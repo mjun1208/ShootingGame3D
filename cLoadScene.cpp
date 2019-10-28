@@ -1,0 +1,84 @@
+#include "DXUT.h"
+#include "cLoadScene.h"
+
+
+
+cLoadScene::cLoadScene()
+{
+}
+
+
+cLoadScene::~cLoadScene()
+{
+}
+
+void cLoadScene::Init()
+{
+	NowLoad = 0;
+	NowOBJLoad = 0;
+	OBJLoad("Map", "./resorce/Map.obj", "./resorce/");
+	OBJLoad("Coll", "./resorce/Coll.obj", "./resorce/");
+	//OBJLoad("Player_Idle", "./resorce/Idle/idle(%d).obj", "./resorce/Idle/", 40, "idle.mtl");
+	//OBJLoad("Player_Run", "./resorce/Run/Run(%d).obj", "./resorce/Run/", 24, "Run.mtl");
+	//OBJLoad("Player_Dash", "./resorce/Dash/Dash(%d).obj", "./resorce/Dash/", 22, "Dash.mtl");
+	//OBJLoad("Player_Attack", "./resorce/Attack/Attack(%d).obj", "./resorce/Attack/", 100, "Attack.mtl");
+	//OBJLoad("Player_Sword", "./resorce/Attack/Sword/Sword(%d).obj", "./resorce/Attack/Sword/", 100, "Sword.mtl");
+	//OBJLoad("Elucidator", "./resorce/Attack/Elucidator/Elucidator(%d).obj", "./resorce/Attack/Elucidator/", 100, "Elucidator.mtl");
+
+	OBJLoad("Player_Idle", "./resorce/Player/Idle/PlayerIdle(%d).obj", "./resorce/Player/Idle/", 231, "PlayerIdle.mtl");
+	OBJLoad("Player_Dead", "./resorce/Player/Dead/PlayerDead(%d).obj", "./resorce/Player/Dead/", 99, "PlayerDead.mtl");
+
+	OBJLoad("Player_Pistol_Walk", "./resorce/Player/Pistol/Walk/PlayerWalk(%d).obj", "./resorce/Player/Pistol/Walk/", 24, "PlayerWalk.mtl");
+	OBJLoad("Player_Pistol_Shoot", "./resorce/Player/Pistol/Shoot/PlayerShoot(%d).obj", "./resorce/Player/Pistol/Shoot/", 17, "PlayerShoot.mtl");
+
+    OBJLoad("Player_BigGun_Walk", "./resorce/Player/BigGun/Walk/PlayerWalk(%d).obj", "./resorce/Player/BigGun/Walk/", 30 , "PlayerWalk.mtl");
+	OBJLoad("Player_BigGun_Shoot", "./resorce/Player/BigGun/Shoot/PlayerShoot(%d).obj", "./resorce/Player/BigGun/Shoot/", 35, "PlayerShoot.mtl");
+
+
+	//Wolf
+	OBJLoad("Wolf_Idle", "./resorce/Enemy/Wolf/Idle/WolfIdle_(%d).obj", "./resorce/Enemy/Wolf/Idle/", 140, "WolfIdle.mtl");
+	MaxLoad = m_Load.size();
+	MaxOBJLoad = m_OBJLoad.size();
+}
+
+void cLoadScene::Update()
+{
+	if (NowLoad != MaxLoad) {
+		IMAGE->AddImage(
+			m_Load[NowLoad].key,
+			m_Load[NowLoad].path,
+			m_Load[NowLoad].count);
+		NowLoad++;
+	}
+	else {
+		if (NowOBJLoad != MaxOBJLoad) {
+			if(m_OBJLoad[NowOBJLoad].count == 0)
+			OBJ->AddOBJ(
+				m_OBJLoad[NowOBJLoad].key,
+				m_OBJLoad[NowOBJLoad].path,
+				m_OBJLoad[NowOBJLoad].mappath);
+			else
+			OBJ->AddMultiOBJ(
+				m_OBJLoad[NowOBJLoad].key,
+				m_OBJLoad[NowOBJLoad].path,
+				m_OBJLoad[NowOBJLoad].mappath,
+				m_OBJLoad[NowOBJLoad].count,
+				m_OBJLoad[NowOBJLoad].mtlpath);
+			NowOBJLoad++;
+		
+			DEBUG_LOG(NowOBJLoad << " / " << MaxOBJLoad);
+		}
+		else {
+			SCENE->ChangeScene("Title");
+		}
+		//SCENE->ChangeScene("Title");
+	}
+}
+
+void cLoadScene::Render()
+{
+}
+
+void cLoadScene::Release()
+{
+}

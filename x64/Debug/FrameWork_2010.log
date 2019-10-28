@@ -1,0 +1,141 @@
+﻿  DXUT.cpp
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54723): note: 'DXGI_STATUS_OCCLUDED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54732): note: 'DXGI_STATUS_CLIPPED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54741): note: 'DXGI_STATUS_NO_REDIRECTION'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54750): note: 'DXGI_STATUS_NO_DESKTOP_ACCESS'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54759): note: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54768): note: 'DXGI_STATUS_MODE_CHANGED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54777): note: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54792): note: 'DXGI_ERROR_INVALID_CALL'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54801): note: 'DXGI_ERROR_NOT_FOUND'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54810): note: 'DXGI_ERROR_MORE_DATA'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54819): note: 'DXGI_ERROR_UNSUPPORTED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54828): note: 'DXGI_ERROR_DEVICE_REMOVED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54837): note: 'DXGI_ERROR_DEVICE_HUNG'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54847): note: 'DXGI_ERROR_DEVICE_RESET'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54856): note: 'DXGI_ERROR_WAS_STILL_DRAWING'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54866): note: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54875): note: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54885): note: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54894): note: 'DXGI_ERROR_NONEXCLUSIVE'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54903): note: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54913): note: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(54922): note: 'DXGI_ERROR_REMOTE_OUTOFMEMORY'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(55162): note: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'의 이전 정의를 참조하십시오.
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': 매크로 재정의
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\winerror.h(55171): note: 'D3D10_ERROR_FILE_NOT_FOUND'의 이전 정의를 참조하십시오.
+c:\users\김민준\desktop\framework3d - 복사본\dxut\core\dxut.cpp(696): warning C4838: 'UINT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\김민준\desktop\framework3d - 복사본\dxut\core\dxut.cpp(697): warning C4838: 'UINT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\김민준\desktop\framework3d - 복사본\dxut\core\dxut.cpp(4961): warning C4996: 'GetVersionExW': deprecated로 선언되었습니다.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\um\sysinfoapi.h(387): note: 'GetVersionExW' 선언을 참조하십시오.
+  cLoadScene.cpp
+c:\users\김민준\desktop\framework3d - 복사본\cloadscene.cpp(34): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\cloadscene.cpp(35): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cOBJManager.cpp
+c:\users\김민준\desktop\framework3d - 복사본\cobjmanager.cpp(35): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: 'sprintf' 선언을 참조하십시오.
+  OBJLoader.cpp
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(16): warning C4267: '인수': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(113): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(122): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(131): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(139): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(149): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(151): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(159): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(160): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(167): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(177): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(226): warning C4267: '=': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(340): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(364): warning C4267: '=': 'size_t'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\objloader.cpp(320): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(2263): note: 'sscanf' 선언을 참조하십시오.
+  Utility.cpp
+  cCameraManager.cpp
+c:\users\김민준\desktop\framework3d - 복사본\ccameramanager.cpp(30): warning C4189: 'moveSpeed': 지역 변수가 초기화되었으나 참조되지 않았습니다.
+  cImageManager.cpp
+c:\users\김민준\desktop\framework3d - 복사본\cimagemanager.cpp(89): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\cimagemanager.cpp(93): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\cimagemanager.cpp(94): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\cimagemanager.cpp(99): warning C4267: '인수': 'size_t'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\cimagemanager.cpp(119): warning C4244: '인수': 'UINT'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\cimagemanager.cpp(119): warning C4238: 비표준 확장이 사용됨: 클래스 rvalue를 lvalue로 사용했습니다.
+c:\users\김민준\desktop\framework3d - 복사본\cimagemanager.cpp(139): warning C4244: '인수': 'UINT'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\cimagemanager.cpp(139): warning C4238: 비표준 확장이 사용됨: 클래스 rvalue를 lvalue로 사용했습니다.
+c:\users\김민준\desktop\framework3d - 복사본\cimagemanager.cpp(156): warning C4244: '인수': 'UINT'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\cimagemanager.cpp(156): warning C4238: 비표준 확장이 사용됨: 클래스 rvalue를 lvalue로 사용했습니다.
+  cInputManager.cpp
+  cMainGame.cpp
+  cMultiTexture.cpp
+c:\users\김민준\desktop\framework3d - 복사본\cmultitexture.cpp(20): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: 'sprintf' 선언을 참조하십시오.
+  cScene.cpp
+  cSceneManager.cpp
+  cSingleTexture.cpp
+  cTexture.cpp
+  cTitleScene.cpp
+c:\users\김민준\desktop\framework3d - 복사본\ctitlescene.cpp(26): warning C4244: '인수': 'float'에서 'unsigned long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\ctitlescene.cpp(28): warning C4244: '인수': 'float'에서 'unsigned long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\ctitlescene.cpp(30): warning C4244: '인수': 'float'에서 'unsigned long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\김민준\desktop\framework3d - 복사본\ctitlescene.cpp(32): warning C4244: '인수': 'float'에서 'unsigned long'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  DXUTenum.cpp
+  DXUTmisc.cpp
+c:\users\김민준\desktop\framework3d - 복사본\dxut\core\dxutmisc.cpp(1263): warning C4996: 'GetVersionExA': deprecated로 선언되었습니다.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\um\sysinfoapi.h(378): note: 'GetVersionExA' 선언을 참조하십시오.
+  DXUTcamera.cpp
+  DXUTgui.cpp
+c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\dxutgui.cpp(6846): warning C4458: 'iTexture' 선언은 클래스 멤버를 숨깁니다.
+  c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\dxutgui.h(109): note: 'CDXUTElement::iTexture' 선언을 참조하십시오.
+c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\dxutgui.cpp(6860): warning C4458: 'iFont' 선언은 클래스 멤버를 숨깁니다.
+  c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\dxutgui.h(110): note: 'CDXUTElement::iFont' 선언을 참조하십시오.
+c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\dxutgui.cpp(6860): warning C4458: 'dwTextFormat' 선언은 클래스 멤버를 숨깁니다.
+  c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\dxutgui.h(111): note: 'CDXUTElement::dwTextFormat' 선언을 참조하십시오.
+  DXUTres.cpp
+  DXUTsettingsdlg.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  SDKmesh.cpp
+  SDKmisc.cpp
+c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\sdkmisc.cpp(144): warning C4477: 'swprintf_s' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'LPARAM'입니다.
+  c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\sdkmisc.cpp(144): note: 서식 문자열에서 '%lld'을(를) 사용하는 것이 좋습니다.
+  c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\sdkmisc.cpp(144): note: 서식 문자열에서 '%Id'을(를) 사용하는 것이 좋습니다.
+  c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\sdkmisc.cpp(144): note: 서식 문자열에서 '%I64d'을(를) 사용하는 것이 좋습니다.
+c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\sdkmisc.cpp(144): warning C4477: 'swprintf_s' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'LPARAM'입니다.
+  c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\sdkmisc.cpp(144): note: 서식 문자열에서 '%lld'을(를) 사용하는 것이 좋습니다.
+  c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\sdkmisc.cpp(144): note: 서식 문자열에서 '%Id'을(를) 사용하는 것이 좋습니다.
+  c:\users\김민준\desktop\framework3d - 복사본\dxut\optional\sdkmisc.cpp(144): note: 서식 문자열에서 '%I64d'을(를) 사용하는 것이 좋습니다.
+  SDKsound.cpp
+  SDKwavefile.cpp
+  FrameWork.cpp
+c:\users\김민준\desktop\framework3d - 복사본\framework.cpp(129): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(243): note: 'freopen' 선언을 참조하십시오.
+c:\users\김민준\desktop\framework3d - 복사본\framework.cpp(130): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(243): note: 'freopen' 선언을 참조하십시오.
+c:\users\김민준\desktop\framework3d - 복사본\framework.cpp(131): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(243): note: 'freopen' 선언을 참조하십시오.
+  코드를 생성하고 있습니다...
+  FrameWork_2010.vcxproj -> C:\Users\김민준\Desktop\FrameWork3D - 복사본\x64\Debug\FrameWork.exe
