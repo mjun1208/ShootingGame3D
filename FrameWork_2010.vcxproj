@@ -31,7 +31,7 @@
     <ProjectGuid>{D3D09108-96D0-4629-88B8-122C0256058C}</ProjectGuid>
     <RootNamespace>FrameWork</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -385,6 +385,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cBullet.cpp" />
+    <ClCompile Include="cBulletAdmin.cpp" />
     <ClCompile Include="cFxManager.cpp" />
     <ClCompile Include="cLoadScene.cpp" />
     <ClCompile Include="cMapEditerScene.cpp" />
@@ -393,6 +395,8 @@
     <ClCompile Include="cPlayer.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClInclude Include="cBullet.h" />
+    <ClInclude Include="cBulletAdmin.h" />
     <ClInclude Include="cCameraManager.h" />
     <ClInclude Include="cFxManager.h" />
     <ClInclude Include="cImageManager.h" />

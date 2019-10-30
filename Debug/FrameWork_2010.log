@@ -1,3 +1,0 @@
-﻿  cCameraManager.cpp
-c:\users\김민준\desktop\ghost carnival 3d\ccameramanager.cpp(32): warning C4189: 'moveSpeed': 지역 변수가 초기화되었으나 참조되지 않았습니다.
-  FrameWork_2010.vcxproj -> C:\Users\김민준\Desktop\Ghost Carnival 3D\Debug\FrameWork.exe

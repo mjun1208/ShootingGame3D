@@ -86,20 +86,7 @@ void cCameraManager::Update()
 
 		eye = at + Dir * 6.f;
 	}
-	else if(isClip && IsSnipe){
-		Vec3 Dir = Vec3(0.f, 0.f, -1.f);
-		Vec3 OriginalDir = Vec3(0.f, 0.f, -1.f);
-
-		D3DXMATRIX matRotation_x, matRotation_y, matR;
-		D3DXMatrixRotationY(&matRotation_y, D3DXToRadian(angle));
-		D3DXMatrixRotationX(&matRotation_x, D3DXToRadian(4));
-		matR = matRotation_x * matRotation_y;
-		D3DXVec3TransformNormal(&Dir, &OriginalDir, &matR);
-
-		Vec3 TargetPos = at + Dir * 10.f;
-		D3DXVec3Lerp(&eye, &eye, &TargetPos, 0.4f);
-		//eye = at + Dir * 10.f;
-	}
+	
 }
 
 void cCameraManager::Render()

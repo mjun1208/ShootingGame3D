@@ -124,15 +124,26 @@ void cPlayer::Update()
 
 		Vec3 CameraDir;
 		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
-		D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() + 90));
+		D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() - 90));
 		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
 		matR = matX * matY * matZ;
-		D3DXVec3TransformCoord(&CameraDir, &vOriginDir, &matR);
+		D3DXVec3TransformNormal(&CameraDir, &Vec3(-1,0,-1), &matR);
 
 		vCameraPos = Vec3(vPos.x, vPos.y + 15, vPos.z);
-		vCameraPos += CameraDir * 4;
+		vCameraPos += CameraDir * 7.f;
+		CAMERA->SetPos(vCameraPos);
+		///////////////////////////////
+		
+		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+		D3DXMatrixRotationY(&matY, D3DXToRadian(AimAngle));
+		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+		matR = matX * matY * matZ;
+		D3DXVec3TransformNormal(&CameraDir, &vOriginDir, &matR);
 
-		CAMERA->SetTarget(vCameraPos);
+		Vec3 TargetPos;
+		TargetPos = Vec3(vPos.x, vPos.y + 15, vPos.z);
+		TargetPos += CameraDir * 60.f;
+		CAMERA->SetTarget(TargetPos);
 	}
 	else
 		CAMERA->SetTarget(Vec3(vPos.x, vPos.y + 15, vPos.z));

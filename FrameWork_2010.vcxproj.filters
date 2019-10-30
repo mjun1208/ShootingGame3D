@@ -60,6 +60,9 @@
     <Filter Include="Object\Player">
       <UniqueIdentifier>{4310985a-de1b-4850-a0c9-d6e9b3822c58}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Bullet">
+      <UniqueIdentifier>{1204e7c3-d789-40b9-abc3-fc4a1895466d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -180,6 +183,12 @@
     <ClCompile Include="cPlayer.cpp">
       <Filter>Object\Player</Filter>
     </ClCompile>
+    <ClCompile Include="cBullet.cpp">
+      <Filter>Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="cBulletAdmin.cpp">
+      <Filter>Object\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -243,6 +252,12 @@
     </ClInclude>
     <ClInclude Include="cPlayer.h">
       <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="cBullet.h">
+      <Filter>Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="cBulletAdmin.h">
+      <Filter>Object\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
