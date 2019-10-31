@@ -18,6 +18,8 @@ void cBulletAdmin::Init()
 
 void cBulletAdmin::Update()
 {
+	for (auto iter : m_Bullet)
+		iter->Update();
 }
 
 void cBulletAdmin::Render()

@@ -9,11 +9,11 @@ cPlayer::cPlayer()
 	m_PistolMoveFrame = new cFrame();
 	m_PistolMoveFrame->SetFrame(0, 24, 1.f);
 	m_PistolShootFrame = new cFrame();
-	m_PistolShootFrame->SetFrame(0, 17, 1.f);
+	m_PistolShootFrame->SetFrame(0, 35, 1.f);
 	m_BigGunMoveFrame = new cFrame();
 	m_BigGunMoveFrame->SetFrame(0, 30, 1.f);
 	m_BigGunShootFrame = new cFrame();
-	m_BigGunShootFrame->SetFrame(0, 35, 1.f);
+	m_BigGunShootFrame->SetFrame(0, 17, 1.f);
 	m_DeadFrame = new cFrame();
 	m_DeadFrame->SetFrame(0, 99, 1.f);
 	Init();
@@ -60,8 +60,9 @@ void cPlayer::Update()
 	if (!INPUT->KeyPress(VK_MENU)) {
 		if (!IsSnipe)
 			Angle = CAMERA->GetAngle();
-		else
-			Angle = AimAngle;
+		else {
+			Angle = CAMERA->GetAngle();
+		}
 		IsFixedCamera = false;
 	}
 	else
@@ -194,7 +195,19 @@ void cPlayer::Render()
 	}
 	else {
 		if (!IsMove) {
-			OBJ->Render(OBJ->FindMultidOBJ("Player_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
+			switch (WeaponState)
+			{
+			case Pistol:
+				OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
+				break;
+			case BigGun:
+				OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
+				break;
+			case None:
+				break;
+			default:
+				break;
+			}
 		}
 		else {
 			switch (WeaponState)

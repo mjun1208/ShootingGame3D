@@ -25,14 +25,15 @@ void cLoadScene::Init()
 	//OBJLoad("Player_Sword", "./resorce/Attack/Sword/Sword(%d).obj", "./resorce/Attack/Sword/", 100, "Sword.mtl");
 	//OBJLoad("Elucidator", "./resorce/Attack/Elucidator/Elucidator(%d).obj", "./resorce/Attack/Elucidator/", 100, "Elucidator.mtl");
 
-	OBJLoad("Player_Idle", "./resorce/Player/Idle/PlayerIdle(%d).obj", "./resorce/Player/Idle/", 231, "PlayerIdle.mtl");
 	OBJLoad("Player_Dead", "./resorce/Player/Dead/PlayerDead(%d).obj", "./resorce/Player/Dead/", 99, "PlayerDead.mtl");
 
+	OBJLoad("Player_Pistol_Idle", "./resorce/Player/Pistol/Idle/PlayerIdle(%d).obj", "./resorce/Player/Pistol/Idle/", 231, "PlayerIdle.mtl");
 	OBJLoad("Player_Pistol_Walk", "./resorce/Player/Pistol/Walk/PlayerWalk(%d).obj", "./resorce/Player/Pistol/Walk/", 24, "PlayerWalk.mtl");
-	OBJLoad("Player_Pistol_Shoot", "./resorce/Player/Pistol/Shoot/PlayerShoot(%d).obj", "./resorce/Player/Pistol/Shoot/", 17, "PlayerShoot.mtl");
+	OBJLoad("Player_Pistol_Shoot", "./resorce/Player/Pistol/Shoot/PlayerShoot(%d).obj", "./resorce/Player/Pistol/Shoot/", 35, "PlayerShoot.mtl");
 
+	OBJLoad("Player_BigGun_Idle", "./resorce/Player/BigGun/Idle/PlayerIdle(%d).obj", "./resorce/Player/BigGun/Idle/", 231, "PlayerIdle.mtl");
     OBJLoad("Player_BigGun_Walk", "./resorce/Player/BigGun/Walk/PlayerWalk(%d).obj", "./resorce/Player/BigGun/Walk/", 30 , "PlayerWalk.mtl");
-	OBJLoad("Player_BigGun_Shoot", "./resorce/Player/BigGun/Shoot/PlayerShoot(%d).obj", "./resorce/Player/BigGun/Shoot/", 35, "PlayerShoot.mtl");
+	OBJLoad("Player_BigGun_Shoot", "./resorce/Player/BigGun/Shoot/PlayerShoot(%d).obj", "./resorce/Player/BigGun/Shoot/", 17, "PlayerShoot.mtl");
 
 
 	//Wolf

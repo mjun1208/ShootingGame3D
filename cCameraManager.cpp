@@ -86,6 +86,37 @@ void cCameraManager::Update()
 
 		eye = at + Dir * 6.f;
 	}
+	if (isClip && IsSnipe) {
+		float rotSpeed = 1.f;
+		POINT vCenter = { WINSIZEX / 2 , WINSIZEY / 2 };
+		ClientToScreen(DXUTGetHWND(), &vCenter);
+		SetCursorPos(vCenter.x, vCenter.y);
+
+		if (vCur.x < vCenter.x)
+		{
+			angle -= rotSpeed;
+			if (angle < -360)
+				angle += 360;
+		}
+		
+		if (vCur.x > vCenter.x)
+		{
+			angle += rotSpeed;
+			if (angle > 360)
+				angle -= 360;
+		}
+
+		Vec3 Dir = Vec3(0.f, 0.f, 0.f);
+		Vec3 OriginalDir = Vec3(0.f, 0.f, 0.f);
+
+		D3DXMATRIX matRotation_x, matRotation_y, matR;
+		D3DXMatrixRotationY(&matRotation_y, D3DXToRadian(angle));
+		D3DXMatrixRotationX(&matRotation_x, D3DXToRadian(4));
+		matR = matRotation_x * matRotation_y;
+		D3DXVec3TransformNormal(&Dir, &OriginalDir, &matR);
+
+		eye = at + Dir;
+	}
 	
 }
 
