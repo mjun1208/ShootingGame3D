@@ -1,7 +1,7 @@
 #include "DXUT.h"
 #include "cTitleScene.h"
 
-#include "cTerrain.h"
+#include "cBulletAdmin.h"
 #include "cPlayer.h"
 
 cTitleScene::cTitleScene()
@@ -15,17 +15,20 @@ cTitleScene::~cTitleScene()
 
 void cTitleScene::Init()
 {
-	m_Player = new cPlayer();
+	m_Bullet = new cBulletAdmin();
+	m_Player = new cPlayer(m_Bullet->GetBullet());
 }
 
 void cTitleScene::Update()
 {
+	m_Bullet->Update();
 	m_Player->Update();
 }
 
 void cTitleScene::Render()
 {
 	m_Player->Render();
+	m_Bullet->Render();
 
 	D3DXMATRIX matX, matY, matZ , matR;
 
@@ -40,4 +43,5 @@ void cTitleScene::Render()
 void cTitleScene::Release()
 {
 	SAFE_DELETE(m_Player);
+	SAFE_DELETE(m_Bullet);
 }

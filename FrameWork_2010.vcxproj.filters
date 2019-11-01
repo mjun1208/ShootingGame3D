@@ -63,6 +63,9 @@
     <Filter Include="Object\Bullet">
       <UniqueIdentifier>{1204e7c3-d789-40b9-abc3-fc4a1895466d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Enemy">
+      <UniqueIdentifier>{1e9599b6-9def-452d-8377-4f4a7ce51e32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -189,6 +192,9 @@
     <ClCompile Include="cBulletAdmin.cpp">
       <Filter>Object\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="cEnemy.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -258,6 +264,9 @@
     </ClInclude>
     <ClInclude Include="cBulletAdmin.h">
       <Filter>Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="cEnemy.h">
+      <Filter>Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

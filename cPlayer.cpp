@@ -1,8 +1,10 @@
 #include "DXUT.h"
 #include "cPlayer.h"
 
+#include "cBullet.h"
 
-cPlayer::cPlayer()
+cPlayer::cPlayer(vector<cBullet *>& Bullet)
+	: m_Bullet(Bullet)
 {
 	m_IdleFrame = new cFrame();
 	m_IdleFrame->SetFrame(0, 231, 1.f);
@@ -65,8 +67,16 @@ void cPlayer::Update()
 		}
 		IsFixedCamera = false;
 	}
-	else
+	else if (!IsSnipe)
 		IsFixedCamera = true;
+	else {
+		if (!IsSnipe)
+			Angle = CAMERA->GetAngle();
+		else {
+			Angle = CAMERA->GetAngle();
+		}
+		IsFixedCamera = false;
+	}
 
 	m_IdleFrame->Frame();
 
@@ -305,9 +315,8 @@ void cPlayer::Move()
 			IsBackMove = false;
 			fSpeed = 1.f;
 		}
-		if (INPUT->MouseLDown()) {
-			IsAttack = true;
-			ShootAngle = Angle;
+		if (INPUT->MouseLPress()) {
+			ShootBullet();
 		}
 	}
 
@@ -316,11 +325,11 @@ void cPlayer::Move()
 
 void cPlayer::SnipeMove()
 {
-	if (!IsAttack) {
+	//if (!IsAttack) {
 		if (INPUT->KeyPress('A')) {
 			if (INPUT->KeyPress('W'))
 				Angle = AimAngle - 45;
-			if(INPUT->KeyPress('S'))
+			else if(INPUT->KeyPress('S'))
 				Angle = AimAngle + 45;
 			else
 				Angle = AimAngle - 90;
@@ -328,7 +337,7 @@ void cPlayer::SnipeMove()
 		else if (INPUT->KeyPress('D')) {
 			if (INPUT->KeyPress('W'))
 				Angle = AimAngle + 45;
-			if (INPUT->KeyPress('S'))
+			else if (INPUT->KeyPress('S'))
 				Angle = AimAngle - 45;
 			else
 				Angle = AimAngle + 90;
@@ -340,12 +349,50 @@ void cPlayer::SnipeMove()
 		else if (INPUT->KeyPress('W') || INPUT->KeyPress('A') || INPUT->KeyPress('D') || INPUT->KeyPress('S'))
 			fSpeed = 1.f;
 		
-		if (INPUT->MouseLDown()) {
-			IsAttack = true;
-			ShootAngle = Angle;
+		if (INPUT->MouseLPress() && !IsAttack) {
+			ShootBullet();
 		}
-	}
+	//}
 	//Vec3 TargetPos = vPos + vDir * fSpeed;
 	//D3DXVec3Lerp(&vPos, &vPos, &TargetPos, 0.8f);
+
+		D3DXMATRIX matX, matY, matZ, matR;
+
+		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+		D3DXMatrixRotationY(&matY, D3DXToRadian(Angle));
+		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+		matR = matX * matY * matZ;
+		D3DXVec3TransformNormal(&vDir, &vOriginDir, &matR);
+
 	vPos += vDir * fSpeed * 0.6f;
+}
+
+void cPlayer::ShootBullet()
+{
+	IsAttack = true;
+	ShootAngle = Angle;
+
+	if (IsSnipe) {
+		D3DXMATRIX matX, matY, matZ, matR;
+
+		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+		D3DXMatrixRotationY(&matY, D3DXToRadian(AimAngle));
+		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+		matR = matX * matY * matZ;
+		D3DXVec3TransformNormal(&vDir, &vOriginDir, &matR);
+	}
+
+	switch (WeaponState)
+	{
+	case Pistol:
+		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 13, 0) + vDir * 10, vDir));
+		break;
+	case BigGun:
+		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 13, 0) + vDir * 10, vDir));
+		break;
+	case None:
+		break;
+	default:
+		break;
+	}
 }

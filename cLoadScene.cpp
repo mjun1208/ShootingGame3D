@@ -35,7 +35,7 @@ void cLoadScene::Init()
     OBJLoad("Player_BigGun_Walk", "./resorce/Player/BigGun/Walk/PlayerWalk(%d).obj", "./resorce/Player/BigGun/Walk/", 30 , "PlayerWalk.mtl");
 	OBJLoad("Player_BigGun_Shoot", "./resorce/Player/BigGun/Shoot/PlayerShoot(%d).obj", "./resorce/Player/BigGun/Shoot/", 17, "PlayerShoot.mtl");
 
-
+	OBJLoad("Player_Bullet", "./resorce/Player/Bullet.obj", "./resorce/Player/");
 	//Wolf
 	OBJLoad("Wolf_Idle", "./resorce/Enemy/Wolf/Idle/WolfIdle_(%d).obj", "./resorce/Enemy/Wolf/Idle/", 140, "WolfIdle.mtl");
 	MaxLoad = m_Load.size();

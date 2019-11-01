@@ -1,9 +1,12 @@
 #pragma once
+class cBullet;
 enum WeaponKind {
 	Pistol, BigGun, None
 };
 class cPlayer
 {
+private:
+	vector<cBullet *>& m_Bullet;
 private:
 	cFrame * m_IdleFrame;
 	cFrame * m_PistolMoveFrame;
@@ -46,8 +49,9 @@ private:
 
 	void Move();
 	void SnipeMove();
+	void ShootBullet();
 public:
-	cPlayer();
+	cPlayer(vector<cBullet *>& Bullet);
 	~cPlayer();
 
 	void Init();

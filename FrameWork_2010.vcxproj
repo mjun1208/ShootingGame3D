@@ -387,6 +387,7 @@
   <ItemGroup>
     <ClCompile Include="cBullet.cpp" />
     <ClCompile Include="cBulletAdmin.cpp" />
+    <ClCompile Include="cEnemy.cpp" />
     <ClCompile Include="cFxManager.cpp" />
     <ClCompile Include="cLoadScene.cpp" />
     <ClCompile Include="cMapEditerScene.cpp" />
@@ -398,6 +399,7 @@
     <ClInclude Include="cBullet.h" />
     <ClInclude Include="cBulletAdmin.h" />
     <ClInclude Include="cCameraManager.h" />
+    <ClInclude Include="cEnemy.h" />
     <ClInclude Include="cFxManager.h" />
     <ClInclude Include="cImageManager.h" />
     <ClInclude Include="cInputManager.h" />

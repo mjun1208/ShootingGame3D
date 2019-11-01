@@ -1,10 +1,12 @@
 #pragma once
 #include "cScene.h"
 
+class cBulletAdmin;
 class cPlayer;
 class cTitleScene : public cScene
 {
 private:
+	cBulletAdmin * m_Bullet;
 	cPlayer * m_Player;
 public:
 	cTitleScene();
