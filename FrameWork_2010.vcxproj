@@ -388,9 +388,11 @@
     <ClCompile Include="cBullet.cpp" />
     <ClCompile Include="cBulletAdmin.cpp" />
     <ClCompile Include="cEnemy.cpp" />
+    <ClCompile Include="cEnemyAdmin.cpp" />
     <ClCompile Include="cFxManager.cpp" />
     <ClCompile Include="cLoadScene.cpp" />
     <ClCompile Include="cMapEditerScene.cpp" />
+    <ClCompile Include="cMonster.cpp" />
     <ClCompile Include="cNode.cpp" />
     <ClCompile Include="cOBJManager.cpp" />
     <ClCompile Include="cPlayer.cpp" />
@@ -400,12 +402,14 @@
     <ClInclude Include="cBulletAdmin.h" />
     <ClInclude Include="cCameraManager.h" />
     <ClInclude Include="cEnemy.h" />
+    <ClInclude Include="cEnemyAdmin.h" />
     <ClInclude Include="cFxManager.h" />
     <ClInclude Include="cImageManager.h" />
     <ClInclude Include="cInputManager.h" />
     <ClInclude Include="cLoadScene.h" />
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMapEditerScene.h" />
+    <ClInclude Include="cMonster.h" />
     <ClInclude Include="cMultiTexture.h" />
     <ClInclude Include="cNode.h" />
     <ClInclude Include="cOBJManager.h" />

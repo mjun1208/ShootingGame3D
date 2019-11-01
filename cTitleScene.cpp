@@ -2,6 +2,7 @@
 #include "cTitleScene.h"
 
 #include "cBulletAdmin.h"
+#include "cEnemyAdmin.h"
 #include "cPlayer.h"
 
 cTitleScene::cTitleScene()
@@ -17,17 +18,20 @@ void cTitleScene::Init()
 {
 	m_Bullet = new cBulletAdmin();
 	m_Player = new cPlayer(m_Bullet->GetBullet());
+	m_Enemy = new cEnemyAdmin(m_Player);
 }
 
 void cTitleScene::Update()
 {
 	m_Bullet->Update();
+	m_Enemy->Update();
 	m_Player->Update();
 }
 
 void cTitleScene::Render()
 {
 	m_Player->Render();
+	m_Enemy->Render();
 	m_Bullet->Render();
 
 	D3DXMATRIX matX, matY, matZ , matR;
@@ -44,4 +48,5 @@ void cTitleScene::Release()
 {
 	SAFE_DELETE(m_Player);
 	SAFE_DELETE(m_Bullet);
+	SAFE_DELETE(m_Enemy);
 }

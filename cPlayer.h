@@ -58,5 +58,7 @@ public:
 	void Update();
 	void Render();
 	void Release();
+
+	Vec3 GetPos() { return vPos; }
 };
 

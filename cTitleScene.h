@@ -2,11 +2,13 @@
 #include "cScene.h"
 
 class cBulletAdmin;
+class cEnemyAdmin;
 class cPlayer;
 class cTitleScene : public cScene
 {
 private:
 	cBulletAdmin * m_Bullet;
+	cEnemyAdmin * m_Enemy;
 	cPlayer * m_Player;
 public:
 	cTitleScene();

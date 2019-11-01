@@ -5,7 +5,7 @@
 cBullet::cBullet(Vec3 pos, Vec3 Dir)
 	: m_vPos(pos) , m_vDir(Dir)
 {
-	m_fSpeed = 3.f;
+	m_fSpeed = 33.f;
 	b_Del = false;
 	m_fLifeTime = 0;
 }

@@ -66,6 +66,9 @@
     <Filter Include="Object\Enemy">
       <UniqueIdentifier>{1e9599b6-9def-452d-8377-4f4a7ce51e32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Enemy\Monster">
+      <UniqueIdentifier>{85feaa28-c33a-480a-a6a8-52cb74f19d3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -195,6 +198,12 @@
     <ClCompile Include="cEnemy.cpp">
       <Filter>Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="cEnemyAdmin.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="cMonster.cpp">
+      <Filter>Object\Enemy\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -267,6 +276,12 @@
     </ClInclude>
     <ClInclude Include="cEnemy.h">
       <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="cEnemyAdmin.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="cMonster.h">
+      <Filter>Object\Enemy\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
