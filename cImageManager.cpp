@@ -14,12 +14,19 @@ cImageManager::~cImageManager()
 	Release();
 }
 
-void cImageManager::Begin(bool Ui)
+void cImageManager::Begin(bool Ui ,bool BillBoard)
 {
-	if (!Ui)
-		m_sprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE);
-	else
-		m_sprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	if (BillBoard) {
+		m_sprite->SetWorldViewLH(NULL,&CAMERA->GetView());
+		m_sprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_BILLBOARD | D3DXSPRITE_OBJECTSPACE);
+	}
+	else {
+		if (!Ui)
+			m_sprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_OBJECTSPACE);
+		else
+			m_sprite->Begin(D3DXSPRITE_ALPHABLEND);
+	}
 }
 
 void cImageManager::End()

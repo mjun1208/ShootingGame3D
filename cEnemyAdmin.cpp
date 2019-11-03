@@ -28,6 +28,15 @@ void cEnemyAdmin::Update()
 		iter->SetTarget(m_Player->GetPos());
 		iter->Update();
 	}
+
+	for (auto iter = m_Enemy.begin(); iter != m_Enemy.end();) {
+		if ((*iter)->GetDel()) {
+			SAFE_DELETE(*iter);
+			iter = m_Enemy.erase(iter);
+		}
+		else
+			++iter;
+	}
 }
 
 void cEnemyAdmin::Render()

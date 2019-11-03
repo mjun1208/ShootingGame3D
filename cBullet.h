@@ -8,6 +8,10 @@ private:
 
 	bool b_Del;
 	float m_fLifeTime;
+
+	cBoundingSphere * m_BoundingSphere;
+
+	void CheckColl();
 public:
 	cBullet(Vec3 pos, Vec3 Dir);
 	~cBullet();

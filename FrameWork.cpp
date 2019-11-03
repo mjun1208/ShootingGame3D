@@ -6,8 +6,12 @@
 #include "DXUT.h"
 #include "resource.h"
 #include "cMainGame.h"
+#include "cEffectAdmin.h"
+#include "cBoundingSphereAdmin.h"
 
 cMainGame mg;
+cEffectAdmin g_Effect;
+cBoundingSphereAdmin g_Bounding;
 
 //--------------------------------------------------------------------------------------
 // Rejects any D3D9 devices that aren't acceptable to the app by returning false

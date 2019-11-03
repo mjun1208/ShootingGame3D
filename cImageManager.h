@@ -25,9 +25,9 @@ public:
 	cImageManager();
 	virtual ~cImageManager();
 
-	void Begin(bool Ui);
+	void Begin(bool Ui, bool BillBoard);
 	void End();
-	void ReBegin(bool Ui) { End(); Begin(Ui); }
+	void ReBegin(bool Ui , bool BillBoard) { End(); Begin(Ui, BillBoard); }
 
 	void Init();
 	void Release();

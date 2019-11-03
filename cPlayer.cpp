@@ -50,6 +50,9 @@ void cPlayer::Init()
 
 void cPlayer::Update()
 {
+	if (INPUT->MouseLDown()) {
+		ShootBullet();
+	}
 	if (INPUT->KeyDown('1')) {
 		WeaponState = Pistol;
 	}
@@ -78,7 +81,7 @@ void cPlayer::Update()
 		IsFixedCamera = false;
 	}
 
-	//m_IdleFrame->Frame();
+	m_IdleFrame->Frame();
 
 	if (INPUT->MouseRPress()) {
 		AimAngle = Angle;
@@ -100,12 +103,12 @@ void cPlayer::Update()
 		switch (WeaponState)
 		{
 		case Pistol:
-			//m_PistolShootFrame->Frame();
+			m_PistolShootFrame->Frame();
 			if (m_PistolShootFrame->NowFrame == m_PistolShootFrame->EndFrame)
 				IsAttack = false;
 			break;
 		case BigGun:
-			//m_BigGunShootFrame->Frame();
+			m_BigGunShootFrame->Frame();
 			if (m_BigGunShootFrame->NowFrame == m_BigGunShootFrame->EndFrame)
 				IsAttack = false;
 			break;
@@ -126,8 +129,8 @@ void cPlayer::Update()
 	else {
 		IsMove = true;
 		IsAiming = false;
-		//m_PistolMoveFrame->Frame();
-		//m_BigGunMoveFrame->Frame();
+		m_PistolMoveFrame->Frame();
+		m_BigGunMoveFrame->Frame();
 	}
 
 	if (IsSnipe) {
@@ -325,6 +328,7 @@ void cPlayer::Move()
 
 void cPlayer::SnipeMove()
 {
+	IsAiming = true;
 	//if (!IsAttack) {
 		if (INPUT->KeyPress('A')) {
 			if (INPUT->KeyPress('W'))

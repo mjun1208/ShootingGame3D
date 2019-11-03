@@ -32,5 +32,7 @@ public:
 
 	bool GetMouseClip() { return isClip; }
 	void SetMouseClip(bool clip) { isClip = clip; }
+
+	D3DXMATRIX GetView() { return view; }
 };
 #define CAMERA cCameraManager::GetInstance()

@@ -32,3 +32,8 @@ cTexture * cMultiTexture::FindImage(int count)
 	else
 		return this;
 }
+
+int cMultiTexture::GetLength()
+{
+	return m_VecTex.size();
+}

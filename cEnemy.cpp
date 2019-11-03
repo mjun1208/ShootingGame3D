@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "cEnemy.h"
 
+#include "cBoundingSphere.h"	
 
 cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 	: m_vPos(pos), m_EnemyState(Kind)
@@ -22,6 +23,10 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		m_AttackFrame->SetFrame(0, 115, 0.5f);
 		m_DeadFrame->SetFrame(0, 110, 0.5f);
 		f_Scale = 0.15f;
+		m_BoundingSphere = new cBoundingSphere;
+		m_BoundingSphere->ComputeBoundingSphere(ENEMY ,7.f);
+		g_Bounding.GetBounding().push_back(m_BoundingSphere);
+		i_Hp = 3;
 		break;
 	case Zombie:
 		m_IdleFrame->SetFrame(0, 120, 0.5f);
@@ -34,6 +39,8 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		break;
 	}
 
+	b_Del = false;
+	b_IsDead = false;
 	//Init();
 }
 

@@ -69,6 +69,12 @@
     <Filter Include="Object\Enemy\Monster">
       <UniqueIdentifier>{85feaa28-c33a-480a-a6a8-52cb74f19d3a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\BoundingSphere">
+      <UniqueIdentifier>{1835b079-2631-4216-a5a8-39426c522da4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Effect">
+      <UniqueIdentifier>{2921182c-6ab5-496f-82cc-01d2cb023f7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -204,6 +210,18 @@
     <ClCompile Include="cMonster.cpp">
       <Filter>Object\Enemy\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="cBoundingSphere.cpp">
+      <Filter>Object\BoundingSphere</Filter>
+    </ClCompile>
+    <ClCompile Include="cEffect.cpp">
+      <Filter>Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="cEffectAdmin.cpp">
+      <Filter>Object\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="cBoundingSphereAdmin.cpp">
+      <Filter>Object\BoundingSphere</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -282,6 +300,18 @@
     </ClInclude>
     <ClInclude Include="cMonster.h">
       <Filter>Object\Enemy\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="cBoundingSphere.h">
+      <Filter>Object\BoundingSphere</Filter>
+    </ClInclude>
+    <ClInclude Include="cEffect.h">
+      <Filter>Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="cEffectAdmin.h">
+      <Filter>Object\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="cBoundingSphereAdmin.h">
+      <Filter>Object\BoundingSphere</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -24,3 +24,8 @@ cTexture * cSingleTexture::FindImage(int count)
 {
 	return this;
 }
+
+int cSingleTexture::GetLength()
+{
+	return 1;
+}

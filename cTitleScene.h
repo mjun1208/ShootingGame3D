@@ -3,6 +3,7 @@
 
 class cBulletAdmin;
 class cEnemyAdmin;
+class cEffectAdmin;
 class cPlayer;
 class cTitleScene : public cScene
 {

@@ -1,7 +1,10 @@
 #pragma once
+#include "cBoundingSphere.h"
+
 enum EnemyKind{
 	Wolf, Zombie
 };
+class cBoundingSphere;
 class cEnemy abstract
 {
 protected:
@@ -27,6 +30,8 @@ protected:
 	cFrame * m_WalkFrame;
 	cFrame * m_AttackFrame;
 	cFrame * m_DeadFrame;
+
+	cBoundingSphere * m_BoundingSphere;
 public:
 	cEnemy(Vec3 pos ,EnemyKind Kind);
 	virtual ~cEnemy();
@@ -36,6 +41,13 @@ public:
 	virtual void Render() PURE;
 	virtual void Release() PURE;
 
+	virtual void ObjUpdate() PURE;
+	virtual void StateUpdate() PURE;
+ 
 	void SetTarget(Vec3 Target) { m_vTarget = Target; }
+	int GetHp() { return i_Hp; }
+	void SetHp(int hp) { i_Hp = hp; }
+
+	bool GetDel() { return b_Del; }
 };
 

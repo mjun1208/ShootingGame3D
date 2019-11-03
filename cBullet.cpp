@@ -8,24 +8,34 @@ cBullet::cBullet(Vec3 pos, Vec3 Dir)
 	m_fSpeed = 33.f;
 	b_Del = false;
 	m_fLifeTime = 0;
+	Init();
 }
 
 
 cBullet::~cBullet()
 {
+	Release();
 }
 
 void cBullet::Init()
 {
+	m_BoundingSphere = new cBoundingSphere;
+	m_BoundingSphere->ComputeBoundingSphere(BULLET , 1.6f);
+	g_Bounding.GetBounding().push_back(m_BoundingSphere);
+	m_BoundingSphere->SetPos(m_vPos);
 }
 
 void cBullet::Update()
 {
 	m_fLifeTime += DeltaTime;
-	m_vPos += m_vDir * m_fSpeed;
+	m_vPos += m_vDir * m_fSpeed * 0.1f;
+
+	m_BoundingSphere->SetPos(m_vPos);
 
 	if (m_fLifeTime > 5.f)
 		b_Del = true;
+
+	CheckColl();
 }
 
 void cBullet::Render()
@@ -40,4 +50,14 @@ void cBullet::Render()
 
 void cBullet::Release()
 {
+	m_BoundingSphere->SetDel(true);
+}
+
+void cBullet::CheckColl()
+{
+	for (auto iter : m_BoundingSphere->GetCollinfo()) {
+		if (iter->Tag == ENEMY) {
+			b_Del = true;
+		}
+	}
 }

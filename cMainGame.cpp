@@ -32,6 +32,8 @@ void cMainGame::Update()
 	if (CAMERA->GetMouseClip())
 		CAMERA->Update();
 	SCENE->Update();
+	g_Effect.Update();
+	g_Bounding.Update();
 	INPUT->Update();
 }
 
@@ -39,20 +41,24 @@ void cMainGame::Render()
 {
 
 	CAMERA->Render();
-	IMAGE->Begin(false);
+	IMAGE->Begin(false , false);
 	SCENE->Render();
 	IMAGE->End();
+	g_Effect.Render();
+	g_Bounding.Render();
 	
 }
 
 void cMainGame::Release()
 {
+	g_Effect.Release();
 	cCameraManager::ResetInstance();
 	cImageManager::ResetInstance();
 	cInputManager::ResetInstance();
 	cSceneManager::ResetInstance();
 	cOBJManager::ResetInstance();
 	cFxManager::ResetInstance();
+	g_Bounding.Release();
 }
 
 void cMainGame::ResetDevice()

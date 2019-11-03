@@ -77,4 +77,10 @@ struct VERTEX
 };
 
 #include "cOBJManager.h"
+#include "cEffectAdmin.h"
+#include "cEffect.h"
+#include "cBoundingSphereAdmin.h"
+#include "cBoundingSphere.h"
+extern cEffectAdmin g_Effect;
+extern cBoundingSphereAdmin g_Bounding;
 
