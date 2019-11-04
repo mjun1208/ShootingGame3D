@@ -29,6 +29,9 @@ void cEffect::Update()
 		b_IsDead = true;
 	if (m_Frame->NowFrame == m_Frame->StartFrame && b_IsDead)
 		b_Del = true;
+
+	if (!IsDebug)
+		b_Del = true;
 }
 
 void cEffect::Render()

@@ -15,10 +15,14 @@ using namespace std;
 #define g_Device DXUTGetD3D9Device()
 #define DeltaTime DXUTGetElapsedTime()
 
+//extern bool IsDebug;
+
 #ifdef _DEBUG
 #define DEBUG_LOG(log) cout << log << endl;
+#define IsDebug false
 #else
 #define DEBUG_LOG(log)
+#define IsDebug true
 #endif // _DEBUG
 
 using Vec2 = D3DXVECTOR2;
@@ -26,7 +30,6 @@ using Vec3 = D3DXVECTOR3;
 
 const int WINSIZEX = 1280;
 const int WINSIZEY = 720;
-
 
 #include "Utility.h"
 

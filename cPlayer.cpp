@@ -98,7 +98,7 @@ void cPlayer::Update()
 
 	if (IsAttack) {
 		IsAiming = true;
-		Angle = ShootAngle;
+		//Angle = ShootAngle;
 		fSpeed = 0.f;
 		switch (WeaponState)
 		{

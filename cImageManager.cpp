@@ -181,7 +181,7 @@ void cImageManager::CenterRender(cTexture * texture, Vec3 pos, const Vec3 & cent
 
 bool cFrame::Frame()
 {
-	if (FrameSkip <= timeGetTime()) {
+	if (FrameSkip <= timeGetTime() && IsDebug) {
 		if (NowFrame == EndFrame)
 			NowFrame = StartFrame;
 		else

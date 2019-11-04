@@ -37,7 +37,6 @@ void cMonster::Update()
 		CheckColl();
 	}
 	ObjUpdate();
-	DEBUG_LOG(i_Hp);
 }
 
 void cMonster::Render()
@@ -146,8 +145,11 @@ void cMonster::StateUpdate()
 		break;
 	case Dead:
 		if (m_BoundingSphere)
-			m_BoundingSphere->SetDel(true);
+			m_BoundingSphere->SetActive(false);
 		m_DeadFrame->Frame();
+
+		if (!IsDebug)
+			b_Del = true;
 
 		if (m_DeadFrame->NowFrame == m_DeadFrame->EndFrame)
 			b_IsDead = true;

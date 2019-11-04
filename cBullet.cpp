@@ -61,7 +61,7 @@ void cBullet::CheckColl()
 		for (auto iter : m_BoundingSphere->GetCollinfo()) {
 			if (iter->Tag == ENEMY) {
 				b_Del = true;
-				//m_BoundingSphere->SetDel(true);
+				m_BoundingSphere->SetActive(false);
 			}
 		}
 	}

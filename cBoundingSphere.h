@@ -26,8 +26,7 @@ private:
 	ObjTag m_Tag;
 	bool b_Del;
 	float f_Size;
-
-	bool b_IsColl;
+	bool b_SetActive;
 	
 	CollInfo MyInfo;
 
@@ -51,8 +50,8 @@ public:
 
 	vector<CollInfo *>& GetCollinfo() { return m_Collinfo; }
 
-	bool GetColl() { return b_IsColl; }
-	void SetColl(bool Coll) { b_IsColl = Coll; }
+	bool GetActive() { return b_SetActive; }
+	void SetActive(bool Coll) { b_SetActive = Coll; }
 
 	CollInfo * GetInfo() { return &MyInfo; }
 };

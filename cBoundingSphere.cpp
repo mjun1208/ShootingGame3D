@@ -15,7 +15,7 @@ cBoundingSphere::~cBoundingSphere()
 void cBoundingSphere::ComputeBoundingSphere(ObjTag tag, float radius)
 {
 	b_Del = false;
-	b_IsColl = false;
+	b_SetActive = true;
 	m_Tag = tag;
 	D3DXCreateSphere(g_Device, radius, 10, 10, &SphereMesh, NULL);
 	f_Size = radius;
