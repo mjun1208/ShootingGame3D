@@ -50,7 +50,7 @@ void cPlayer::Init()
 
 void cPlayer::Update()
 {
-	if (INPUT->MouseLDown()) {
+	if (INPUT->MouseLPress()) {
 		ShootBullet();
 	}
 	if (INPUT->KeyDown('1')) {

@@ -37,6 +37,19 @@ void cEnemyAdmin::Update()
 		else
 			++iter;
 	}
+
+	if (m_Enemy.size() == 0) {
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 0), Wolf));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 10), Wolf));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 20), Wolf));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 30), Wolf));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 40), Wolf));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 50), Wolf));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 60), Wolf));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 70), Wolf));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 80), Wolf));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 90), Wolf));
+	}
 }
 
 void cEnemyAdmin::Render()

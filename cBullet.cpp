@@ -30,12 +30,14 @@ void cBullet::Update()
 	m_fLifeTime += DeltaTime;
 	m_vPos += m_vDir * m_fSpeed * 0.1f;
 
-	m_BoundingSphere->SetPos(m_vPos);
 
 	if (m_fLifeTime > 5.f)
 		b_Del = true;
 
-	CheckColl();
+	if (!b_Del && !m_BoundingSphere->GetDel() && m_BoundingSphere) {
+		m_BoundingSphere->SetPos(m_vPos);
+		CheckColl();
+	}
 }
 
 void cBullet::Render()
@@ -55,9 +57,12 @@ void cBullet::Release()
 
 void cBullet::CheckColl()
 {
-	for (auto iter : m_BoundingSphere->GetCollinfo()) {
-		if (iter->Tag == ENEMY) {
-			b_Del = true;
+	if (!b_Del && !m_BoundingSphere->GetDel() && m_BoundingSphere) {
+		for (auto iter : m_BoundingSphere->GetCollinfo()) {
+			if (iter->Tag == ENEMY) {
+				b_Del = true;
+				//m_BoundingSphere->SetDel(true);
+			}
 		}
 	}
 }

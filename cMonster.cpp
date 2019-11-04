@@ -4,6 +4,7 @@
 cMonster::cMonster(Vec3 pos, EnemyKind Kind)
 	: cEnemy(pos, Kind)
 {
+	m_Obj = OBJ->FindMultidOBJ("Wolf_Idle", 0);
 }
 
 
@@ -30,8 +31,8 @@ void cMonster::Update()
 		else
 			State = Idle;
 	}
-	StateUpdate();
-	if (m_BoundingSphere) {
+	StateUpdate();	
+	if (!m_BoundingSphere->GetDel() && m_BoundingSphere) {
 		m_BoundingSphere->SetPos(m_vPos + Vec3(0, 10, 0));
 		CheckColl();
 	}
@@ -160,10 +161,12 @@ void cMonster::StateUpdate()
 
 void cMonster::CheckColl()
 {
-	for (auto iter : m_BoundingSphere->GetCollinfo()) {
-		if (iter->Tag == BULLET) {
-			g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), iter->Pos, 1.f, 0.05f));
-			--i_Hp;
+	if (!m_BoundingSphere->GetDel() && m_BoundingSphere) {
+		for (auto iter : m_BoundingSphere->GetCollinfo()) {
+			if (iter->Tag == BULLET) {
+				g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), iter->Pos, 1.f, 0.05f));
+				--i_Hp;
+			}
 		}
 	}
 }

@@ -54,6 +54,6 @@ public:
 	bool GetColl() { return b_IsColl; }
 	void SetColl(bool Coll) { b_IsColl = Coll; }
 
-	CollInfo GetInfo() { return MyInfo; }
+	CollInfo * GetInfo() { return &MyInfo; }
 };
 
