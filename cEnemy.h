@@ -2,7 +2,7 @@
 #include "cBoundingSphere.h"
 
 enum EnemyKind{
-	Wolf, Zombie
+	Wolf, Zombie, Zombie2 ,Reaper
 };
 class cBoundingSphere;
 class cEnemy abstract
@@ -18,11 +18,18 @@ protected:
 	float f_Angle;
 	D3DXQUATERNION prevQ;
 	
+	float f_Speed;
+	float f_Distance;
+	float f_AttackDistance;
+
 	Vec3 vOriginDir;
 	Vec3 vDir;
 
 	bool b_IsDead;
 	bool b_Attack;
+	bool b_IsAttackEnd;
+
+	bool b_CantMove;
 
 	EnemyKind m_EnemyState;
 

@@ -26,14 +26,52 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		m_BoundingSphere = new cBoundingSphere;
 		m_BoundingSphere->ComputeBoundingSphere(ENEMY ,7.f);
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
-		i_Hp = 3;
+		i_Hp = 1;
+		f_Speed = 0.3f;
+		f_Distance = 200;
+		f_AttackDistance = 15.f;
 		break;
 	case Zombie:
 		m_IdleFrame->SetFrame(0, 120, 0.5f);
 		m_WalkFrame->SetFrame(0, 24, 0.5f);
 		m_AttackFrame->SetFrame(0, 139, 0.5f);
 		m_DeadFrame->SetFrame(0, 89, 0.5f);
+		f_Scale = 0.011f;
+		m_BoundingSphere = new cBoundingSphere;
+		m_BoundingSphere->ComputeBoundingSphere(ENEMY, 7.f);
+		g_Bounding.GetBounding().push_back(m_BoundingSphere);
+		i_Hp = 1;
+		f_Speed = 0.8f;
+		f_Distance = 400;
+		f_AttackDistance = 15.f;
+		break;
+	case Zombie2:
+		m_IdleFrame->SetFrame(0, 120, 0.5f);
+		m_WalkFrame->SetFrame(0, 24, 0.5f);
+		m_AttackFrame->SetFrame(0, 125, 0.5f);
+		m_DeadFrame->SetFrame(0, 89, 0.5f);
+		f_Scale = 0.33f;
+		m_BoundingSphere = new cBoundingSphere;
+		m_BoundingSphere->ComputeBoundingSphere(ENEMY, 7.f);
+		g_Bounding.GetBounding().push_back(m_BoundingSphere);
+		i_Hp = 1;
+		f_Speed = 0.6f;
+		f_Distance = 700;
+		f_AttackDistance = 15.f;
+		break;
+	case Reaper:
+		m_IdleFrame->SetFrame(0, 55, 0.5f);
+		m_WalkFrame->SetFrame(0, 42, 0.5f);
+		m_AttackFrame->SetFrame(0, 69, 0.5f);
+		m_DeadFrame->SetFrame(0, 109, 0.5f);
 		f_Scale = 0.1f;
+		m_BoundingSphere = new cBoundingSphere;
+		m_BoundingSphere->ComputeBoundingSphere(ENEMY, 7.f);
+		g_Bounding.GetBounding().push_back(m_BoundingSphere);
+		i_Hp = 1;
+		f_Speed = 0.6f;
+		f_Distance = 700;
+		f_AttackDistance = 100.f;
 		break;
 	default:
 		break;
@@ -41,6 +79,9 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 
 	b_Del = false;
 	b_IsDead = false;
+	b_CantMove = false;
+	b_Attack = false;
+	b_IsAttackEnd = false;
 	//Init();
 }
 

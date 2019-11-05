@@ -42,6 +42,7 @@ void cTitleScene::Render()
 	
 	matR = matX * matY * matZ;
 	OBJ->Render(OBJ->FindOBJ("Map"), Vec3(0,0,0), matR, 1.f);
+	OBJ->Render(OBJ->FindOBJ("Tree"), Vec3(0, 0, 0), matR, 0.1f);
 }
 
 void cTitleScene::Release()

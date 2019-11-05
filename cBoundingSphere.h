@@ -6,6 +6,7 @@ struct CollInfo
 {
 	ObjTag Tag;
 	Vec3 Pos;
+	float Size;
 };
 
 class cBoundingSphere
@@ -28,7 +29,7 @@ private:
 	float f_Size;
 	bool b_SetActive;
 	
-	CollInfo MyInfo;
+	CollInfo * MyInfo;
 
 	vector<CollInfo *> m_Collinfo;
 public:
@@ -53,6 +54,6 @@ public:
 	bool GetActive() { return b_SetActive; }
 	void SetActive(bool Coll) { b_SetActive = Coll; }
 
-	CollInfo * GetInfo() { return &MyInfo; }
+	CollInfo * GetInfo() { return MyInfo; }
 };
 

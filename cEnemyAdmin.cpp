@@ -39,16 +39,16 @@ void cEnemyAdmin::Update()
 	}
 
 	if (m_Enemy.size() == 0) {
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 0), Wolf));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 10), Wolf));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 20), Wolf));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 30), Wolf));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 40), Wolf));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 50), Wolf));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 60), Wolf));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 70), Wolf));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 80), Wolf));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 90), Wolf));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 0),  EnemyKind(rand() % 4)));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 10), EnemyKind(rand() % 4)));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 20), EnemyKind(rand() % 4)));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 30), EnemyKind(rand() % 4)));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 40), EnemyKind(rand() % 4)));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 50), EnemyKind(rand() % 4)));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 60), EnemyKind(rand() % 4)));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 70), EnemyKind(rand() % 4)));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 80), EnemyKind(rand() % 4)));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 90), EnemyKind(rand() % 4)));
 	}
 }
 
@@ -56,6 +56,11 @@ void cEnemyAdmin::Render()
 {
 	for (auto iter : m_Enemy)
 		iter->Render();
+
+	IMAGE->ReBegin(true, false);
+	IMAGE->PrintText("³²Àº Àû : " + to_string(m_Enemy.size()), Vec3(0, 100, 0), 20, D3DCOLOR_XRGB(255, 255, 255), false);
+	IMAGE->ReBegin(false, false);
+
 }
 
 void cEnemyAdmin::Release()

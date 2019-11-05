@@ -32,8 +32,8 @@ void cMainGame::Update()
 	if (CAMERA->GetMouseClip())
 		CAMERA->Update();
 	SCENE->Update();
-	g_Effect.Update();
 	g_Bounding.Update();
+	g_Effect.Update();
 	INPUT->Update();
 }
 

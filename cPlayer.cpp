@@ -50,7 +50,7 @@ void cPlayer::Init()
 
 void cPlayer::Update()
 {
-	if (INPUT->MouseLPress()) {
+	if (!IsDebug && INPUT->MouseLPress()) {
 		ShootBullet();
 	}
 	if (INPUT->KeyDown('1')) {
@@ -70,8 +70,7 @@ void cPlayer::Update()
 		}
 		IsFixedCamera = false;
 	}
-	else if (!IsSnipe)
-		IsFixedCamera = true;
+
 	else {
 		if (!IsSnipe)
 			Angle = CAMERA->GetAngle();
@@ -376,23 +375,59 @@ void cPlayer::ShootBullet()
 	IsAttack = true;
 	ShootAngle = Angle;
 
+	Vec3 ShootDir = Vec3(0, 0, 1);
+	Vec3 PistolDir = Vec3(0, 0, 1);
+	Vec3 BigGunDir = Vec3(0, 0, 1);
 	if (IsSnipe) {
 		D3DXMATRIX matX, matY, matZ, matR;
+
+		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+		D3DXMatrixRotationY(&matY, D3DXToRadian(AimAngle - 13));
+		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+		matR = matX * matY * matZ;
+		D3DXVec3TransformNormal(&PistolDir, &vOriginDir, &matR);
+		D3DXVec3TransformNormal(&BigGunDir, &vOriginDir, &matR);
 
 		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
 		D3DXMatrixRotationY(&matY, D3DXToRadian(AimAngle));
 		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
 		matR = matX * matY * matZ;
-		D3DXVec3TransformNormal(&vDir, &vOriginDir, &matR);
+		D3DXVec3TransformNormal(&ShootDir, &vOriginDir, &matR);
+
+		BigGunDir *= 15;
 	}
+	else {
+		D3DXMATRIX matX, matY, matZ, matR;
+
+		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+		D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() - 8));
+		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+		matR = matX * matY * matZ;
+		D3DXVec3TransformNormal(&PistolDir, &vOriginDir, &matR);
+
+		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+		D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() - 2));
+		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+		matR = matX * matY * matZ;
+		D3DXVec3TransformNormal(&BigGunDir, &vOriginDir, &matR);
+
+		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+		D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle()));
+		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+		matR = matX * matY * matZ;
+		D3DXVec3TransformNormal(&ShootDir, &vOriginDir, &matR);
+
+		BigGunDir *= 12;
+	}
+
 
 	switch (WeaponState)
 	{
 	case Pistol:
-		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 13, 0) + vDir * 10, vDir));
+		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 13, 0) + PistolDir * 13, ShootDir));
 		break;
 	case BigGun:
-		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 13, 0) + vDir * 10, vDir));
+		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 14, 0) + BigGunDir, ShootDir));
 		break;
 	case None:
 		break;

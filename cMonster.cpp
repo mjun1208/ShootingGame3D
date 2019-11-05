@@ -23,15 +23,22 @@ void cMonster::Update()
 	if (i_Hp <= 0)
 		State = Dead;
 	else {
-		if (D3DXVec3Length(&vDir) < 15.f) {
+		if (D3DXVec3Length(&vDir) < f_AttackDistance && !b_Attack) {
 			State = Attack;
+			b_Attack = true;
+			b_IsAttackEnd = true;
 		}
-		else if (D3DXVec3Length(&vDir) < 100.f)
+		else if (D3DXVec3Length(&vDir) < f_Distance && !b_Attack) {
 			State = Walk;
-		else
+			m_AttackFrame->NowFrame = 0;
+		}
+		else if (!b_Attack){
 			State = Idle;
+			m_AttackFrame->NowFrame = 0;
+		}
 	}
 	StateUpdate();	
+	b_CantMove = false;
 	if (!m_BoundingSphere->GetDel() && m_BoundingSphere) {
 		m_BoundingSphere->SetPos(m_vPos + Vec3(0, 10, 0));
 		CheckColl();
@@ -77,6 +84,12 @@ void cMonster::ObjUpdate()
 		case Zombie:
 			m_Obj = OBJ->FindMultidOBJ("Zombie_Idle", m_IdleFrame->NowFrame);
 			break;
+		case Zombie2:
+			m_Obj = OBJ->FindMultidOBJ("Zombie2_Idle", m_IdleFrame->NowFrame);
+			break;
+		case Reaper:
+			m_Obj = OBJ->FindMultidOBJ("Reaper_Idle", m_IdleFrame->NowFrame);
+			break;
 		default:
 			break;
 		}
@@ -89,6 +102,12 @@ void cMonster::ObjUpdate()
 			break;
 		case Zombie:
 			m_Obj = OBJ->FindMultidOBJ("Zombie_Walk", m_WalkFrame->NowFrame);
+			break;
+		case Zombie2:
+			m_Obj = OBJ->FindMultidOBJ("Zombie2_Walk", m_WalkFrame->NowFrame);
+			break;
+		case Reaper:
+			m_Obj = OBJ->FindMultidOBJ("Reaper_Walk", m_WalkFrame->NowFrame);
 			break;
 		default:
 			break;
@@ -103,6 +122,12 @@ void cMonster::ObjUpdate()
 		case Zombie:
 			m_Obj = OBJ->FindMultidOBJ("Zombie_Attack", m_AttackFrame->NowFrame);
 			break;
+		case Zombie2:
+			m_Obj = OBJ->FindMultidOBJ("Zombie2_Attack", m_AttackFrame->NowFrame);
+			break;
+		case Reaper:
+			m_Obj = OBJ->FindMultidOBJ("Reaper_Attack", m_AttackFrame->NowFrame);
+			break;
 		default:
 			break;
 		}
@@ -115,6 +140,12 @@ void cMonster::ObjUpdate()
 			break;
 		case Zombie:
 			m_Obj = OBJ->FindMultidOBJ("Zombie_Dead", m_DeadFrame->NowFrame);
+			break;
+		case Zombie2:
+			m_Obj = OBJ->FindMultidOBJ("Zombie2_Dead", m_DeadFrame->NowFrame);
+			break;
+		case Reaper:
+			m_Obj = OBJ->FindMultidOBJ("Reaper_Dead", m_DeadFrame->NowFrame);
 			break;
 		default:
 			break;
@@ -136,12 +167,25 @@ void cMonster::StateUpdate()
 		m_WalkFrame->Frame();
 		vDir = m_vTarget - m_vPos;
 		D3DXVec3Normalize(&vDir, &vDir);
-		m_vPos += vDir * 0.2f;
+		if (!b_CantMove)
+			m_vPos += vDir * f_Speed;
 		f_Angle = atan2f(vDir.x, vDir.z);
 		f_Angle = D3DXToDegree(f_Angle);
 		break;
 	case Attack:
+		vDir = m_vTarget - m_vPos;
+		D3DXVec3Normalize(&vDir, &vDir);
+		f_Angle = atan2f(vDir.x, vDir.z);
+		f_Angle = D3DXToDegree(f_Angle);
+
 		m_AttackFrame->Frame();
+		if (m_AttackFrame->NowFrame == m_AttackFrame->StartFrame) {
+			b_IsAttackEnd = false;
+		}
+		if (m_AttackFrame->NowFrame == m_AttackFrame->EndFrame && !b_IsAttackEnd) {
+			b_Attack = false;
+		}
+
 		break;
 	case Dead:
 		if (m_BoundingSphere)
@@ -168,6 +212,13 @@ void cMonster::CheckColl()
 			if (iter->Tag == BULLET) {
 				g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), iter->Pos, 1.f, 0.05f));
 				--i_Hp;
+			}
+			else if (iter->Tag == ENEMY) {
+				b_CantMove = true;
+				Vec3 CollDis = iter->Pos - m_vPos;
+				float fCollDis = (m_BoundingSphere->GetSize() + iter->Size) - D3DXVec3Length(&CollDis);
+				D3DXVec3Normalize(&CollDis, &CollDis);
+				m_vPos -= Vec3(CollDis.x , 0 , CollDis.z) * 0.2f;
 			}
 		}
 	}

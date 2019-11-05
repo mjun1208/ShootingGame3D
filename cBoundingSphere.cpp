@@ -19,11 +19,12 @@ void cBoundingSphere::ComputeBoundingSphere(ObjTag tag, float radius)
 	m_Tag = tag;
 	D3DXCreateSphere(g_Device, radius, 10, 10, &SphereMesh, NULL);
 	f_Size = radius;
+	MyInfo = new CollInfo{ m_Tag, m_vPos , f_Size };
 }
 
 void cBoundingSphere::Update()
 {
-	MyInfo = CollInfo{ m_Tag, m_vPos };
+	MyInfo->Pos = m_vPos;
 
 	for (auto iter : m_Collinfo)
 		SAFE_DELETE(iter);
@@ -71,4 +72,6 @@ void cBoundingSphere::Release()
 	for (auto iter : m_Collinfo)
 		SAFE_DELETE(iter);
 	m_Collinfo.clear();
+
+	SAFE_DELETE(MyInfo);
 }

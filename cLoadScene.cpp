@@ -20,8 +20,7 @@ void cLoadScene::Init()
 	Load("BloodEffect", "./resorce/Effect/Blood/(%d).png", 5);
 
 	OBJLoad("Map", "./resorce/Map.obj", "./resorce/");
-	OBJLoad("Coll", "./resorce/Coll.obj", "./resorce/");
-
+	OBJLoad("Tree", "./resorce/Tree/Tree.obj", "./resorce/Tree/");
 	if (IsDebug) {
 
 		OBJLoad("Player_Dead", "./resorce/Player/Dead/PlayerDead(%d).obj", "./resorce/Player/Dead/", 99, "PlayerDead.mtl");
@@ -47,6 +46,18 @@ void cLoadScene::Init()
 		OBJLoad("Zombie_Walk", "./resorce/Enemy/Zombie/Walk/ZombieWalk(%d).obj", "./resorce/Enemy/Zombie/Walk/", 24, "ZombieWalk.mtl");
 		OBJLoad("Zombie_Attack", "./resorce/Enemy/Zombie/Attack/ZombieAttack(%d).obj", "./resorce/Enemy/Zombie/Attack/", 139, "ZombieAttack.mtl");
 		OBJLoad("Zombie_Dead", "./resorce/Enemy/Zombie/Dead/ZombieDead(%d).obj", "./resorce/Enemy/Zombie/Dead/", 89, "ZombieDead.mtl");
+
+		//Zombie
+		OBJLoad("Zombie2_Idle", "./resorce/Enemy/Zombie2/Idle/ZombieIdle(%d).obj", "./resorce/Enemy/Zombie2/Idle/", 120, "ZombieIdle.mtl");
+		OBJLoad("Zombie2_Walk", "./resorce/Enemy/Zombie2/Walk/ZombieWalk(%d).obj", "./resorce/Enemy/Zombie2/Walk/", 24, "ZombieWalk.mtl");
+		OBJLoad("Zombie2_Attack", "./resorce/Enemy/Zombie2/Attack/ZombieAttack(%d).obj", "./resorce/Enemy/Zombie2/Attack/", 125, "ZombieAttack.mtl");
+		OBJLoad("Zombie2_Dead", "./resorce/Enemy/Zombie2/Dead/ZombieDead(%d).obj", "./resorce/Enemy/Zombie2/Dead/", 89, "ZombieDead.mtl");
+
+		//Reaper
+		OBJLoad("Reaper_Idle", "./resorce/Enemy/Reaper/Idle/ReaperIdle(%d).obj", "./resorce/Enemy/Reaper/Idle/", 55, "ReaperIdle.mtl");
+		OBJLoad("Reaper_Walk", "./resorce/Enemy/Reaper/Walk/ReaperWalk(%d).obj", "./resorce/Enemy/Reaper/Walk/", 42, "ReaperWalk.mtl");
+		OBJLoad("Reaper_Attack", "./resorce/Enemy/Reaper/Attack/ReaperAttack(%d).obj", "./resorce/Enemy/Reaper/Attack/", 69, "ReaperAttack.mtl");
+		OBJLoad("Reaper_Dead", "./resorce/Enemy/Reaper/Dead/ReaperDead(%d).obj", "./resorce/Enemy/Reaper/Dead/", 109, "ReaperDead.mtl");
 	}
 	else {
 		OBJLoad("Player_Dead", "./resorce/Player/Dead/PlayerDead(%d).obj", "./resorce/Player/Dead/", 1, "PlayerDead.mtl");
@@ -73,6 +84,17 @@ void cLoadScene::Init()
 		OBJLoad("Zombie_Attack", "./resorce/Enemy/Zombie/Attack/ZombieAttack(%d).obj", "./resorce/Enemy/Zombie/Attack/", 1, "ZombieAttack.mtl");
 		OBJLoad("Zombie_Dead", "./resorce/Enemy/Zombie/Dead/ZombieDead(%d).obj", "./resorce/Enemy/Zombie/Dead/", 1, "ZombieDead.mtl");
 
+		//Zombie2
+		OBJLoad("Zombie2_Idle", "./resorce/Enemy/Zombie2/Idle/ZombieIdle(%d).obj", "./resorce/Enemy/Zombie2/Idle/", 1, "ZombieIdle.mtl");
+		OBJLoad("Zombie2_Walk", "./resorce/Enemy/Zombie2/Walk/ZombieWalk(%d).obj", "./resorce/Enemy/Zombie2/Walk/", 1, "ZombieWalk.mtl");
+		OBJLoad("Zombie2_Attack", "./resorce/Enemy/Zombie2/Attack/ZombieAttack(%d).obj", "./resorce/Enemy/Zombie2/Attack/", 1, "ZombieAttack.mtl");
+		OBJLoad("Zombie2_Dead", "./resorce/Enemy/Zombie2/Dead/ZombieDead(%d).obj", "./resorce/Enemy/Zombie2/Dead/", 1, "ZombieDead.mtl");
+
+		//Reaper
+		OBJLoad("Reaper_Idle", "./resorce/Enemy/Reaper/Idle/ReaperIdle(%d).obj", "./resorce/Enemy/Reaper/Idle/", 1, "ReaperIdle.mtl");
+		OBJLoad("Reaper_Walk", "./resorce/Enemy/Reaper/Walk/ReaperWalk(%d).obj", "./resorce/Enemy/Reaper/Walk/", 1, "ReaperWalk.mtl");
+		OBJLoad("Reaper_Attack", "./resorce/Enemy/Reaper/Attack/ReaperAttack(%d).obj", "./resorce/Enemy/Reaper/Attack/", 1, "ReaperAttack.mtl");
+		OBJLoad("Reaper_Dead", "./resorce/Enemy/Reaper/Dead/ReaperDead(%d).obj", "./resorce/Enemy/Reaper/Dead/", 1, "ReaperDead.mtl");
 	}
 
 	MaxLoad = m_Load.size();

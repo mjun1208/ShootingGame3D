@@ -69,20 +69,26 @@ void cOBJManager::Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale , D
 	matW = matS * matR * matT;
 
 	HRESULT hr;
-
+	if (mesh->Material[0]->map)
+		FX->SetTexture((D3DXHANDLE)"DiffuseSampler", mesh->Material[0]->map->texturePtr);
+	else
+		FX->SetTexture((D3DXHANDLE)"DiffuseSampler", nullptr);
+	D3DXVECTOR4 gWorldLightPosition(500.0f, 500.0f, -500.0f, 1.0f);
+	D3DXVECTOR4 gWorldCameraPosition(0.0f, 0.0f, -200.0f, 1.0f);
+	FX->SetVector((D3DXHANDLE)"gWorldLightPosition", &gWorldLightPosition);
+	FX->SetVector((D3DXHANDLE)"gWorldCameraPosition", &gWorldCameraPosition);
 	FX->SetMatrix((D3DXHANDLE)"m_World", &matW);
 	FX->SetMatrix((D3DXHANDLE)"m_View", &CAMERA->view);
 	FX->SetMatrix((D3DXHANDLE)"m_Proj", &CAMERA->proj);
-	FX->SetFloat((D3DXHANDLE)"OutLineWidth", 10.f);
-
+	
 	FX->SetTechnique((D3DXHANDLE)"BoSoo");
-
+	
 	UINT cPass;
 	FX->Begin(&cPass, 0); //Pass가 몇개인지 받아옴
-
-	//for (UINT p = 0; p < cPass; ++p)
-	//{
-	//	FX->BeginPass(p);
+	
+	for (UINT p = 0; p < cPass; ++p)
+	{
+		FX->BeginPass(p);
 
 		g_Device->SetTransform(D3DTS_WORLD, &matW); //fx할땐 안해도됨
 		for (int i = 0; i < mesh->Material.size(); ++i)
@@ -92,15 +98,38 @@ void cOBJManager::Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale , D
 			}
 			else
 				g_Device->SetTexture(0, nullptr);
+			//mesh->Material[i]->material.Diffuse.r = mesh->Material[i]->material.Ambient.r = 1.0f;
+			//mesh->Material[i]->material.Diffuse.g = mesh->Material[i]->material.Ambient.g = 1.0f;
+			//mesh->Material[i]->material.Diffuse.b = mesh->Material[i]->material.Ambient.b = 1.0f;
+			//mesh->Material[i]->material.Diffuse.a = mesh->Material[i]->material.Ambient.a = 1.0f;
+			//
+			//D3DLIGHT9 light;
+            //ZeroMemory(&light, sizeof(D3DLIGHT9));
+            //light.Type = D3DLIGHT_DIRECTIONAL; 
+			//
+			//Vec3 vecDir;
+            //vecDir = Vec3(10, -2, 3);
+            //D3DXVec3Normalize((Vec3*)&light.Direction, &vecDir);
+			//
+			//light.Diffuse.r = 1.f;
+            //light.Diffuse.g = 1.f;
+            //light.Diffuse.b = 1.f;
+            //light.Diffuse.a = 1.f;
+			//
+			//g_Device->SetLight(0, &light);
+            //g_Device->LightEnable(0, true);
+            //g_Device->SetRenderState(D3DRS_LIGHTING, true);
+            //g_Device->SetRenderState(D3DRS_AMBIENT, 0x00202020);
+
 			g_Device->SetMaterial(&mesh->Material[i]->material);
 
 			mesh->mesh->DrawSubset(i);
 		}
 
-	//	FX->EndPass();
-  	//
-	//}
-    // FX->End();
+		FX->EndPass();
+  	
+	}
+    FX->End();
 }
 
 void cOBJManager::RenderShadow(Mesh * mesh, Vec3 Pos)
