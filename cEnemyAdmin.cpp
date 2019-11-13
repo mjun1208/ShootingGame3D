@@ -5,8 +5,8 @@
 
 #include "cMonster.h"
 #include "cPlayer.h"
-cEnemyAdmin::cEnemyAdmin(cPlayer * player)
-	: m_Player(player)
+cEnemyAdmin::cEnemyAdmin(cPlayer * player, vector<cBullet *>& Bullet)
+	: m_Player(player), m_Bullet(Bullet)
 {
 	Init();
 }
@@ -26,7 +26,7 @@ void cEnemyAdmin::Update()
 {
 	for (auto iter : m_Enemy) {
 		iter->SetTarget(m_Player->GetPos());
-		iter->Update();
+		iter->Update(m_Bullet);
 	}
 
 	for (auto iter = m_Enemy.begin(); iter != m_Enemy.end();) {
@@ -40,15 +40,6 @@ void cEnemyAdmin::Update()
 
 	if (m_Enemy.size() == 0) {
 		m_Enemy.push_back(new cMonster(Vec3(0, 0, 0),  EnemyKind(rand() % 4)));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 10), EnemyKind(rand() % 4)));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 20), EnemyKind(rand() % 4)));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 30), EnemyKind(rand() % 4)));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 40), EnemyKind(rand() % 4)));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 50), EnemyKind(rand() % 4)));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 60), EnemyKind(rand() % 4)));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 70), EnemyKind(rand() % 4)));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 80), EnemyKind(rand() % 4)));
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 90), EnemyKind(rand() % 4)));
 	}
 }
 

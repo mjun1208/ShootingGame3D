@@ -38,7 +38,7 @@ void cBoundingSphereAdmin::Update()
 				Vec3 Distance = iter->GetPos() - iter_->GetPos();
 				float fDistance = D3DXVec3Length(&Distance);
 				if (fDistance < iter->GetSize() + iter_->GetSize()) {
-					if (iter_->GetTag() == BULLET) {
+					if (iter_->GetTag() == PLAYERBULLET) {
 						iter_->GetCollinfo().push_back(new CollInfo(*iter->GetInfo()));
 						iter_->SetActive(false);
 					}

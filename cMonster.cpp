@@ -1,6 +1,7 @@
 #include "DXUT.h"
 #include "cMonster.h"
 
+#include "cBullet.h"
 cMonster::cMonster(Vec3 pos, EnemyKind Kind)
 	: cEnemy(pos, Kind)
 {
@@ -17,7 +18,7 @@ void cMonster::Init()
 {
 }
 
-void cMonster::Update()
+void cMonster::Update(vector<cBullet *>& Bullet)
 {
 	vDir = m_vTarget - m_vPos;
 	if (i_Hp <= 0)
@@ -37,7 +38,7 @@ void cMonster::Update()
 			m_AttackFrame->NowFrame = 0;
 		}
 	}
-	StateUpdate();	
+	StateUpdate(Bullet);	
 	b_CantMove = false;
 	if (!m_BoundingSphere->GetDel() && m_BoundingSphere) {
 		m_BoundingSphere->SetPos(m_vPos + Vec3(0, 10, 0));
@@ -156,7 +157,7 @@ void cMonster::ObjUpdate()
 	}
 }
 
-void cMonster::StateUpdate()
+void cMonster::StateUpdate(vector<cBullet *>& Bullet)
 {
 	switch (State)
 	{
@@ -178,7 +179,9 @@ void cMonster::StateUpdate()
 		f_Angle = atan2f(vDir.x, vDir.z);
 		f_Angle = D3DXToDegree(f_Angle);
 
-		m_AttackFrame->Frame();
+		if (m_AttackFrame->Frame() && (m_AttackFrame->NowFrame == m_AttackFrame->EndFrame / 2) && m_EnemyState == Reaper)
+			Bullet.push_back(new cBullet(m_vPos + Vec3(0, 10, 0), vDir, DARKBALL, 3.f, 2.f));
+
 		if (m_AttackFrame->NowFrame == m_AttackFrame->StartFrame) {
 			b_IsAttackEnd = false;
 		}
@@ -186,7 +189,7 @@ void cMonster::StateUpdate()
 			b_Attack = false;
 		}
 
-		break;
+		break; 
 	case Dead:
 		if (m_BoundingSphere)
 			m_BoundingSphere->SetActive(false);
@@ -209,7 +212,7 @@ void cMonster::CheckColl()
 {
 	if (!m_BoundingSphere->GetDel() && m_BoundingSphere) {
 		for (auto iter : m_BoundingSphere->GetCollinfo()) {
-			if (iter->Tag == BULLET) {
+			if (iter->Tag == PLAYERBULLET) {
 				g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), iter->Pos, 1.f, 0.05f));
 				--i_Hp;
 			}

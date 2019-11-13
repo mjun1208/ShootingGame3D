@@ -1,6 +1,7 @@
 #pragma once
 #include "cBoundingSphere.h"
 
+class cBullet;
 enum EnemyKind{
 	Wolf, Zombie, Zombie2 ,Reaper
 };
@@ -44,12 +45,12 @@ public:
 	virtual ~cEnemy();
 	
 	virtual void Init() PURE;
-	virtual void Update() PURE;
+	virtual void Update(vector<cBullet *>& Bullet) PURE;
 	virtual void Render() PURE;
 	virtual void Release() PURE;
 
 	virtual void ObjUpdate() PURE;
-	virtual void StateUpdate() PURE;
+	virtual void StateUpdate(vector<cBullet *>& Bullet) PURE;
  
 	void SetTarget(Vec3 Target) { m_vTarget = Target; }
 	int GetHp() { return i_Hp; }

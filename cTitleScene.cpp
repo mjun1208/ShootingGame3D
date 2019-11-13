@@ -18,7 +18,7 @@ void cTitleScene::Init()
 {
 	m_Bullet = new cBulletAdmin();
 	m_Player = new cPlayer(m_Bullet->GetBullet());
-	m_Enemy = new cEnemyAdmin(m_Player);
+	m_Enemy = new cEnemyAdmin(m_Player , m_Bullet->GetBullet());
 }
 
 void cTitleScene::Update()

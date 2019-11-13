@@ -424,10 +424,10 @@ void cPlayer::ShootBullet()
 	switch (WeaponState)
 	{
 	case Pistol:
-		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 13, 0) + PistolDir * 13, ShootDir));
+		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 13, 0) + PistolDir * 13, ShootDir, PLAYERBULLET, 3.f, 5.f));
 		break;
 	case BigGun:
-		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 14, 0) + BigGunDir, ShootDir));
+		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 14, 0) + BigGunDir, ShootDir,PLAYERBULLET , 3.f, 5.f));
 		break;
 	case None:
 		break;

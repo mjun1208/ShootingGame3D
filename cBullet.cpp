@@ -2,13 +2,18 @@
 #include "cBullet.h"
 
 
-cBullet::cBullet(Vec3 pos, Vec3 Dir)
-	: m_vPos(pos) , m_vDir(Dir)
+cBullet::cBullet(Vec3 pos, Vec3 Dir, ObjTag tag, float speed, float lifetime)
+	: m_vPos(pos) , m_vDir(Dir), m_tag(tag), m_fSpeed(speed), m_fDelTime(lifetime)
 {
-	m_fSpeed = 33.f;
+	//m_fSpeed = 33.f;
 	b_Del = false;
 	m_fLifeTime = 0;
 	Init();
+
+	if (m_tag == DARKBALL) {
+		m_DarkBallFrame = new cFrame();
+		m_DarkBallFrame->SetFrame(0, 4, 50);
+	}
 }
 
 
@@ -20,7 +25,7 @@ cBullet::~cBullet()
 void cBullet::Init()
 {
 	m_BoundingSphere = new cBoundingSphere;
-	m_BoundingSphere->ComputeBoundingSphere(BULLET , 0.8f);
+	m_BoundingSphere->ComputeBoundingSphere(m_tag, 0.8f);
 	g_Bounding.GetBounding().push_back(m_BoundingSphere);
 	m_BoundingSphere->SetPos(m_vPos);
 }
@@ -28,10 +33,13 @@ void cBullet::Init()
 void cBullet::Update()
 {
 	m_fLifeTime += DeltaTime;
-	m_vPos += m_vDir * m_fSpeed * 0.1f;
+	m_vPos += m_vDir * m_fSpeed;
 
+	if (m_tag == DARKBALL) {
+		m_DarkBallFrame->Frame();
+	}
 
-	if (m_fLifeTime > 5.f)
+	if (m_fLifeTime > m_fDelTime)
 		b_Del = true;
 
 	if (!b_Del && !m_BoundingSphere->GetDel() && m_BoundingSphere) {
@@ -47,19 +55,42 @@ void cBullet::Render()
 	D3DXMatrixRotationY(&matY, D3DXToRadian(0));
 	D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
 	matR = matX * matY * matZ;
-	OBJ->Render(OBJ->FindOBJ("Player_Bullet"), m_vPos, matR , 0.05f);
+	switch (m_tag)
+	{
+	case NONE:
+		break;
+	case PLAYER:
+		break;
+	case ENEMY:
+		break;
+	case PLAYERBULLET:
+		OBJ->Render(OBJ->FindOBJ("Player_Bullet"), m_vPos, matR, 0.05f);
+		break;
+	case DARKBALL:
+		OBJ->Render(OBJ->FindOBJ("DarkBall"), m_vPos, matR, 0.05f);
+		IMAGE->ReBegin(false, true);
+		IMAGE->Render(IMAGE->FindImage("DarkBall")->FindImage(m_DarkBallFrame->NowFrame), m_vPos + Vec3(0, 4, 0) , Vec3(0.2, -0.2, 0.2), 0, D3DCOLOR_XRGB(255, 255, 255), true);
+		IMAGE->ReBegin(false, false);
+		break;
+	default:
+		break;
+	}
 }
 
 void cBullet::Release()
 {
 	m_BoundingSphere->SetDel(true);
+	if (m_tag == DARKBALL) {
+		g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("DarkBallEffect"), m_vPos, 1, 0.5f));
+		SAFE_DELETE(m_DarkBallFrame);
+	}
 }
 
 void cBullet::CheckColl()
 {
 	if (!b_Del && !m_BoundingSphere->GetDel() && m_BoundingSphere) {
 		for (auto iter : m_BoundingSphere->GetCollinfo()) {
-			if (iter->Tag == ENEMY) {
+			if (iter->Tag == ENEMY && m_tag == PLAYERBULLET) {
 				b_Del = true;
 				m_BoundingSphere->SetActive(false);
 			}

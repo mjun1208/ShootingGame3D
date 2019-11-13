@@ -58,6 +58,10 @@ void cLoadScene::Init()
 		OBJLoad("Reaper_Walk", "./resorce/Enemy/Reaper/Walk/ReaperWalk(%d).obj", "./resorce/Enemy/Reaper/Walk/", 42, "ReaperWalk.mtl");
 		OBJLoad("Reaper_Attack", "./resorce/Enemy/Reaper/Attack/ReaperAttack(%d).obj", "./resorce/Enemy/Reaper/Attack/", 69, "ReaperAttack.mtl");
 		OBJLoad("Reaper_Dead", "./resorce/Enemy/Reaper/Dead/ReaperDead(%d).obj", "./resorce/Enemy/Reaper/Dead/", 109, "ReaperDead.mtl");
+		OBJLoad("DarkBall", "./resorce/Enemy/Reaper/Bullet/DarkBall.obj", "./resorce/Enemy/Reaper/Bullet/");
+
+		Load("DarkBall", "./resorce/Enemy/Reaper/Bullet/(%d).png", 4);
+		Load("DarkBallEffect", "./resorce/Enemy/Reaper/Bullet/Effect/(%d).png", 20);
 	}
 	else {
 		OBJLoad("Player_Dead", "./resorce/Player/Dead/PlayerDead(%d).obj", "./resorce/Player/Dead/", 1, "PlayerDead.mtl");
@@ -95,6 +99,10 @@ void cLoadScene::Init()
 		OBJLoad("Reaper_Walk", "./resorce/Enemy/Reaper/Walk/ReaperWalk(%d).obj", "./resorce/Enemy/Reaper/Walk/", 1, "ReaperWalk.mtl");
 		OBJLoad("Reaper_Attack", "./resorce/Enemy/Reaper/Attack/ReaperAttack(%d).obj", "./resorce/Enemy/Reaper/Attack/", 1, "ReaperAttack.mtl");
 		OBJLoad("Reaper_Dead", "./resorce/Enemy/Reaper/Dead/ReaperDead(%d).obj", "./resorce/Enemy/Reaper/Dead/", 1, "ReaperDead.mtl");
+		OBJLoad("DarkBall", "./resorce/Enemy/Reaper/Bullet/DarkBall.obj", "./resorce/Enemy/Reaper/Bullet/");
+
+		Load("DarkBall", "./resorce/Enemy/Reaper/Bullet/(%d).png", 4);
+		Load("DarkBallEffect", "./resorce/Enemy/Reaper/Bullet/Effect/(%d).png", 20);
 	}
 
 	MaxLoad = m_Load.size();
