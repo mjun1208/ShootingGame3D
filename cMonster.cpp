@@ -91,6 +91,9 @@ void cMonster::ObjUpdate()
 		case Reaper:
 			m_Obj = OBJ->FindMultidOBJ("Reaper_Idle", m_IdleFrame->NowFrame);
 			break;
+		case Vampire:
+			m_Obj = OBJ->FindMultidOBJ("Vampire_Idle", m_IdleFrame->NowFrame);
+			break;
 		default:
 			break;
 		}
@@ -109,6 +112,9 @@ void cMonster::ObjUpdate()
 			break;
 		case Reaper:
 			m_Obj = OBJ->FindMultidOBJ("Reaper_Walk", m_WalkFrame->NowFrame);
+			break;
+		case Vampire:
+			m_Obj = OBJ->FindMultidOBJ("Vampire_Walk", m_IdleFrame->NowFrame);
 			break;
 		default:
 			break;
@@ -129,6 +135,9 @@ void cMonster::ObjUpdate()
 		case Reaper:
 			m_Obj = OBJ->FindMultidOBJ("Reaper_Attack", m_AttackFrame->NowFrame);
 			break;
+		case Vampire:
+			m_Obj = OBJ->FindMultidOBJ("Vampire_Attack", m_IdleFrame->NowFrame);
+			break;
 		default:
 			break;
 		}
@@ -147,6 +156,9 @@ void cMonster::ObjUpdate()
 			break;
 		case Reaper:
 			m_Obj = OBJ->FindMultidOBJ("Reaper_Dead", m_DeadFrame->NowFrame);
+			break;
+		case Vampire:
+			m_Obj = OBJ->FindMultidOBJ("Vampire_Dead", m_IdleFrame->NowFrame);
 			break;
 		default:
 			break;
@@ -174,21 +186,25 @@ void cMonster::StateUpdate(vector<cBullet *>& Bullet)
 		f_Angle = D3DXToDegree(f_Angle);
 		break;
 	case Attack:
+		m_AttackFrame->Frame();
 		vDir = m_vTarget - m_vPos;
 		D3DXVec3Normalize(&vDir, &vDir);
 		f_Angle = atan2f(vDir.x, vDir.z);
 		f_Angle = D3DXToDegree(f_Angle);
 
-		if (m_AttackFrame->Frame() && (m_AttackFrame->NowFrame == m_AttackFrame->EndFrame / 2) && m_EnemyState == Reaper)
+		if ((m_AttackFrame->NowFrame == m_AttackFrame->EndFrame / 2) && m_EnemyState == Reaper)
 			Bullet.push_back(new cBullet(m_vPos + Vec3(0, 10, 0), vDir, DARKBALL, 3.f, 2.f));
 
-		if (m_AttackFrame->NowFrame == m_AttackFrame->StartFrame) {
+		if ((m_AttackFrame->NowFrame == m_AttackFrame->EndFrame / 2) && m_EnemyState == Vampire)
+			Bullet.push_back(new cBullet(m_vPos + Vec3(0, 10, 0), vDir, BAT, 3.f, 2.f));
+
+		if (m_AttackFrame->NowFrame == m_AttackFrame->EndFrame) {
 			b_IsAttackEnd = false;
 		}
-		if (m_AttackFrame->NowFrame == m_AttackFrame->EndFrame && !b_IsAttackEnd) {
+		if (m_AttackFrame->NowFrame == m_AttackFrame->StartFrame && !b_IsAttackEnd) {
 			b_Attack = false;
+			State = Idle;
 		}
-
 		break; 
 	case Dead:
 		if (m_BoundingSphere)

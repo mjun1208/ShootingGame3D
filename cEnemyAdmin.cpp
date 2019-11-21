@@ -39,7 +39,7 @@ void cEnemyAdmin::Update()
 	}
 
 	if (m_Enemy.size() == 0) {
-		m_Enemy.push_back(new cMonster(Vec3(0, 0, 0),  EnemyKind(rand() % 4)));
+		m_Enemy.push_back(new cMonster(Vec3(0, 0, 0),  EnemyKind(rand() % 5)));
 	}
 }
 

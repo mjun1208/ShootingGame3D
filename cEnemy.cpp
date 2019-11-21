@@ -73,6 +73,20 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		f_Distance = 700;
 		f_AttackDistance = 100.f;
 		break;
+	case Vampire:
+		m_IdleFrame->SetFrame(0, 120, 0.5f);
+		m_WalkFrame->SetFrame(0, 31, 0.5f);
+		m_AttackFrame->SetFrame(0, 69, 0.5f);
+		m_DeadFrame->SetFrame(0, 89, 0.5f);
+		f_Scale = 0.1f;
+		m_BoundingSphere = new cBoundingSphere;
+		m_BoundingSphere->ComputeBoundingSphere(ENEMY, 7.f);
+		g_Bounding.GetBounding().push_back(m_BoundingSphere);
+		i_Hp = 1;
+		f_Speed = 0.6f;
+		f_Distance = 700;
+		f_AttackDistance = 100.f;
+		break;
 	default:
 		break;
 	}

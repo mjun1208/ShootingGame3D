@@ -72,6 +72,8 @@ void cBullet::Render()
 		IMAGE->Render(IMAGE->FindImage("DarkBall")->FindImage(m_DarkBallFrame->NowFrame), m_vPos + Vec3(0, 4, 0) , Vec3(0.2, -0.2, 0.2), 0, D3DCOLOR_XRGB(255, 255, 255), true);
 		IMAGE->ReBegin(false, false);
 		break;
+	case BAT:
+		OBJ->Render(OBJ->FindOBJ("Bat"), m_vPos, matR, 0.05f);
 	default:
 		break;
 	}

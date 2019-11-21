@@ -3,7 +3,7 @@
 
 class cBullet;
 enum EnemyKind{
-	Wolf, Zombie, Zombie2 ,Reaper
+	Wolf, Zombie, Zombie2 ,Reaper , Vampire
 };
 class cBoundingSphere;
 class cEnemy abstract

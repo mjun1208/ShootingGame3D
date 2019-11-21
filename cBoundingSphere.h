@@ -1,6 +1,6 @@
 #pragma once
 enum ObjTag
-{NONE, PLAYER, ENEMY, PLAYERBULLET, DARKBALL};
+{NONE, PLAYER, ENEMY, PLAYERBULLET, DARKBALL ,BAT};
 
 struct CollInfo
 {

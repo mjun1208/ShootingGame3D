@@ -62,6 +62,16 @@ void cLoadScene::Init()
 
 		Load("DarkBall", "./resorce/Enemy/Reaper/Bullet/(%d).png", 4);
 		Load("DarkBallEffect", "./resorce/Enemy/Reaper/Bullet/Effect/(%d).png", 20);
+
+		//Vampire
+		OBJLoad("Vampire_Idle", "./resorce/Enemy/Vampire/Idle/VampireIdle(%d).obj", "./resorce/Enemy/Vampire/Idle/", 120, "VampireIdle.mtl");
+		OBJLoad("Vampire_Walk", "./resorce/Enemy/Vampire/Walk/VampireWalk(%d).obj", "./resorce/Enemy/Vampire/Walk/", 31, "VampireWalk.mtl");
+		OBJLoad("Vampire_Attack", "./resorce/Enemy/Vampire/Attack/VampireAttack(%d).obj", "./resorce/Enemy/Vampire/Attack/", 69, "VampireAttack.mtl");
+		OBJLoad("Vampire_Attack2", "./resorce/Enemy/Vampire/Attack2/VampireAttack(%d).obj", "./resorce/Enemy/Vampire/Attack2/", 125, "VampireAttack.mtl");
+		OBJLoad("Vampire_Dead", "./resorce/Enemy/Vampire/Dead/VampireDead(%d).obj", "./resorce/Enemy/Vampire/Dead/", 89, "VampireDead.mtl");
+
+		OBJLoad("Bat", "./resorce/Enemy/Vampire/Bat.obj",  "./resorce/Enemy/Vampire/");
+
 	}
 	else {
 		OBJLoad("Player_Dead", "./resorce/Player/Dead/PlayerDead(%d).obj", "./resorce/Player/Dead/", 1, "PlayerDead.mtl");
@@ -103,6 +113,15 @@ void cLoadScene::Init()
 
 		Load("DarkBall", "./resorce/Enemy/Reaper/Bullet/(%d).png", 4);
 		Load("DarkBallEffect", "./resorce/Enemy/Reaper/Bullet/Effect/(%d).png", 20);
+
+		//Vampire
+		OBJLoad("Vampire_Idle", "./resorce/Enemy/Vampire/Idle/VampireIdle(%d).obj", "./resorce/Enemy/Vampire/Idle/", 1, "VampireIdle.mtl");
+		OBJLoad("Vampire_Walk", "./resorce/Enemy/Vampire/Walk/VampireWalk(%d).obj", "./resorce/Enemy/Vampire/Walk/", 1, "VampireWalk.mtl");
+		OBJLoad("Vampire_Attack", "./resorce/Enemy/Vampire/Attack/VampireAttack(%d).obj", "./resorce/Enemy/Vampire/Attack/", 1, "VampireAttack.mtl");
+		OBJLoad("Vampire_Attack2", "./resorce/Enemy/Vampire/Attack2/VampireAttack(%d).obj", "./resorce/Enemy/Vampire/Attack2/", 1, "VampireAttack.mtl");
+		OBJLoad("Vampire_Dead", "./resorce/Enemy/Vampire/Dead/VampireDead(%d).obj", "./resorce/Enemy/Vampire/Dead/", 1, "VampireDead.mtl");
+
+		OBJLoad("Bat", "./resorce/Enemy/Vampire/Bat", "./resorce/Enemy/Vampire/");
 	}
 
 	MaxLoad = m_Load.size();
