@@ -77,8 +77,8 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		m_IdleFrame->SetFrame(0, 120, 0.5f);
 		m_WalkFrame->SetFrame(0, 31, 0.5f);
 		m_AttackFrame->SetFrame(0, 69, 0.5f);
-		m_DeadFrame->SetFrame(0, 89, 0.5f);
-		f_Scale = 0.1f;
+		m_DeadFrame->SetFrame(0, 78, 0.5f);
+		f_Scale = 0.08f;
 		m_BoundingSphere = new cBoundingSphere;
 		m_BoundingSphere->ComputeBoundingSphere(ENEMY, 7.f);
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);

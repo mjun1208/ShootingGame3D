@@ -114,7 +114,7 @@ void cMonster::ObjUpdate()
 			m_Obj = OBJ->FindMultidOBJ("Reaper_Walk", m_WalkFrame->NowFrame);
 			break;
 		case Vampire:
-			m_Obj = OBJ->FindMultidOBJ("Vampire_Walk", m_IdleFrame->NowFrame);
+			m_Obj = OBJ->FindMultidOBJ("Vampire_Walk", m_WalkFrame->NowFrame);
 			break;
 		default:
 			break;
@@ -136,7 +136,7 @@ void cMonster::ObjUpdate()
 			m_Obj = OBJ->FindMultidOBJ("Reaper_Attack", m_AttackFrame->NowFrame);
 			break;
 		case Vampire:
-			m_Obj = OBJ->FindMultidOBJ("Vampire_Attack", m_IdleFrame->NowFrame);
+			m_Obj = OBJ->FindMultidOBJ("Vampire_Attack", m_AttackFrame->NowFrame);
 			break;
 		default:
 			break;
@@ -158,7 +158,7 @@ void cMonster::ObjUpdate()
 			m_Obj = OBJ->FindMultidOBJ("Reaper_Dead", m_DeadFrame->NowFrame);
 			break;
 		case Vampire:
-			m_Obj = OBJ->FindMultidOBJ("Vampire_Dead", m_IdleFrame->NowFrame);
+			m_Obj = OBJ->FindMultidOBJ("Vampire_Dead", m_DeadFrame->NowFrame);
 			break;
 		default:
 			break;

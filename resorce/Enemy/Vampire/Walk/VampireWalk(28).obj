@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# File Created: 01.11.2019 15:18:50
+# File Created: 26.11.2019 13:06:23
 
 mtllib VampireWalk28f.mtl
 
@@ -2947,7 +2947,7 @@ vt 0.9211 0.9988 0.0000
 
 o Plane002
 g Plane002
-usemtl Material__26
+usemtl Material__25
 s off
 f 1/1/1 2/2/1 3/3/1 
 f 3/3/1 4/4/1 1/1/1 
