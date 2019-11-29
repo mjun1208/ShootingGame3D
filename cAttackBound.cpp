@@ -5,6 +5,7 @@
 cAttackBound::cAttackBound(float size)
 	: m_fSize(size)
 {
+	Init();
 }
 
 
@@ -20,7 +21,8 @@ void cAttackBound::Init()
 	m_BoundingSphere->ComputeBoundingSphere(m_tag, m_fSize);
 	g_Bounding.GetBounding().push_back(m_BoundingSphere);
 	m_BoundingSphere->SetPos(m_vPos);
-	m_BoundingSphere->SetActive(false);
+	IsActive = false;
+	m_BoundingSphere->SetActive(IsActive);
 }
 
 void cAttackBound::Update()

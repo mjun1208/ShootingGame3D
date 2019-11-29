@@ -64,6 +64,7 @@ void cMonster::Update(vector<cBullet *>& Bullet)
 		CheckColl();
 	}
 	ObjUpdate();
+	m_AttackBound->Update();
 }
 
 void cMonster::Render()
@@ -216,15 +217,14 @@ void cMonster::StateUpdate(vector<cBullet *>& Bullet)
 
 		if ((m_AttackFrame->NowFrame == m_AttackFrame->EndFrame / 2) && m_EnemyState == Vampire)
 			Bullet.push_back(new cBullet(m_vPos + Vec3(0, 10, 0), vDir, BAT, 3.f, 0.8f, 2.f));
-
-		if ((m_AttackFrame->NowFrame >= m_AttackFrame->EndFrame / 3) && m_EnemyState != Reaper && m_EnemyState != Vampire){
+		
+		if ((m_AttackFrame->NowFrame >= m_AttackFrame->EndFrame - 60)) {
+			m_AttackBound->SetActive(false);
+		}
+		else if ((m_AttackFrame->NowFrame >= m_AttackFrame->EndFrame / 3) && m_EnemyState != Reaper && m_EnemyState != Vampire){
 			m_AttackBound->SetPos(m_vPos + Vec3(0, 10, 0) + (vDir * (f_AttackDistance / 2)));
 			m_AttackBound->SetActive(true);
-			m_AttackBound->Update();
 			//Bullet.push_back(new cBullet(m_vPos + Vec3(0, 10, 0) + (vDir * (f_AttackDistance / 2)), vDir, , 0.f, 7.f, 1.f));
-		}
-		else {
-			m_AttackBound->SetActive(false);
 		}
 
 		if (m_AttackFrame->NowFrame == m_AttackFrame->EndFrame) {
