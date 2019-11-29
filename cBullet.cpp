@@ -2,8 +2,8 @@
 #include "cBullet.h"
 
 
-cBullet::cBullet(Vec3 pos, Vec3 Dir, ObjTag tag, float speed, float lifetime)
-	: m_vPos(pos) , m_vDir(Dir), m_tag(tag), m_fSpeed(speed), m_fDelTime(lifetime)
+cBullet::cBullet(Vec3 pos, Vec3 Dir, ObjTag tag, float speed, float size,  float lifetime)
+	: m_vPos(pos) , m_vDir(Dir), m_tag(tag), m_fSpeed(speed), m_fDelTime(lifetime) , m_fSize(size)
 {
 	//m_fSpeed = 33.f;
 	b_Del = false;
@@ -25,7 +25,7 @@ cBullet::~cBullet()
 void cBullet::Init()
 {
 	m_BoundingSphere = new cBoundingSphere;
-	m_BoundingSphere->ComputeBoundingSphere(m_tag, 0.8f);
+	m_BoundingSphere->ComputeBoundingSphere(m_tag, m_fSize);
 	g_Bounding.GetBounding().push_back(m_BoundingSphere);
 	m_BoundingSphere->SetPos(m_vPos);
 }

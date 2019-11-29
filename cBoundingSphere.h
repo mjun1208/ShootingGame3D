@@ -1,6 +1,6 @@
 #pragma once
 enum ObjTag
-{NONE, PLAYER, ENEMY, PLAYERBULLET, DARKBALL ,BAT};
+{NONE, PLAYER, ENEMY, PLAYERBULLET, DARKBALL ,BAT, ENEMYATTACKBOUND};
 
 struct CollInfo
 {
@@ -29,6 +29,8 @@ private:
 	float f_Size;
 	bool b_SetActive;
 	
+	bool b_IsColl;
+
 	CollInfo * MyInfo;
 
 	vector<CollInfo *> m_Collinfo;

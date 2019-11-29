@@ -20,6 +20,8 @@ void cBoundingSphere::ComputeBoundingSphere(ObjTag tag, float radius)
 	D3DXCreateSphere(g_Device, radius, 10, 10, &SphereMesh, NULL);
 	f_Size = radius;
 	MyInfo = new CollInfo{ m_Tag, m_vPos , f_Size };
+
+	b_IsColl = false;
 }
 
 void cBoundingSphere::Update()

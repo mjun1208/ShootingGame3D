@@ -96,6 +96,9 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 	b_CantMove = false;
 	b_Attack = false;
 	b_IsAttackEnd = false;
+
+	m_AttackBound = new cAttackBound(7.f);
+	m_AttackBound->SetPos(m_vPos);
 	//Init();
 }
 

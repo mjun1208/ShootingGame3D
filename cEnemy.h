@@ -1,11 +1,13 @@
 #pragma once
 #include "cBoundingSphere.h"
+#include "cAttackBound.h"
 
 class cBullet;
 enum EnemyKind{
 	Wolf, Zombie, Zombie2 ,Reaper , Vampire
 };
 class cBoundingSphere;
+class cAttackBound;
 class cEnemy abstract
 {
 protected:
@@ -40,6 +42,7 @@ protected:
 	cFrame * m_DeadFrame;
 
 	cBoundingSphere * m_BoundingSphere;
+	cAttackBound * m_AttackBound;
 public:
 	cEnemy(Vec3 pos ,EnemyKind Kind);
 	virtual ~cEnemy();

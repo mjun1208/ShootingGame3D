@@ -222,6 +222,9 @@
     <ClCompile Include="cBoundingSphereAdmin.cpp">
       <Filter>Object\BoundingSphere</Filter>
     </ClCompile>
+    <ClCompile Include="cAttackBound.cpp">
+      <Filter>Object\Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -312,6 +315,9 @@
     </ClInclude>
     <ClInclude Include="cBoundingSphereAdmin.h">
       <Filter>Object\BoundingSphere</Filter>
+    </ClInclude>
+    <ClInclude Include="cAttackBound.h">
+      <Filter>Object\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

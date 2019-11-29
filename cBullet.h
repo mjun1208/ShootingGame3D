@@ -6,6 +6,8 @@ private:
 	Vec3 m_vDir;
 	float m_fSpeed;
 
+	float m_fSize;
+
 	ObjTag m_tag;
 
 	bool b_Del;
@@ -18,7 +20,7 @@ private:
 
 	cFrame * m_DarkBallFrame;
 public:
-	cBullet(Vec3 pos, Vec3 Dir, ObjTag tag, float speed, float lifetime);
+	cBullet(Vec3 pos, Vec3 Dir, ObjTag tag, float speed, float size, float lifetime);
 	~cBullet();
 
 	void Init();

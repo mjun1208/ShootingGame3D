@@ -73,8 +73,8 @@ void cOBJManager::Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale , D
 		FX->SetTexture((D3DXHANDLE)"DiffuseSampler", mesh->Material[0]->map->texturePtr);
 	else
 		FX->SetTexture((D3DXHANDLE)"DiffuseSampler", nullptr);
-	D3DXVECTOR4 gWorldLightPosition(500.0f, 500.0f, -500.0f, 1.0f);
-	D3DXVECTOR4 gWorldCameraPosition(0.0f, 0.0f, -200.0f, 1.0f);
+	D3DXVECTOR4 gWorldLightPosition(CAMERA->eye.x, CAMERA->eye.y, CAMERA->eye.z, 1.0f);
+	D3DXVECTOR4 gWorldCameraPosition(CAMERA->eye.x, CAMERA->eye.y, CAMERA->eye.z, 1.0f);
 	FX->SetVector((D3DXHANDLE)"gWorldLightPosition", &gWorldLightPosition);
 	FX->SetVector((D3DXHANDLE)"gWorldCameraPosition", &gWorldCameraPosition);
 	FX->SetMatrix((D3DXHANDLE)"m_World", &matW);
