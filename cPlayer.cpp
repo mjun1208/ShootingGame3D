@@ -3,6 +3,18 @@
 
 #include "cBullet.h"
 
+void cPlayer::CheckColl()
+{
+	if (!m_BoundingSphere->GetDel() && m_BoundingSphere) {
+		for (auto iter : m_BoundingSphere->GetCollinfo()) {
+			if (iter->Tag == DARKBALL || iter->Tag == BAT) {
+				g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), iter->Pos, 1.f, 0.05f));
+				i_Hp -= 2;
+			}
+		}
+	}
+}
+
 cPlayer::cPlayer(vector<cBullet *>& Bullet)
 	: m_Bullet(Bullet)
 {
@@ -19,6 +31,9 @@ cPlayer::cPlayer(vector<cBullet *>& Bullet)
 	m_DeadFrame = new cFrame();
 	m_DeadFrame->SetFrame(0, 99, 1.f);
 	Init();
+
+	m_HPGauge = IMAGE->FindImage("PlayerHPGauge");
+	m_HPEdge = IMAGE->FindImage("PlayerHPEdge");
 }
 
 
@@ -46,10 +61,19 @@ void cPlayer::Init()
 	IsBackMove = false;
 
 	WeaponState = Pistol;
+	i_Hp = 100;
+	InvincibilityDelay = 0;
+	b_IsHit = false;
+
+	m_BoundingSphere = new cBoundingSphere;
+	m_BoundingSphere->ComputeBoundingSphere(PLAYER, 5.f);
+	g_Bounding.GetBounding().push_back(m_BoundingSphere);
 }
 
 void cPlayer::Update()
 {
+	m_BoundingSphere->SetPos(vPos + Vec3(0, 10, 0));
+
 	if (!IsDebug && INPUT->MouseLPress()) {
 		ShootBullet();
 	}
@@ -160,10 +184,32 @@ void cPlayer::Update()
 	}
 	else
 		CAMERA->SetTarget(Vec3(vPos.x, vPos.y + 15, vPos.z));
+	
+	CheckColl();
+
+	if (b_IsHit) {
+		if (InvincibilityDelay < 1.f) {
+			InvincibilityDelay += DeltaTime;
+		}
+		else {
+			b_IsHit = false;
+			InvincibilityDelay = 0;
+		}
+	}
+
 }
 
 void cPlayer::Render()
 {
+	//Hp 
+	IMAGE->ReBegin(true, false);
+	IMAGE->Render(m_HPEdge, Vec3(m_HPEdge->info.Width / 2 + 50, m_HPEdge->info.Height / 2 + 25, 0), 0, true);
+	RECT HpRECT{ 0, 0, ((float)m_HPGauge->info.Width / i_MaxHp) * i_Hp, m_HPGauge->info.Height };
+	IMAGE->CropRender(m_HPGauge, Vec3(m_HPEdge->info.Width / 2 + 50, m_HPEdge->info.Height / 2 + 25, 0), HpRECT);
+	if (INPUT->KeyPress('H') && i_Hp > 0)
+		i_Hp--;
+	IMAGE->ReBegin(false, false);
+
 	// 각도 바꾸는거
 	D3DXMATRIX matX, matY, matZ;
 

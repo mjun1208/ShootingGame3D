@@ -147,12 +147,12 @@ void cImageManager::Render(cTexture * texture, Vec3 pos, Vec3 size, float rot, D
 	}
 }
 
-void cImageManager::CropRender(cTexture * texture, Vec3 pos, RECT rcRange)
+void cImageManager::CropRender(cTexture * texture, Vec3 pos, RECT rcRange, float size)
 {
 	D3DXMATRIX mat;
 	D3DXMATRIX matS, matR, matT;
 
-	D3DXMatrixScaling(&matS, 1.f, 1.f, 1.f);
+	D3DXMatrixScaling(&matS, size, size, size);
 	D3DXMatrixRotationZ(&matR, D3DXToRadian(0));
 	D3DXMatrixTranslation(&matT, pos.x, pos.y, pos.z);
 

@@ -24,6 +24,8 @@ void cBulletAdmin::Update()
 
 	for (auto iter = m_Bullet.begin(); iter != m_Bullet.end();) {
 		if ((*iter)->GetDel()) {
+			if ((*iter)->GetTag() == DARKBALL)
+				g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("DarkBallEffect"), (*iter)->GetPos(), 1, 0.5f));
 			SAFE_DELETE(*iter);
 			iter = m_Bullet.erase(iter);
 		}

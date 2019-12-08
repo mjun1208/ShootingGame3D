@@ -39,6 +39,13 @@ private:
 	void OBJLoad(const string& key, const string& path, const string& mappath = "None", int count = 0, const string& mtlpath = "None") {
 		m_OBJLoad.push_back(OBJstrBun(key, path,mappath, count, mtlpath));
 	}
+
+	vector<thread> workers;
+
+	void func1(int A);
+
+	mutex Mutex;
+	void ThreadLoad(int A, int B, mutex& m);
 public:
 	cLoadScene();
 	virtual ~cLoadScene();

@@ -2,6 +2,7 @@
 #include "cMonster.h"
 
 #include "cBullet.h"
+#include "cPlayer.h"
 cMonster::cMonster(Vec3 pos, EnemyKind Kind)
 	: cEnemy(pos, Kind)
 {
@@ -69,6 +70,14 @@ void cMonster::Update(vector<cBullet *>& Bullet)
 
 void cMonster::Render()
 {
+	//Hp
+	IMAGE->ReBegin(false, true);
+	IMAGE->Render(m_HPEdge, Vec3(m_vPos.x , m_vPos.y + 20, m_vPos.z), Vec3(0.1f, 0.1f, 0.1f), 0, D3DCOLOR_XRGB(255,255,255),true);
+	RECT HpRECT{ 0, 0, ((float)m_HPGauge->info.Width / i_MaxHp) * i_Hp, m_HPGauge->info.Height };
+	IMAGE->CropRender(m_HPGauge, Vec3(m_vPos.x, m_vPos.y + 20, m_vPos.z), HpRECT , 0.1f);
+	IMAGE->ReBegin(false, false);
+
+
 	D3DXMATRIX matX, matY, matZ;
 
 	D3DXMatrixRotationX(&matX, D3DXToRadian(0));
@@ -260,7 +269,7 @@ void cMonster::CheckColl()
 		for (auto iter : m_BoundingSphere->GetCollinfo()) {
 			if (iter->Tag == PLAYERBULLET) {
 				g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), iter->Pos, 1.f, 0.05f));
-				--i_Hp;
+				i_Hp -= 100;
 			}
 			else if (iter->Tag == ENEMY) {
 				b_CantMove = true;
@@ -268,6 +277,14 @@ void cMonster::CheckColl()
 				float fCollDis = (m_BoundingSphere->GetSize() + iter->Size) - D3DXVec3Length(&CollDis);
 				D3DXVec3Normalize(&CollDis, &CollDis);
 				m_vPos -= Vec3(CollDis.x , 0 , CollDis.z) * 0.2f;
+			}
+		}
+	}
+
+	if (m_AttackBound->GetBoundingSphere() && !m_AttackBound->GetBoundingSphere()->GetDel() && m_AttackBound->GetBoundingSphere()->GetActive()) {
+		for (auto iter : m_AttackBound->GetBoundingSphere()->GetCollinfo()) {
+			if (iter->Tag == PLAYER) {
+				Player->Hit();
 			}
 		}
 	}

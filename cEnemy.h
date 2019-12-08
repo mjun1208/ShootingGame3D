@@ -2,6 +2,7 @@
 #include "cBoundingSphere.h"
 #include "cAttackBound.h"
 
+class cPlayer;
 class cBullet;
 enum EnemyKind{
 	Wolf, Zombie, Zombie2 ,Reaper , Vampire
@@ -17,6 +18,7 @@ protected:
 	Vec3 m_vTarget;
 	bool b_Del;
 	int i_Hp;
+	const int i_MaxHp = 100;
 	float f_Scale;
 	float f_Angle;
 	D3DXQUATERNION prevQ;
@@ -43,6 +45,11 @@ protected:
 
 	cBoundingSphere * m_BoundingSphere;
 	cAttackBound * m_AttackBound;
+
+	cTexture * m_HPGauge;
+	cTexture * m_HPEdge;
+
+	cPlayer * Player;
 public:
 	cEnemy(Vec3 pos ,EnemyKind Kind);
 	virtual ~cEnemy();
@@ -56,6 +63,7 @@ public:
 	virtual void StateUpdate(vector<cBullet *>& Bullet) PURE;
  
 	void SetTarget(Vec3 Target) { m_vTarget = Target; }
+	void SetPlayer(cPlayer * player) { Player = player; }
 	int GetHp() { return i_Hp; }
 	void SetHp(int hp) { i_Hp = hp; }
 

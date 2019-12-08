@@ -43,7 +43,7 @@ public:
 
 	void Render(cTexture * texture, Vec3 pos, float rot = 0, bool center = false);
 	void Render(cTexture * texture, Vec3 pos, Vec3 size, float rot = 0, D3DCOLOR color = D3DCOLOR_XRGB(255, 255, 255), bool center = false);
-	void CropRender(cTexture * texture, Vec3 pos, RECT rcRange);
+	void CropRender(cTexture * texture, Vec3 pos, RECT rcRange , float size = 1.f);
 	void CenterRender(cTexture * texture, Vec3 pos, const Vec3 & center, float rot = 0);
 };
 

@@ -35,7 +35,7 @@ vector<Mesh*> cOBJManager::AddMultiOBJ(const string & key, const string & path, 
 		sprintf(sz, path.c_str(), i);
 		Mesh * temp = new Mesh;
 		loader.OBJLOAD(temp, sz, mappath, MtlPath);
-
+		DEBUG_LOG(sz);
 		(*m_VecOBJ).push_back(temp);
 	}
 	m_MultiMesh.insert(make_pair(key, m_VecOBJ));

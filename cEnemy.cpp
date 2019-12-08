@@ -2,6 +2,7 @@
 #include "cEnemy.h"
 
 #include "cBoundingSphere.h"	
+#include "cPlayer.h"
 
 cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 	: m_vPos(pos), m_EnemyState(Kind)
@@ -9,6 +10,9 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 	prevQ = { 0,0,0,1 };
 	vOriginDir = vDir = { 0, 0, 1.f };
 	f_Angle = 0;
+
+	m_HPEdge = IMAGE->FindImage("EnemyHPEdge");
+	m_HPGauge = IMAGE->FindImage("EnemyHPGauge");
 
 	m_IdleFrame = new cFrame();
 	m_WalkFrame = new cFrame();
@@ -26,7 +30,7 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		m_BoundingSphere = new cBoundingSphere;
 		m_BoundingSphere->ComputeBoundingSphere(ENEMY ,7.f);
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
-		i_Hp = 1;
+		i_Hp = 100;
 		f_Speed = 0.3f;
 		f_Distance = 200;
 		f_AttackDistance = 15.f;
@@ -40,7 +44,7 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		m_BoundingSphere = new cBoundingSphere;
 		m_BoundingSphere->ComputeBoundingSphere(ENEMY, 7.f);
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
-		i_Hp = 1;
+		i_Hp = 100;
 		f_Speed = 0.8f;
 		f_Distance = 400;
 		f_AttackDistance = 15.f;
@@ -54,7 +58,7 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		m_BoundingSphere = new cBoundingSphere;
 		m_BoundingSphere->ComputeBoundingSphere(ENEMY, 7.f);
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
-		i_Hp = 1;
+		i_Hp = 100;
 		f_Speed = 0.6f;
 		f_Distance = 700;
 		f_AttackDistance = 15.f;
@@ -68,7 +72,7 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		m_BoundingSphere = new cBoundingSphere;
 		m_BoundingSphere->ComputeBoundingSphere(ENEMY, 7.f);
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
-		i_Hp = 1;
+		i_Hp = 100;
 		f_Speed = 0.6f;
 		f_Distance = 700;
 		f_AttackDistance = 100.f;
@@ -78,11 +82,11 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		m_WalkFrame->SetFrame(0, 31, 0.5f);
 		m_AttackFrame->SetFrame(0, 69, 0.5f);
 		m_DeadFrame->SetFrame(0, 78, 0.5f);
-		f_Scale = 0.08f;
+		f_Scale = 0.06f;
 		m_BoundingSphere = new cBoundingSphere;
 		m_BoundingSphere->ComputeBoundingSphere(ENEMY, 7.f);
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
-		i_Hp = 1;
+		i_Hp = 100;
 		f_Speed = 0.6f;
 		f_Distance = 700;
 		f_AttackDistance = 100.f;
@@ -114,4 +118,6 @@ cEnemy::~cEnemy()
 		SAFE_DELETE(m_AttackFrame);
 	if (m_DeadFrame)
 		SAFE_DELETE(m_DeadFrame);
+
+	SAFE_DELETE(m_AttackBound);
 }

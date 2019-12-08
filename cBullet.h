@@ -30,5 +30,8 @@ public:
 
 	bool GetDel() { return b_Del; }
 	void SetDel(bool Del) { b_Del = Del; }
+
+	Vec3 GetPos() { return m_vPos;}
+	ObjTag GetTag() { return m_tag; }
 };
 

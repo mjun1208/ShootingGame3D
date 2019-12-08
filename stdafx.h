@@ -8,6 +8,9 @@
 #include <time.h>
 #include <string>
 #include <fstream>
+#include <thread>
+#include <mutex>
+#include <functional>
 #include "SDKsound.h"
 
 using namespace std;

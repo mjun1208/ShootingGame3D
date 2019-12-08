@@ -20,5 +20,6 @@ public:
 	Vec3 GetPos() { return m_vPos; }
 
 	void SetActive(bool active) { IsActive  = active; }
+	cBoundingSphere * GetBoundingSphere() { return m_BoundingSphere; }
 };
 

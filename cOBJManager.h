@@ -8,6 +8,7 @@ private:
 	OBJLoader loader;
 	map<string, Mesh *> m_Mesh;
 	map<string, vector<Mesh *> *> m_MultiMesh;
+	vector<thread> workers;
 public:
 	cOBJManager();
 

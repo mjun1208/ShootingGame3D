@@ -48,7 +48,7 @@ bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* p
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
 {
-	//_CrtSetBreakAlloc(6430412);
+	//_CrtSetBreakAlloc(534);
 	mg.Init();
     return S_OK;
 }

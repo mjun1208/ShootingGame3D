@@ -82,10 +82,8 @@ void cBullet::Render()
 void cBullet::Release()
 {
 	m_BoundingSphere->SetDel(true);
-	if (m_tag == DARKBALL) {
-		g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("DarkBallEffect"), m_vPos, 1, 0.5f));
+	if (m_tag == DARKBALL) 
 		SAFE_DELETE(m_DarkBallFrame);
-	}
 }
 
 void cBullet::CheckColl()
@@ -93,6 +91,15 @@ void cBullet::CheckColl()
 	if (!b_Del && !m_BoundingSphere->GetDel() && m_BoundingSphere) {
 		for (auto iter : m_BoundingSphere->GetCollinfo()) {
 			if (iter->Tag == ENEMY && m_tag == PLAYERBULLET) {
+				b_Del = true;
+				m_BoundingSphere->SetActive(false);
+			}
+		}
+	}
+
+	if (!b_Del && !m_BoundingSphere->GetDel() && m_BoundingSphere) {
+		for (auto iter : m_BoundingSphere->GetCollinfo()) {
+			if (iter->Tag == PLAYER && (m_tag == DARKBALL || m_tag == BAT)) {
 				b_Del = true;
 				m_BoundingSphere->SetActive(false);
 			}

@@ -25,6 +25,7 @@ void cEnemyAdmin::Init()
 void cEnemyAdmin::Update()
 {
 	for (auto iter : m_Enemy) {
+		iter->SetPlayer(m_Player);
 		iter->SetTarget(m_Player->GetPos());
 		iter->Update(m_Bullet);
 	}
