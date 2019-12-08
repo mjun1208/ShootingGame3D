@@ -71,17 +71,30 @@ void cOBJManager::Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale, bo
 	if (b_Boss) {
 		HRESULT hr;	
 
-		float Alpha = rand() % 10 * 0.1f;
+		D3DXVECTOR4 Alpha(rand() % 100 * 0.01f, rand() % 100 * 0.01f, rand() % 100 * 0.01f , 1.f);
 
-		FXBoss->SetFloat((D3DXHANDLE)"Alpha", Alpha);
+		FXBoss->SetVector((D3DXHANDLE)"Alpha", &Alpha);
+		FXBoss->SetFloat((D3DXHANDLE)"time", 1.f);
+		FXBoss->SetFloat((D3DXHANDLE)"timeangle", 1.f);
 		if (mesh->Material[0]->map)
 			FXBoss->SetTexture((D3DXHANDLE)"DiffuseSampler", mesh->Material[0]->map->texturePtr);
 		else
 			FXBoss->SetTexture((D3DXHANDLE)"DiffuseSampler", nullptr);
 
-		FXBoss->SetMatrix((D3DXHANDLE)"gWorldMatrix", &matW);
-		FXBoss->SetMatrix((D3DXHANDLE)"gViewMatrix", &CAMERA->view);
-		FXBoss->SetMatrix((D3DXHANDLE)"gProjectionMatrix", &CAMERA->proj);
+		D3DXVECTOR4 gWorldLightPosition(CAMERA->eye.x, CAMERA->eye.y, CAMERA->eye.z, 1.0f);
+		D3DXVECTOR4 gWorldCameraPosition(CAMERA->eye.x, CAMERA->eye.y, CAMERA->eye.z, 1.0f);
+		FXBoss->SetVector((D3DXHANDLE)"gWorldLightPosition", &gWorldLightPosition);
+		FXBoss->SetVector((D3DXHANDLE)"gWorldCameraPosition", &gWorldCameraPosition);
+
+		FXBoss->SetTexture((D3DXHANDLE)"Boss_Rumble", IMAGE->FindImage("Shader_Boss")->texturePtr);
+		FXBoss->SetMatrix((D3DXHANDLE)"m_World", &matW);
+		FXBoss->SetMatrix((D3DXHANDLE)"m_View", &CAMERA->view);
+		FXBoss->SetMatrix((D3DXHANDLE)"m_Proj", &CAMERA->proj);
+		D3DXMATRIX WORLDINVERSETRANSEPOSE;
+	    D3DXMatrixInverse(&WORLDINVERSETRANSEPOSE, NULL, &matW);
+		D3DXMatrixTranspose(&WORLDINVERSETRANSEPOSE, &WORLDINVERSETRANSEPOSE);
+
+		FXBoss->SetMatrix((D3DXHANDLE)"WITM", &WORLDINVERSETRANSEPOSE);
 
 		FXBoss->SetTechnique((D3DXHANDLE)"Boss");
 
