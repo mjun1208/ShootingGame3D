@@ -92,7 +92,7 @@ void cMonster::Render()
 	D3DXMATRIX mRQ;
 	D3DXMatrixRotationQuaternion(&mRQ, &prevQ);
 
-	OBJ->Render(m_Obj, m_vPos, matR, f_Scale);
+	OBJ->Render(m_Obj, m_vPos, matR, f_Scale, true);
 }
 
 void cMonster::Release()

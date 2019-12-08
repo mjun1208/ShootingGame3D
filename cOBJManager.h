@@ -18,7 +18,7 @@ public:
 	vector<Mesh*> AddMultiOBJ(const string& key, const string& path, const string& mappath, int count = 0, const string& MtlPath = "None");
     Mesh * FindOBJ(const string& key);
 	Mesh * FindMultidOBJ(const string& key , int count = 0);
-	void Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale = 1.f, D3DXCOLOR color = { 1.f,1.f,1.f,1.f });
+	void Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale = 1.f, bool b_Boss = false);
 
 	void RenderShadow(Mesh * mesh, Vec3 Pos);
 
