@@ -72,9 +72,9 @@ void cMonster::Render()
 {
 	//Hp
 	IMAGE->ReBegin(false, true);
-	IMAGE->Render(m_HPEdge, Vec3(m_vPos.x , m_vPos.y + 20, m_vPos.z), Vec3(0.1f, 0.1f, 0.1f), 0, D3DCOLOR_XRGB(255,255,255),true);
+	IMAGE->Render(m_HPEdge, Vec3(m_vPos.x , m_vPos.y + 20, m_vPos.z), Vec3(0.05f, 0.05f, 0.05f), 0, D3DCOLOR_XRGB(255,255,255),true);
 	RECT HpRECT{ 0, 0, ((float)m_HPGauge->info.Width / i_MaxHp) * i_Hp, m_HPGauge->info.Height };
-	IMAGE->CropRender(m_HPGauge, Vec3(m_vPos.x, m_vPos.y + 20, m_vPos.z), HpRECT , 0.1f);
+	IMAGE->CropRender(m_HPGauge, Vec3(m_vPos.x, m_vPos.y + 20, m_vPos.z), HpRECT , 0.05f);
 	IMAGE->ReBegin(false, false);
 
 

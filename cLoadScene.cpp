@@ -39,8 +39,7 @@ void cLoadScene::Init()
 {
 	NowLoad = 0;
 	NowOBJLoad = 0;
-
-	Load("Shader_Boss", "./Fx/MM.png");
+	Load("Shader_Boss", "./Fx/AA.png");
 
 	Load("BloodEffect", "./resorce/Effect/Blood/(%d).png", 5);
 	Load("PlayerHPGauge", "./resorce/Player/HPGauge.png");
