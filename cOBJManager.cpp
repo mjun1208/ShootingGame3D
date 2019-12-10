@@ -71,8 +71,40 @@ void cOBJManager::Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale, bo
 	if (b_Boss) {
 		HRESULT hr;
 
-		FXBoss->SetMatrix((D3DXHANDLE)"matView", &CAMERA->view);
-		FXBoss->SetMatrix((D3DXHANDLE)"matViewProjection", &(matW * CAMERA->view * CAMERA->proj));
+		//float4x4 matWorldView;
+		//float4x4 matWorldViewIT;
+		//float4x4 matProjection;
+		//float3 LightDir;
+		//float4 diffuseColor;
+		//float4 ambientColor;
+		//float4 GlowColor;
+		//float4 GlowAmbient;
+		//float GlowThickness;
+		//texture base;
+
+		if (mesh->Material[0]->map)
+			FXBoss->SetTexture((D3DXHANDLE)"base", mesh->Material[0]->map->texturePtr);
+		else
+			FXBoss->SetTexture((D3DXHANDLE)"base", nullptr);
+
+		FXBoss->SetTexture((D3DXHANDLE)"UVAnime", mesh->Material[0]->map->texturePtr);
+
+		FXBoss->SetMatrix((D3DXHANDLE)"matWorldView", &(matW * CAMERA->view));
+		D3DXMATRIX InverseTranspose = matW * CAMERA->view;
+		D3DXMatrixInverse(&InverseTranspose, NULL, &InverseTranspose);
+		D3DXMatrixTranspose(&InverseTranspose, &InverseTranspose);
+		FXBoss->SetMatrix((D3DXHANDLE)"matWorldViewIT", &InverseTranspose);
+		FXBoss->SetMatrix((D3DXHANDLE)"matProjection", &CAMERA->proj);
+		FXBoss->SetVector((D3DXHANDLE)"LightDir", &D3DXVECTOR4(CAMERA->eye.x, CAMERA->eye.y, CAMERA->eye.z , 1.f));
+		FXBoss->SetVector((D3DXHANDLE)"diffuseColor", &D3DXVECTOR4(1.f, 1.f, 1.f, 1.f));
+		FXBoss->SetVector((D3DXHANDLE)"ambientColor", &D3DXVECTOR4(1.f, 1.f, 1.f, 1.f));
+
+		//float4 gWorldLightPosition;
+		//float4 gWorldCameraPosition;
+
+		FXBoss->SetVector((D3DXHANDLE)"GlowColor", &D3DXVECTOR4(1.f, 0.1f, 0.1f, 1.f));
+		FXBoss->SetVector((D3DXHANDLE)"GlowAmbient", &D3DXVECTOR4(1.f, 0.1f, 0.1f, 1.f));
+		FXBoss->SetFloat((D3DXHANDLE)"GlowThickness", 0.2f);
 
 		FXBoss->SetTechnique((D3DXHANDLE)"Boss");
 

@@ -51,9 +51,6 @@
     <Filter Include="Scene\MapEditer">
       <UniqueIdentifier>{ddc747a9-73d5-4eff-93d5-b4149256705c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Node">
-      <UniqueIdentifier>{5275a069-3104-4d9d-a937-3a1014994cb7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager\FxManager">
       <UniqueIdentifier>{1890322f-1300-49a9-9b56-655adce7ddaf}</UniqueIdentifier>
     </Filter>
@@ -74,6 +71,9 @@
     </Filter>
     <Filter Include="Object\Effect">
       <UniqueIdentifier>{2921182c-6ab5-496f-82cc-01d2cb023f7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Node">
+      <UniqueIdentifier>{5275a069-3104-4d9d-a937-3a1014994cb7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

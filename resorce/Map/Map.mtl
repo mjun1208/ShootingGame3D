@@ -1,0 +1,210 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 10.12.2019 13:04:35
+
+newmtl Material__560
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka Gradient3.png
+	map_Kd Gradient3.png
+
+newmtl Material__550
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+
+newmtl Material__572
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka StandLight_1.tga
+	map_Kd StandLight_1.tga
+
+newmtl Material__570
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka Irrigation.tga
+	map_Kd Irrigation.tga
+
+newmtl Material__567
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka Grave_1.tga
+	map_Kd Grave_1.tga
+
+newmtl Material__566
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka Grave_2.tga
+	map_Kd Grave_2.tga
+
+newmtl Material__563
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka House_3.tga
+	map_Kd House_3.tga
+
+newmtl Material__562
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka House_4.tga
+	map_Kd House_4.tga
+
+newmtl Material__561
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka House_5.tga
+	map_Kd House_5.tga
+
+newmtl Material__564
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka House_1.tga
+	map_Kd House_1.tga
+
+newmtl Material__569
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka Tree_3.tga
+	map_Kd Tree_3.tga
+
+newmtl Material__565
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka Wagon.tga
+	map_Kd Wagon.tga
+
+newmtl Material__568
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka Tree_4.tga
+	map_Kd Tree_4.tga
+
+newmtl Material__571
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka StandLight_2.tga
+	map_Kd StandLight_2.tga
+
+newmtl Material__573
+	Ns 10.000
+	Ni 1.500
+	d 1.000
+	Tr 0.000
+	Tf 1.000 1.000 1.000 
+	illum 2
+	Ka 0.588 0.588 0.588
+	Kd 0.588 0.588 0.588
+	Ks 0.000 0.000 0.000
+	Ke 0.000 0.000 0.000
+	map_Ka castle2.tga
+	map_Kd castle2.tga
