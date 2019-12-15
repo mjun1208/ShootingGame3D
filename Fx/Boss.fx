@@ -1,132 +1,143 @@
-//--------------------------------------------------------------//
-// OutlineRendering
-//--------------------------------------------------------------//
-//--------------------------------------------------------------//
-// NormalRender
-//--------------------------------------------------------------//
-texture rtOrigin_Tex : RenderColorTarget
-<
-float2 RenderTargetDimensions = { 512,512 };
-string Format = "D3DFMT_A8R8G8B8";
-float  ClearDepth = 1.000000;
-int    ClearColor = -16777216;
-> ;
-float4x4 matViewProjection : ViewProjection;
-float4x4 matView : View;
+float4x4 matWorldView;
+float4x4 matWorldViewIT;
+float4x4 matProjection;
+float3 LightDir;
+float4 diffuseColor;
+float4 ambientColor;
+float4 GlowColor;
+float4 GlowAmbient;
+float GlowThickness;
+texture base;
+texture UVAnime;
 
-struct NormalRender_VS_INPUT
+sampler2D Texture0 = sampler_state
 {
-	float4 Position : POSITION0;
-	float3 Normal : NORMAL0;
+	texture = (base);
+	minfilter = LINEAR;
+	magfilter = LINEAR;
+	mipfilter = LINEAR;
+	addressu = wrap;
 };
 
-struct NormalRender_VS_OUTPUT
+struct VS_INPUT
 {
 	float4 Position : POSITION0;
-	float4 NormalColor : COLOR0;
-};
-
-NormalRender_VS_OUTPUT NormalRender_vs_main(NormalRender_VS_INPUT In)
-{
-	NormalRender_VS_OUTPUT Out;
-
-	Out.Position = mul(In.Position, matViewProjection);
-	float3 Norm = mul(In.Normal, (float3x3)matView);
-	Out.NormalColor = float4(Norm, 1.0f);
-
-	return Out;
-}
-
-float4 Position_NormalRender_ps_main(float4 NormalColor : COLOR0) : COLOR0
-{
-   return NormalColor;
-}
-
-
-
-
-//--------------------------------------------------------------//
-// OutlineRender
-//--------------------------------------------------------------//
-struct OutlineRender_VS_INPUT
-{
-	float4 Position : POSITION0;
-	float3 Normal : NORMAL0;
-};
-
-struct OutlineRender_VS_OUTPUT
-{
-	float4 Position : POSITION0;
+	float3 Normal : NORMAL;
 	float2 TexCoord : TEXCOORD0;
 };
-
-OutlineRender_VS_OUTPUT OutlineRender_vs_main(OutlineRender_VS_INPUT In)
+struct VS_OUTPUT
 {
-	OutlineRender_VS_OUTPUT Out;
+	float4 Position : POSITION0;
+	float4 Diffuse : COLOR0;
+	float2 TexCoord : TEXCOORD0;
 
-	In.Position.xy = sign(In.Position.xy);
-	Out.Position = float4(In.Position.xy, 0.0f, 1.0f);
-
-	//Image-space
-	//Out.TexCoord = ( float2(In.Position.x, -In.Position.y) + 1.0f) * 0.5f;
-	Out.TexCoord.x = 0.5f * (1.0f + In.Position.x);
-	Out.TexCoord.y = 0.5f * (1.0f - In.Position.y);
-
-	return(Out);
-}
-
-sampler RT = sampler_state
+};
+struct VS_INPUT01
 {
-	Texture = (rtOrigin_Tex);
+	float4 Position : POSITION0;
+	float3 Normal : NORMAL;
+
 };
 
-float mask[9] =
-{ -1, -1, -1,
-  -1, 8, -1,
-  -1, -1, -1 };
-
-float coord[3] = { -1, 0, 1 };
-float divider = 1.0f;
-float MAP_CX = 512.0f;
-float MAP_CY = 512.0f;
-
-
-float4 OutlineRender_ps_main(float2 Tex : TEXCOORD0) : COLOR0
+struct VS_OUTPUT01
 {
-   float4 color = 0;
+	float4 Position : POSITION0;
+	float4 Diffuse : COLOR0;
 
-   for (int i = 0; i < 9; i++)
-	  color += mask[i] * (tex2D(RT, Tex + float2(coord[i % 3] / MAP_CX, coord[i / 3] / MAP_CY)));
+};
 
-   float gray = 1 - (color.r * 0.3f + color.g * 0.59f + color.b*0.11f);
-   return float4(gray, gray, gray, 1) / divider;
 
-   //return tex2D(RT, Tex);
+struct PS_OUTPUT {
+	float4 Diffuse : COLOR;
+	float2 TexCoord : TEXCOORD0;
+};
+struct PS_INPUT01
+{
+	float4 Position : POSITION0;
+	float4 Diffuse : COLOR0;
+
+};
+
+VS_OUTPUT vs_main(VS_INPUT Input)
+{
+	VS_OUTPUT Output;
+	float3 L = normalize(LightDir);
+	float3 P = mul(Input.Position, matWorldView);
+	float3 N = normalize(mul(Input.Normal, (float3x3)matWorldViewIT));  //Normal Vector is 3x3 --> dp3
+
+	Output.Position = mul(float4(P, 1), matProjection);
+	Output.Diffuse = max(0, dot(N, L));
+	Output.TexCoord = Input.TexCoord;
+
+	return(Output);
+
 }
 
 
+float4 ps_main(VS_OUTPUT Input) : COLOR0
+{
+	return(tex2D(Texture0, Input.TexCoord));
+    // float4 color = tex2D(Texture0, Input.TexCoord) * Input.Diffuse * diffuseColor + ambientColor;
+    // return ( color);
+}
 
+VS_OUTPUT01 vs_main01(VS_INPUT01 Input01)
+{
+	VS_OUTPUT01 Output01;
 
-//--------------------------------------------------------------//
-// Technique Section for OutlineRendering
-//--------------------------------------------------------------//
+	//Normal (view space)
+	float3 N = normalize(mul(Input01.Normal, (float3x3)matWorldViewIT));
+
+	// Displaced postion(view space)
+	float3 P = mul(Input01.Position, matWorldView) + GlowThickness * N;
+
+	//glow axis
+	float3 A = float3(0, 0, 1);
+	float Power;
+	Power = dot(N, A);
+	Power *= Power;
+	Power -= 1;
+	Power *= Power;
+	//Power *= Power; //pwoer =(1 - (N dot A)^2)^2 = ((N dot A)^2 -1)^2
+
+	// Projected positsdwino
+	Output01.Position = mul(float4(P, 1), matProjection);
+	Output01.Diffuse = GlowColor * Power + GlowAmbient;
+
+	return(Output01);
+
+}
+
+float4 ps_main01(VS_OUTPUT01 Input) : COLOR0
+{
+	float4 color = Input.Diffuse;
+	return color;
+
+}
+
+//Technique
 technique Boss
 {
-	pass p0
-		//<
-		//string Script = "RenderColorTarget0 = rtOrigin_Tex;"
-		//"ClearColor = (0, 0, 0, 255);"
-		//"ClearDepth = 1.000000;";
-		//>
+	pass P0
 	{
-		VertexShader = compile vs_2_0 NormalRender_vs_main();
-		PixelShader = compile ps_2_0 Position_NormalRender_ps_main();
+		VertexShader = compile vs_2_0 vs_main();
+		PixelShader = compile ps_2_0 ps_main();
+	
+		Texture[0] = base;
+	
+		MinFilter[0] = LINEAR;
+		MagFilter[0] = LINEAR;
+		MipFilter[0] = LINEAR;
 	}
 
-    pass p1
-    {
-    	VertexShader = compile vs_2_0 OutlineRender_vs_main();
-    	PixelShader = compile ps_2_0 OutlineRender_ps_main();
-    }
+	pass P0
+	{
+		VertexShader = compile vs_2_0 vs_main01();
+		PixelShader = compile ps_2_0 ps_main01();
 
+		Texture[0] = NULL;
+		AlphaBlendEnable = TRUE;
+		SrcBlend = ONE;
+		DestBlend = ONE;
+	}
 }

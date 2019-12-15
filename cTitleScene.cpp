@@ -41,7 +41,7 @@ void cTitleScene::Render()
 	D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
 	
 	matR = matX * matY * matZ;
-	OBJ->Render(OBJ->FindOBJ("Map"), Vec3(0,0,0), matR, 1.f);
+	OBJ->Render(OBJ->FindOBJ("Map"), Vec3(0, 64, 0), matR, 0.2f);
 	OBJ->Render(OBJ->FindOBJ("Tree"), Vec3(0, 0, 0), matR, 0.1f);
 }
 

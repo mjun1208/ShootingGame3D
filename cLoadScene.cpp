@@ -47,8 +47,9 @@ void cLoadScene::Init()
 	Load("EnemyHPGauge", "./resorce/Enemy/HPGauge.png");
 	Load("EnemyHPEdge", "./resorce/Enemy/HPEdge.png");
 
-	OBJLoad("Map", "./resorce/Map.obj", "./resorce/");
+	OBJLoad("Map", "./resorce/Map/Map.obj", "./resorce/Map/");
 	OBJLoad("Tree", "./resorce/Tree/Tree.obj", "./resorce/Tree/");
+
 	if (IsDebug) {
 		OBJLoad("Player_Dead", "./resorce/Player/Dead/PlayerDead(%d).obj", "./resorce/Player/Dead/", 99, "PlayerDead.mtl");
 	

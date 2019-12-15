@@ -4,7 +4,6 @@ float4x4 m_Proj;
 sampler2D DiffuseSampler;
 float4 gWorldLightPosition;
 float4 gWorldCameraPosition;
-//float OutLineWidth;
 
 struct vs_input {
 	float4 Position : POSITION; //Ω√∏‡∆Ω
