@@ -86,7 +86,7 @@ void cCameraManager::Update()
 
 		eye = at + Dir * 6.f;
 	}
-	if (isClip && IsSnipe) {
+	else if (isClip && IsSnipe) {
 		float rotSpeed = 1.f;
 		POINT vCenter = { WINSIZEX / 2 , WINSIZEY / 2 };
 		ClientToScreen(DXUTGetHWND(), &vCenter);
@@ -117,7 +117,9 @@ void cCameraManager::Update()
 
 		eye = at + Dir;
 	}
-	
+	else {
+		//DEBUG_LOG("Hi");
+	}
 }
 
 void cCameraManager::Render()

@@ -26,13 +26,13 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		m_WalkFrame->SetFrame(0, 42, 0.5f);
 		m_AttackFrame->SetFrame(0, 115, 0.5f);
 		m_DeadFrame->SetFrame(0, 110, 0.5f);
-		f_Scale = 0.15f;
+		f_Scale = 0.13f;
 		m_BoundingSphere = new cBoundingSphere;
 		m_BoundingSphere->ComputeBoundingSphere(ENEMY ,7.f);
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
 		i_Hp = 100;
 		f_Speed = 0.3f;
-		f_Distance = 200;
+		f_Distance = 20000;
 		f_AttackDistance = 15.f;
 		break;
 	case Zombie:
@@ -46,7 +46,7 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
 		i_Hp = 100;
 		f_Speed = 0.8f;
-		f_Distance = 400;
+		f_Distance = 20000;
 		f_AttackDistance = 15.f;
 		break;
 	case Zombie2:
@@ -60,7 +60,7 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
 		i_Hp = 100;
 		f_Speed = 0.6f;
-		f_Distance = 700;
+		f_Distance = 20000;
 		f_AttackDistance = 15.f;
 		break;
 	case Reaper:
@@ -74,7 +74,7 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
 		i_Hp = 100;
 		f_Speed = 0.6f;
-		f_Distance = 700;
+		f_Distance = 20000;
 		f_AttackDistance = 100.f;
 		break;
 	case Vampire:
@@ -88,7 +88,7 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 		g_Bounding.GetBounding().push_back(m_BoundingSphere);
 		i_Hp = 100;
 		f_Speed = 0.6f;
-		f_Distance = 700;
+		f_Distance = 20000;
 		f_AttackDistance = 100.f;
 		break;
 	default:

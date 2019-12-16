@@ -1,6 +1,8 @@
 #pragma once
 class cMainGame
 {
+private:
+	bool IsBoundingRender = true;
 public:
 	cMainGame();
 	~cMainGame();

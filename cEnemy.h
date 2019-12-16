@@ -18,8 +18,10 @@ protected:
 	Vec3 m_vTarget;
 	bool b_Del;
 	int i_Hp;
-	const int i_MaxHp = 100;
+	int i_MaxHp = 100;
 	float f_Scale;
+
+	float f_BossScale;
 	float f_Angle;
 	D3DXQUATERNION prevQ;
 	
@@ -68,5 +70,7 @@ public:
 	void SetHp(int hp) { i_Hp = hp; }
 
 	bool GetDel() { return b_Del; }
+
+	Vec3 GetPos() { return m_vPos; }
 };
 

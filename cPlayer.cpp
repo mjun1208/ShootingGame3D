@@ -11,6 +11,12 @@ void cPlayer::CheckColl()
 				g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), iter->Pos, 1.f, 0.05f));
 				i_Hp -= 2;
 			}
+			else if (iter->Tag == MAP) {
+				Vec3 CollDis = iter->Pos - vPos;
+				float fCollDis = (m_BoundingSphere->GetSize() + iter->Size) - D3DXVec3Length(&CollDis);
+				D3DXVec3Normalize(&CollDis, &CollDis);
+				vPos -= Vec3(CollDis.x, 0, CollDis.z) * 0.8f;
+			}
 		}
 	}
 }
@@ -77,12 +83,14 @@ void cPlayer::Update()
 	if (!IsDebug && INPUT->MouseLPress()) {
 		ShootBullet();
 	}
-	if (INPUT->KeyDown('1')) {
-		WeaponState = Pistol;
-	}
-	if (INPUT->KeyDown('2')) {
+	//if (INPUT->KeyDown('1')) {
+	//	WeaponState = Pistol;
+	//}
+	//if (INPUT->KeyDown('2')) {
+	//	WeaponState = BigGun;
+	//}
+	if (CoinCount >= 10)
 		WeaponState = BigGun;
-	}
 
 	fSpeed = 0;
 
@@ -164,7 +172,7 @@ void cPlayer::Update()
 		D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() - 90));
 		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
 		matR = matX * matY * matZ;
-		D3DXVec3TransformNormal(&CameraDir, &Vec3(-1,0,-1), &matR);
+		D3DXVec3TransformNormal(&CameraDir, &Vec3(-1, 0,-1), &matR);
 
 		vCameraPos = Vec3(vPos.x, vPos.y + 15, vPos.z);
 		vCameraPos += CameraDir * 7.f;
@@ -204,6 +212,10 @@ void cPlayer::Render()
 	//Hp 
 	IMAGE->ReBegin(true, false);
 	IMAGE->Render(m_HPEdge, Vec3(m_HPEdge->info.Width / 2 + 50, m_HPEdge->info.Height / 2 + 25, 0), 0, true);
+
+	if (i_Hp <= 0) {
+		i_Hp = 0;
+	}
 	RECT HpRECT{ 0, 0, ((float)m_HPGauge->info.Width / i_MaxHp) * i_Hp, m_HPGauge->info.Height };
 	IMAGE->CropRender(m_HPGauge, Vec3(m_HPEdge->info.Width / 2 + 50, m_HPEdge->info.Height / 2 + 25, 0), HpRECT);
 	if (INPUT->KeyPress('H') && i_Hp > 0)
@@ -289,6 +301,11 @@ void cPlayer::Render()
 			}
 		}
 	}
+
+
+	IMAGE->ReBegin(true, false);
+	IMAGE->PrintText("ÁÂÇ¥ : " + to_string(vPos.x) + " " + to_string(vPos.y) + " " + to_string(vPos.z), Vec3(0, 150, 0), 20, D3DCOLOR_XRGB(255, 255, 255), false);
+	IMAGE->ReBegin(false, false);
 }
 
 void cPlayer::Release()

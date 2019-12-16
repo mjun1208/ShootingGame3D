@@ -386,10 +386,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cAttackBound.cpp" />
+    <ClCompile Include="cBoss.cpp" />
     <ClCompile Include="cBoundingSphere.cpp" />
     <ClCompile Include="cBoundingSphereAdmin.cpp" />
     <ClCompile Include="cBullet.cpp" />
     <ClCompile Include="cBulletAdmin.cpp" />
+    <ClCompile Include="cCoin.cpp" />
+    <ClCompile Include="cCoinAdmin.cpp" />
     <ClCompile Include="cEffect.cpp" />
     <ClCompile Include="cEffectAdmin.cpp" />
     <ClCompile Include="cEnemy.cpp" />
@@ -397,6 +400,7 @@
     <ClCompile Include="cFxManager.cpp" />
     <ClCompile Include="cLoadScene.cpp" />
     <ClCompile Include="cMapEditerScene.cpp" />
+    <ClCompile Include="cMapManager.cpp" />
     <ClCompile Include="cMonster.cpp" />
     <ClCompile Include="cNode.cpp" />
     <ClCompile Include="cOBJManager.cpp" />
@@ -404,11 +408,14 @@
     <ClCompile Include="OBJLoader.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClInclude Include="cAttackBound.h" />
+    <ClInclude Include="cBoss.h" />
     <ClInclude Include="cBoundingSphere.h" />
     <ClInclude Include="cBoundingSphereAdmin.h" />
     <ClInclude Include="cBullet.h" />
     <ClInclude Include="cBulletAdmin.h" />
     <ClInclude Include="cCameraManager.h" />
+    <ClInclude Include="cCoin.h" />
+    <ClInclude Include="cCoinAdmin.h" />
     <ClInclude Include="cEffect.h" />
     <ClInclude Include="cEffectAdmin.h" />
     <ClInclude Include="cEnemy.h" />
@@ -419,6 +426,7 @@
     <ClInclude Include="cLoadScene.h" />
     <ClInclude Include="cMainGame.h" />
     <ClInclude Include="cMapEditerScene.h" />
+    <ClInclude Include="cMapManager.h" />
     <ClInclude Include="cMonster.h" />
     <ClInclude Include="cMultiTexture.h" />
     <ClInclude Include="cNode.h" />

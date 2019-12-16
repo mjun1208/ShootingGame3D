@@ -41,8 +41,10 @@ void cMonster::Init()
 void cMonster::Update(vector<cBullet *>& Bullet)
 {
 	vDir = m_vTarget - m_vPos;
-	if (i_Hp <= 0)
+	if (i_Hp <= 0) {
+		i_Hp = 0;
 		State = Dead;
+	}
 	else {
 		if (D3DXVec3Length(&vDir) < f_AttackDistance && !b_Attack) {
 			State = Attack;
@@ -92,7 +94,7 @@ void cMonster::Render()
 	D3DXMATRIX mRQ;
 	D3DXMatrixRotationQuaternion(&mRQ, &prevQ);
 
-	OBJ->Render(m_Obj, m_vPos, matR, f_Scale, true);
+	OBJ->Render(m_Obj, m_vPos, matR, f_Scale);
 }
 
 void cMonster::Release()
@@ -269,9 +271,9 @@ void cMonster::CheckColl()
 		for (auto iter : m_BoundingSphere->GetCollinfo()) {
 			if (iter->Tag == PLAYERBULLET) {
 				g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), iter->Pos, 1.f, 0.05f));
-				i_Hp -= 100;
+				i_Hp -= 30;
 			}
-			else if (iter->Tag == ENEMY) {
+			else if (iter->Tag == ENEMY || iter->Tag == MAP) {
 				b_CantMove = true;
 				Vec3 CollDis = iter->Pos - m_vPos;
 				float fCollDis = (m_BoundingSphere->GetSize() + iter->Size) - D3DXVec3Length(&CollDis);

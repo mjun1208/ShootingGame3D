@@ -46,9 +46,14 @@ void cLoadScene::Init()
 	Load("PlayerHPEdge", "./resorce/Player/HPEdge.png");
 	Load("EnemyHPGauge", "./resorce/Enemy/HPGauge.png");
 	Load("EnemyHPEdge", "./resorce/Enemy/HPEdge.png");
+	Load("BossHPGauge", "./resorce/Enemy/BossHPGauge.png");
+	Load("BossHPEdge", "./resorce/Enemy/BossHPEdge.png");
 
 	OBJLoad("Map", "./resorce/Map/Map.obj", "./resorce/Map/");
+	OBJLoad("Floor", "./resorce/Floor.obj", "./resorce/");
+	OBJLoad("SkyBox", "./resorce/SkyBox.obj", "./resorce/");
 	OBJLoad("Tree", "./resorce/Tree/Tree.obj", "./resorce/Tree/");
+	OBJLoad("Coin", "./resorce/Item/Coin.obj", "./resorce/Item/");
 
 	if (IsDebug) {
 		OBJLoad("Player_Dead", "./resorce/Player/Dead/PlayerDead(%d).obj", "./resorce/Player/Dead/", 99, "PlayerDead.mtl");

@@ -52,7 +52,7 @@ void cBullet::Render()
 {
 	D3DXMATRIX matX, matY, matZ, matR;
 	D3DXMatrixRotationX(&matX, D3DXToRadian(0));
-	D3DXMatrixRotationY(&matY, D3DXToRadian(0));
+	D3DXMatrixRotationY(&matY, atan2f(m_vDir.x, m_vDir.z) + D3DXToRadian(180));
 	D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
 	matR = matX * matY * matZ;
 	switch (m_tag)
@@ -100,6 +100,15 @@ void cBullet::CheckColl()
 	if (!b_Del && !m_BoundingSphere->GetDel() && m_BoundingSphere) {
 		for (auto iter : m_BoundingSphere->GetCollinfo()) {
 			if (iter->Tag == PLAYER && (m_tag == DARKBALL || m_tag == BAT)) {
+				b_Del = true;
+				m_BoundingSphere->SetActive(false);
+			}
+		}
+	}
+
+	if (!b_Del && !m_BoundingSphere->GetDel() && m_BoundingSphere) {
+		for (auto iter : m_BoundingSphere->GetCollinfo()) {
+			if (iter->Tag == MAP) {
 				b_Del = true;
 				m_BoundingSphere->SetActive(false);
 			}

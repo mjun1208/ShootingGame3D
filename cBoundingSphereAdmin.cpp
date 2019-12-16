@@ -34,7 +34,7 @@ void cBoundingSphereAdmin::Update()
 
 	for (auto iter : m_Bounding) {
 		for (auto iter_ : m_Bounding) {
-			if (iter != iter_ && iter->GetActive() && iter_->GetActive()) {
+			if (iter->GetTag() != MAP && iter != iter_ && iter->GetActive() && iter_->GetActive()) {
 				Vec3 Distance = iter->GetPos() - iter_->GetPos();
 				float fDistance = D3DXVec3Length(&Distance);
 				if (fDistance < iter->GetSize() + iter_->GetSize()) {

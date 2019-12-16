@@ -29,23 +29,30 @@ void cMainGame::Init()
 
 void cMainGame::Update()
 {
-	if (CAMERA->GetMouseClip())
-		CAMERA->Update();
+	//if (CAMERA->GetMouseClip())
+	CAMERA->Update();
 	SCENE->Update();
 	g_Bounding.Update();
 	g_Effect.Update();
 	INPUT->Update();
+
+	if (INPUT->KeyDown('B')) {
+		if (IsBoundingRender)
+			IsBoundingRender = false;
+		else
+			IsBoundingRender = true;
+	}
 }
 
 void cMainGame::Render()
 {
-
 	CAMERA->Render();
 	IMAGE->Begin(false , false);
 	SCENE->Render();
 	IMAGE->End();
 	g_Effect.Render();
-	g_Bounding.Render();
+	if(IsBoundingRender)
+		g_Bounding.Render();
 	
 }
 
@@ -58,6 +65,7 @@ void cMainGame::Release()
 	cSceneManager::ResetInstance();
 	cOBJManager::ResetInstance();
 	cFxManager::ResetInstance();
+	cMapManager::ResetInstance();
 	g_Bounding.Release();
 }
 

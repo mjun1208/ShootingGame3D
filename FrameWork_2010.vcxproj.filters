@@ -75,6 +75,15 @@
     <Filter Include="Object\Node">
       <UniqueIdentifier>{5275a069-3104-4d9d-a937-3a1014994cb7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\Map">
+      <UniqueIdentifier>{dacb3551-c38d-44bd-80b7-96b635cec813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Boss">
+      <UniqueIdentifier>{e651b0b4-b752-46e6-9500-1ffffeb54684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Item">
+      <UniqueIdentifier>{d088cedb-fe40-4464-95a0-33634b7dc0ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -225,6 +234,18 @@
     <ClCompile Include="cAttackBound.cpp">
       <Filter>Object\Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="cMapManager.cpp">
+      <Filter>Manager\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="cBoss.cpp">
+      <Filter>Object\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="cCoin.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="cCoinAdmin.cpp">
+      <Filter>Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -318,6 +339,18 @@
     </ClInclude>
     <ClInclude Include="cAttackBound.h">
       <Filter>Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="cMapManager.h">
+      <Filter>Manager\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="cBoss.h">
+      <Filter>Object\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="cCoin.h">
+      <Filter>Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="cCoinAdmin.h">
+      <Filter>Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

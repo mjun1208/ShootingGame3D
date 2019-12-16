@@ -102,7 +102,7 @@ void cOBJManager::Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale, bo
 		//float4 gWorldLightPosition;
 		//float4 gWorldCameraPosition;
 
-		FXBoss->SetVector((D3DXHANDLE)"GlowColor", &D3DXVECTOR4(1.f, 0.1f, 0.1f, 1.f));
+		FXBoss->SetVector((D3DXHANDLE)"GlowColor", &D3DXVECTOR4(0.7f, 0.1f, 0.1f, 0.6f));
 		FXBoss->SetVector((D3DXHANDLE)"GlowAmbient", &D3DXVECTOR4(1.f, 0.1f, 0.1f, 1.f));
 		FXBoss->SetFloat((D3DXHANDLE)"GlowThickness", 0.2f);
 
@@ -135,6 +135,9 @@ void cOBJManager::Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale, bo
 		FXBoss->End();
 	}
 	else {
+
+
+
 		HRESULT hr;
 		if (mesh->Material[0]->map)
 			FX->SetTexture((D3DXHANDLE)"DiffuseSampler", mesh->Material[0]->map->texturePtr);
@@ -147,16 +150,23 @@ void cOBJManager::Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale, bo
 		FX->SetMatrix((D3DXHANDLE)"m_World", &matW);
 		FX->SetMatrix((D3DXHANDLE)"m_View", &CAMERA->view);
 		FX->SetMatrix((D3DXHANDLE)"m_Proj", &CAMERA->proj);
+		
+		//Vec3 vecDir;		
+		//vecDir = Vec3(0, 0, 4);
+		//D3DXVec3TransformCoord(&vecDir, &vecDir, &CAMERA->view);
+		//D3DXVec3Normalize((Vec3*)&vecDir, &vecDir);
+		//
+		//FX->SetVector((D3DXHANDLE)"gLightDir", &D3DXVECTOR4(vecDir.x, vecDir.y, vecDir.z, 1.f));
 
 		FX->SetTechnique((D3DXHANDLE)"BoSoo");
-
+		
 		UINT cPass;
 		FX->Begin(&cPass, 0); //Pass가 몇개인지 받아옴
-
+		
 		for (UINT p = 0; p < cPass; ++p)
 		{
 			FX->BeginPass(p);
-
+		
 			g_Device->SetTransform(D3DTS_WORLD, &matW); //fx할땐 안해도됨
 			for (int i = 0; i < mesh->Material.size(); ++i)
 			{
@@ -165,36 +175,46 @@ void cOBJManager::Render(Mesh * mesh, Vec3 Pos, D3DXMATRIX matR, float scale, bo
 				}
 				else
 					g_Device->SetTexture(0, nullptr);
-				//mesh->Material[i]->material.Diffuse.r = mesh->Material[i]->material.Ambient.r = 1.0f;
-				//mesh->Material[i]->material.Diffuse.g = mesh->Material[i]->material.Ambient.g = 1.0f;
-				//mesh->Material[i]->material.Diffuse.b = mesh->Material[i]->material.Ambient.b = 1.0f;
-				//mesh->Material[i]->material.Diffuse.a = mesh->Material[i]->material.Ambient.a = 1.0f;
-				//
-				//D3DLIGHT9 light;
-				//ZeroMemory(&light, sizeof(D3DLIGHT9));
-				//light.Type = D3DLIGHT_DIRECTIONAL; 
-				//
-				//Vec3 vecDir;
-				//vecDir = Vec3(10, -2, 3);
-				//D3DXVec3Normalize((Vec3*)&light.Direction, &vecDir);
-				//
-				//light.Diffuse.r = 1.f;
-				//light.Diffuse.g = 1.f;
-				//light.Diffuse.b = 1.f;
-				//light.Diffuse.a = 1.f;
-				//
-				//g_Device->SetLight(0, &light);
-				//g_Device->LightEnable(0, true);
-				//g_Device->SetRenderState(D3DRS_LIGHTING, true);
-				//g_Device->SetRenderState(D3DRS_AMBIENT, 0x00202020);
+				mesh->Material[i]->material.Diffuse.r = mesh->Material[i]->material.Ambient.r = 1.0f;
+				mesh->Material[i]->material.Diffuse.g = mesh->Material[i]->material.Ambient.g = 1.0f;
+				mesh->Material[i]->material.Diffuse.b = mesh->Material[i]->material.Ambient.b = 1.0f;
+				mesh->Material[i]->material.Diffuse.a = mesh->Material[i]->material.Ambient.a = 1.0f;
+				
+				D3DLIGHT9 light;
+				ZeroMemory(&light, sizeof(D3DLIGHT9));
+				light.Type = D3DLIGHT_SPOT;
+
+				Vec3 vecDir = Vec3(0.f,0.f,1.f);
+				//vecDir = CAMERA->eye - CAMERA->GetTarget();//Vec3(0, 0, 1);
+				D3DXVec3TransformCoord(&vecDir, &vecDir, &CAMERA->view);
+				D3DXVec3Normalize(&vecDir, &vecDir);
+				light.Direction = vecDir;
+				light.Position.x = CAMERA->eye.x;
+				light.Position.y = CAMERA->eye.y;
+				light.Position.z = CAMERA->eye.z;
+
+				light.Diffuse.r = 1.f;
+				light.Diffuse.g = 1.f;
+				light.Diffuse.b = 0.1f;
+				light.Diffuse.a = 1.f;
+
+				light.Falloff = 1.f;
+				light.Theta = D3DX_PI / 4.f;
+				light.Phi = D3DX_PI / 2.f;
+				light.Range = 300.f;
+
+				g_Device->SetLight(0, &light);
+				g_Device->LightEnable(0, true);
+				g_Device->SetRenderState(D3DRS_LIGHTING, true);
+				g_Device->SetRenderState(D3DRS_AMBIENT, 0x00040404);
 
 				g_Device->SetMaterial(&mesh->Material[i]->material);
 
 				mesh->mesh->DrawSubset(i);
-			}
-
+	     	}
+		
 			FX->EndPass();
-
+		
 		}
 		FX->End();
 	}

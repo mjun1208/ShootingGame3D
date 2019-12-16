@@ -27,6 +27,8 @@ public:
 	void SetTarget(Vec3 at_) { at = at_; }
 
 	Vec3 GetPos() { return eye; }
+	Vec3 GetTarget() { return at; }
+
 	float GetAngle() { return angle; }
 	void SetAngle(float _angle) { angle = _angle; }
 

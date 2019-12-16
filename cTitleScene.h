@@ -4,13 +4,18 @@
 class cBulletAdmin;
 class cEnemyAdmin;
 class cEffectAdmin;
+class cCoinAdmin;
 class cPlayer;
+class cNode;
 class cTitleScene : public cScene
 {
 private:
 	cBulletAdmin * m_Bullet;
 	cEnemyAdmin * m_Enemy;
 	cPlayer * m_Player;
+	cCoinAdmin * m_Coin;
+
+	vector<cNode*> m_Node;
 public:
 	cTitleScene();
 	virtual ~cTitleScene();

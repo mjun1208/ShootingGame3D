@@ -12,6 +12,7 @@
 cMainGame mg;
 cEffectAdmin g_Effect;
 cBoundingSphereAdmin g_Bounding;
+int CoinCount = 0;
 
 //bool IsDebug = false;
 

@@ -10,7 +10,7 @@ private:
 public:
 	cAttackBound(float size);
 	~cAttackBound();
-
+	
 	void Init();
 	void Update();
 	void Render();
