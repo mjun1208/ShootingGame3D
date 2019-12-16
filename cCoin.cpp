@@ -40,7 +40,7 @@ void cCoin::Update()
 	m_Bounding->SetPos(m_vPos + Vec3(0, 10, 0));
 	if (Rot > 360)
 		Rot -= 360;
-	Rot++;
+	Rot+= 4;
 
 	CheckColl();
 }

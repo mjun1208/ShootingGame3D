@@ -66,6 +66,7 @@ void cMainGame::Release()
 	cOBJManager::ResetInstance();
 	cFxManager::ResetInstance();
 	cMapManager::ResetInstance();
+	cThreadPoolManager::ResetInstance();
 	g_Bounding.Release();
 }
 

@@ -53,7 +53,7 @@ void cLoadScene::Init()
 	OBJLoad("Floor", "./resorce/Floor.obj", "./resorce/");
 	OBJLoad("SkyBox", "./resorce/SkyBox.obj", "./resorce/");
 	OBJLoad("Tree", "./resorce/Tree/Tree.obj", "./resorce/Tree/");
-	OBJLoad("Coin", "./resorce/Item/Coin.obj", "./resorce/Item/");
+	OBJLoad("Coin", "./resorce/Item/Coin/Coin.obj", "./resorce/Item/Coin/");
 
 	if (IsDebug) {
 		OBJLoad("Player_Dead", "./resorce/Player/Dead/PlayerDead(%d).obj", "./resorce/Player/Dead/", 99, "PlayerDead.mtl");

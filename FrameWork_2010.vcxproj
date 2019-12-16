@@ -31,7 +31,7 @@
     <ProjectGuid>{D3D09108-96D0-4629-88B8-122C0256058C}</ProjectGuid>
     <RootNamespace>FrameWork</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -405,6 +405,7 @@
     <ClCompile Include="cNode.cpp" />
     <ClCompile Include="cOBJManager.cpp" />
     <ClCompile Include="cPlayer.cpp" />
+    <ClCompile Include="cThreadPoolManager.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClInclude Include="cAttackBound.h" />
@@ -436,6 +437,7 @@
     <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cSingleTexture.h" />
     <ClInclude Include="cTexture.h" />
+    <ClInclude Include="cThreadPoolManager.h" />
     <ClInclude Include="cTitleScene.h" />
     <ClInclude Include="DXUT\Optional\SDKsound.h" />
     <ClInclude Include="DXUT\Optional\SDKwavefile.h" />

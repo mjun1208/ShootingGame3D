@@ -46,6 +46,10 @@ private:
 
 	mutex Mutex;
 	void ThreadLoad(int A, int B, mutex& m);
+
+	///////////////
+	
+
 public:
 	cLoadScene();
 	virtual ~cLoadScene();

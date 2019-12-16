@@ -12,6 +12,8 @@
 #include <mutex>
 #include <functional>
 #include "SDKsound.h"
+#include <queue>
+#include <future>
 
 using namespace std;
 
@@ -43,6 +45,7 @@ const int WINSIZEY = 720;
 #include "cFxManager.h"
 #include "cTexture.h"
 #include "cMapManager.h"
+#include "cThreadPoolManager.h"
 struct Material {
 	string Name;
 
