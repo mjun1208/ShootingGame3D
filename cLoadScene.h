@@ -1,5 +1,6 @@
 #include "DXUT.h"
 #include "cScene.h"
+#include "cThreadPoolManager.h"
 class cLoadScene : public cScene
 {
 private:
@@ -40,16 +41,17 @@ private:
 		m_OBJLoad.push_back(OBJstrBun(key, path,mappath, count, mtlpath));
 	}
 
-	vector<thread> workers;
-
-	void func1(int A);
-
-	mutex Mutex;
-	void ThreadLoad(int A, int B, mutex& m);
+	//vector<thread> workers;
+	//
+	//void func1(int A);
+	//
+	//mutex Mutex;
+	//void ThreadLoad(int A, int B, mutex& m);
 
 	///////////////
-	
-
+	cThreadPoolManager Thread;
+	std::vector<std::future<int>> futures;
+	int ThreadLoadOBJ(int NowCount);
 public:
 	cLoadScene();
 	virtual ~cLoadScene();

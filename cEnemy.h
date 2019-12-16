@@ -52,6 +52,11 @@ protected:
 	cTexture * m_HPEdge;
 
 	cPlayer * Player;
+
+	void SpeakSound();
+
+	float CurSpeakTime;
+	float RandomSpeakTime;
 public:
 	cEnemy(Vec3 pos ,EnemyKind Kind);
 	virtual ~cEnemy();

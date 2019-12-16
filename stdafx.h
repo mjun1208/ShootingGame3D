@@ -45,7 +45,6 @@ const int WINSIZEY = 720;
 #include "cFxManager.h"
 #include "cTexture.h"
 #include "cMapManager.h"
-#include "cThreadPoolManager.h"
 struct Material {
 	string Name;
 
@@ -94,3 +93,5 @@ struct VERTEX
 extern cEffectAdmin g_Effect;
 extern cBoundingSphereAdmin g_Bounding;
 extern int CoinCount;
+extern float Damage;
+extern int HealCount;

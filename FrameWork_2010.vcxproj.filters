@@ -87,6 +87,12 @@
     <Filter Include="Manager\ThreadPool">
       <UniqueIdentifier>{d4fba1d0-ebf5-4ab2-a343-1a48698ae217}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene\Ingame">
+      <UniqueIdentifier>{dc8da673-c934-4383-a2de-4c198425ef56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\End">
+      <UniqueIdentifier>{600b28ce-dfd3-42e8-ab8a-062d7937336a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -252,6 +258,12 @@
     <ClCompile Include="cThreadPoolManager.cpp">
       <Filter>Manager\ThreadPool</Filter>
     </ClCompile>
+    <ClCompile Include="cIngameScene.cpp">
+      <Filter>Scene\Ingame</Filter>
+    </ClCompile>
+    <ClCompile Include="cEndScene.cpp">
+      <Filter>Scene\End</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -360,6 +372,12 @@
     </ClInclude>
     <ClInclude Include="cThreadPoolManager.h">
       <Filter>Manager\ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="cIngameScene.h">
+      <Filter>Scene\Ingame</Filter>
+    </ClInclude>
+    <ClInclude Include="cEndScene.h">
+      <Filter>Scene\End</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

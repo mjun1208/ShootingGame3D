@@ -41,8 +41,8 @@ void cBoss::Init()
 {
 	f_Scale *= 2;
 	f_AttackDistance *= 2;
-	i_MaxHp *= 3;
-	i_Hp *= 3;
+	i_MaxHp *= 5;
+	i_Hp *= 5;
 	m_HPEdge = IMAGE->FindImage("BossHPEdge");
 	m_HPGauge = IMAGE->FindImage("BossHPGauge");
 
@@ -50,16 +50,23 @@ void cBoss::Init()
 	m_BossBounding->ComputeBoundingSphere(ENEMY, 14.f);
 	g_Bounding.GetBounding().push_back(m_BossBounding);
 
-	m_BoundingSphere->SetActive(false);
-	m_AttackBound->SetActive(false);
+	m_BoundingSphere->SetDel(true);
+	//m_AttackBound->SetDel(true);
 
+	SAFE_DELETE(m_AttackBound);
 	m_BossAttackBounding = new cAttackBound(14.f);
 	m_BossAttackBounding->SetPos(m_vPos + Vec3(0,10,0));
 }
 
 void cBoss::Update(vector<cBullet *>& Bullet)
 {
+	if (CurSpeakTime > RandomSpeakTime)
+		SpeakSound();
+	else
+		CurSpeakTime += DeltaTime;
+
 	vDir = m_vTarget - m_vPos;
+
 	if (i_Hp <= 0) {
 		i_Hp = 0;
 		State = _Dead;
@@ -117,7 +124,13 @@ void cBoss::Render()
 	default:
 		break;
 	}
+
+	//Vec3 Distance = m_vTarget - m_vPos;
+	//float dis = D3DXVec3Length(&Distance);
+	//dis = 100 - (dis / 2.5);
+	//IMAGE->PrintText(to_string(dis), Vec3(9, 200, 0), 50, D3DCOLOR_XRGB(255, 255, 255), false);
 	IMAGE->ReBegin(false, false);
+
 
 
 	D3DXMATRIX matX, matY, matZ;
@@ -135,12 +148,14 @@ void cBoss::Render()
 	D3DXMatrixRotationQuaternion(&mRQ, &prevQ);
 
 	OBJ->Render(m_Obj, m_vPos, matR, f_Scale, true);
+
 }
 
 void cBoss::Release()
 {
 	if (m_BossBounding)
 		m_BossBounding->SetDel(true);
+	SAFE_DELETE(m_BossAttackBounding);
 }
 
 void cBoss::ObjUpdate()

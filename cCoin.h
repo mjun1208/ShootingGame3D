@@ -8,6 +8,8 @@ private:
 
 	bool b_Del;
 	void CheckColl();
+
+	bool IsCoin;
 public:
 	cCoin(Vec3 vPos);
 	~cCoin();

@@ -10,6 +10,7 @@ void cPlayer::CheckColl()
 			if (iter->Tag == DARKBALL || iter->Tag == BAT) {
 				g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), iter->Pos, 1.f, 0.05f));
 				i_Hp -= 2;
+				INPUT->DuplicatePlay("Hit", 100);
 			}
 			else if (iter->Tag == MAP) {
 				Vec3 CollDis = iter->Pos - vPos;
@@ -74,137 +75,172 @@ void cPlayer::Init()
 	m_BoundingSphere = new cBoundingSphere;
 	m_BoundingSphere->ComputeBoundingSphere(PLAYER, 5.f);
 	g_Bounding.GetBounding().push_back(m_BoundingSphere);
+	IsDead = false;
+	IsSceneChange = false;
+	DeadDelay = 0;
 }
 
 void cPlayer::Update()
 {
+	if (HealCount > 0) {
+		i_Hp += HealCount;
+		HealCount = 0;
+	}
+
+	if (INPUT->KeyDown(VK_F1)) {
+		i_Hp = i_MaxHp;
+	}
+	if (INPUT->KeyDown(VK_F2)) {
+		CoinCount += 1000;
+	}
+	Damage = CoinCount * 1.2f;
+	//if (INPUT->KeyDown(VK_F3)) {
+	//	Damage *= 100;
+	//}
+
 	m_BoundingSphere->SetPos(vPos + Vec3(0, 10, 0));
 
-	if (!IsDebug && INPUT->MouseLPress()) {
-		ShootBullet();
-	}
-	//if (INPUT->KeyDown('1')) {
-	//	WeaponState = Pistol;
-	//}
-	//if (INPUT->KeyDown('2')) {
-	//	WeaponState = BigGun;
-	//}
-	if (CoinCount >= 10)
-		WeaponState = BigGun;
-
-	fSpeed = 0;
-
-	if (!INPUT->KeyPress(VK_MENU)) {
-		if (!IsSnipe)
-			Angle = CAMERA->GetAngle();
-		else {
-			Angle = CAMERA->GetAngle();
-		}
-		IsFixedCamera = false;
+	if (!IsDead && i_Hp <= 0) {
+		IsDead = true;
 	}
 
-	else {
-		if (!IsSnipe)
-			Angle = CAMERA->GetAngle();
-		else {
-			Angle = CAMERA->GetAngle();
-		}
-		IsFixedCamera = false;
+	if (IsDead && !IsSceneChange) {
+		m_DeadFrame->Frame();
+
+		if (m_DeadFrame->NowFrame == m_DeadFrame->EndFrame && !IsSceneChange)
+			IsSceneChange = true;
 	}
-
-	m_IdleFrame->Frame();
-
-	if (INPUT->MouseRPress()) {
-		AimAngle = Angle;
-		IsSnipe = true;
-	}
-	else
-		IsSnipe = false;
-
-
-	if (IsSnipe)
-		SnipeMove();
-	else
-		Move();
-
-	if (IsAttack) {
-		IsAiming = true;
-		//Angle = ShootAngle;
-		fSpeed = 0.f;
-		switch (WeaponState)
-		{
-		case Pistol:
-			m_PistolShootFrame->Frame();
-			if (m_PistolShootFrame->NowFrame == m_PistolShootFrame->EndFrame)
-				IsAttack = false;
-			break;
-		case BigGun:
-			m_BigGunShootFrame->Frame();
-			if (m_BigGunShootFrame->NowFrame == m_BigGunShootFrame->EndFrame)
-				IsAttack = false;
-			break;
-		case None:
-			break;
-		default:
-			break;
-		}
+	else if (IsDead && IsSceneChange) {
+		DeadDelay += DeltaTime;
+		if (DeadDelay > 1.5f)
+			SCENE->ChangeScene("GameOver");
 	}
 	else {
-		m_PistolShootFrame->NowFrame = m_PistolShootFrame->StartFrame;
-		m_BigGunShootFrame->NowFrame = m_BigGunShootFrame->StartFrame;
-	}
+		if (!IsDebug && INPUT->MouseLPress()) {
+			ShootBullet();
+		}
+		//if (INPUT->KeyDown('1')) {
+		//	WeaponState = Pistol;
+		//}
+		//if (INPUT->KeyDown('2')) {
+		//	WeaponState = BigGun;
+		//}
+		if (CoinCount >= 10)
+			WeaponState = BigGun;
 
-	if (fSpeed == 0) {
-		IsMove = false;
-	}
-	else {
-		IsMove = true;
-		IsAiming = false;
-		m_PistolMoveFrame->Frame();
-		m_BigGunMoveFrame->Frame();
-	}
+		fSpeed = 0;
 
-	if (IsSnipe) {
-		D3DXMATRIX matX, matY, matZ, matR;
+		if (!INPUT->KeyPress(VK_MENU)) {
+			if (!IsSnipe)
+				Angle = CAMERA->GetAngle();
+			else {
+				Angle = CAMERA->GetAngle();
+			}
+			IsFixedCamera = false;
+		}
 
-		Vec3 CameraDir;
-		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
-		D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() - 90));
-		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
-		matR = matX * matY * matZ;
-		D3DXVec3TransformNormal(&CameraDir, &Vec3(-1, 0,-1), &matR);
+		else {
+			if (!IsSnipe)
+				Angle = CAMERA->GetAngle();
+			else {
+				Angle = CAMERA->GetAngle();
+			}
+			IsFixedCamera = false;
+		}
 
-		vCameraPos = Vec3(vPos.x, vPos.y + 15, vPos.z);
-		vCameraPos += CameraDir * 7.f;
-		CAMERA->SetPos(vCameraPos);
-		///////////////////////////////
-		
-		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
-		D3DXMatrixRotationY(&matY, D3DXToRadian(AimAngle));
-		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
-		matR = matX * matY * matZ;
-		D3DXVec3TransformNormal(&CameraDir, &vOriginDir, &matR);
+		m_IdleFrame->Frame();
 
-		Vec3 TargetPos;
-		TargetPos = Vec3(vPos.x, vPos.y + 15, vPos.z);
-		TargetPos += CameraDir * 60.f;
-		CAMERA->SetTarget(TargetPos);
-	}
-	else
-		CAMERA->SetTarget(Vec3(vPos.x, vPos.y + 15, vPos.z));
-	
-	CheckColl();
+		if (INPUT->MouseRPress()) {
+			AimAngle = Angle;
+			IsSnipe = true;
+		}
+		else
+			IsSnipe = false;
 
-	if (b_IsHit) {
-		if (InvincibilityDelay < 1.f) {
-			InvincibilityDelay += DeltaTime;
+
+		if (IsSnipe)
+			SnipeMove();
+		else
+			Move();
+
+		if (IsAttack) {
+			IsAiming = true;
+			//Angle = ShootAngle;
+			fSpeed = 0.f;
+			switch (WeaponState)
+			{
+			case Pistol:
+				m_PistolShootFrame->Frame();
+				if (m_PistolShootFrame->NowFrame == m_PistolShootFrame->EndFrame)
+					IsAttack = false;
+				break;
+			case BigGun:
+				m_BigGunShootFrame->Frame();
+				if (m_BigGunShootFrame->NowFrame == m_BigGunShootFrame->EndFrame)
+					IsAttack = false;
+				break;
+			case None:
+				break;
+			default:
+				break;
+			}
 		}
 		else {
-			b_IsHit = false;
-			InvincibilityDelay = 0;
+			m_PistolShootFrame->NowFrame = m_PistolShootFrame->StartFrame;
+			m_BigGunShootFrame->NowFrame = m_BigGunShootFrame->StartFrame;
+		}
+
+		if (fSpeed == 0) {
+			IsMove = false;
+		}
+		else {
+			IsMove = true;
+			IsAiming = false;
+			m_PistolMoveFrame->Frame();
+			m_BigGunMoveFrame->Frame();
+		}
+
+		if (IsSnipe) {
+			D3DXMATRIX matX, matY, matZ, matR;
+
+			Vec3 CameraDir;
+			D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+			D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() - 90));
+			D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+			matR = matX * matY * matZ;
+			D3DXVec3TransformNormal(&CameraDir, &Vec3(-1, 0, -1), &matR);
+
+			vCameraPos = Vec3(vPos.x, vPos.y + 15, vPos.z);
+			vCameraPos += CameraDir * 7.f;
+			CAMERA->SetPos(vCameraPos);
+			///////////////////////////////
+
+			D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+			D3DXMatrixRotationY(&matY, D3DXToRadian(AimAngle));
+			D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+			matR = matX * matY * matZ;
+			D3DXVec3TransformNormal(&CameraDir, &vOriginDir, &matR);
+
+			Vec3 TargetPos;
+			TargetPos = Vec3(vPos.x, vPos.y + 15, vPos.z);
+			TargetPos += CameraDir * 60.f;
+			CAMERA->SetTarget(TargetPos);
+		}
+		else
+			CAMERA->SetTarget(Vec3(vPos.x, vPos.y + 15, vPos.z));
+
+		CheckColl();
+
+		if (b_IsHit) {
+			if (InvincibilityDelay < 1.f) {
+				InvincibilityDelay += DeltaTime;
+			}
+			else {
+				b_IsHit = false;
+				InvincibilityDelay = 0;
+			}
 		}
 	}
-
 }
 
 void cPlayer::Render()
@@ -221,6 +257,7 @@ void cPlayer::Render()
 	if (INPUT->KeyPress('H') && i_Hp > 0)
 		i_Hp--;
 	IMAGE->ReBegin(false, false);
+
 
 	// 각도 바꾸는거
 	D3DXMATRIX matX, matY, matZ;
@@ -248,30 +285,21 @@ void cPlayer::Render()
 	else
 		D3DXVec3TransformNormal(&vDir, &vOriginDir, &mRQ);
 
-	if (IsAiming) {
-		switch (WeaponState)
-		{
-		case Pistol:
-			OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Shoot", m_PistolShootFrame->NowFrame), vPos, mRQ, 0.01f);
-			break;
-		case BigGun:
-			OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Shoot", m_BigGunShootFrame->NowFrame), vPos, mRQ, 0.01f);
-			break;
-		case None:
-			break;
-		default:
-			break;
-		}
+
+
+	if (IsDead) {
+		OBJ->Render(OBJ->FindMultidOBJ("Player_Dead", m_DeadFrame->NowFrame), vPos, mRQ, 0.01f);
 	}
 	else {
-		if (!IsMove) {
+
+		if (IsAiming) {
 			switch (WeaponState)
 			{
 			case Pistol:
-				OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
+				OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Shoot", m_PistolShootFrame->NowFrame), vPos, mRQ, 0.01f);
 				break;
 			case BigGun:
-				OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
+				OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Shoot", m_BigGunShootFrame->NowFrame), vPos, mRQ, 0.01f);
 				break;
 			case None:
 				break;
@@ -280,28 +308,44 @@ void cPlayer::Render()
 			}
 		}
 		else {
-			switch (WeaponState)
-			{
-			case Pistol:
-				if (IsBackMove)
-					OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Walk", m_PistolMoveFrame->EndFrame - m_PistolMoveFrame->NowFrame), vPos, mRQ, 0.01f);
-				else
-					OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Walk", m_PistolMoveFrame->NowFrame), vPos, mRQ, 0.01f);
-				break;
-			case BigGun:
-				if (IsBackMove)
-					OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Walk", m_BigGunMoveFrame->EndFrame - m_BigGunMoveFrame->NowFrame), vPos, mRQ, 0.01f);
-				else
-					OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Walk", m_BigGunMoveFrame->NowFrame), vPos, mRQ, 0.01f);
-				break;
-			case None:
-				break;
-			default:
-				break;
+			if (!IsMove) {
+				switch (WeaponState)
+				{
+				case Pistol:
+					OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
+					break;
+				case BigGun:
+					OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
+					break;
+				case None:
+					break;
+				default:
+					break;
+				}
+			}
+			else {
+				switch (WeaponState)
+				{
+				case Pistol:
+					if (IsBackMove)
+						OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Walk", m_PistolMoveFrame->EndFrame - m_PistolMoveFrame->NowFrame), vPos, mRQ, 0.01f);
+					else
+						OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Walk", m_PistolMoveFrame->NowFrame), vPos, mRQ, 0.01f);
+					break;
+				case BigGun:
+					if (IsBackMove)
+						OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Walk", m_BigGunMoveFrame->EndFrame - m_BigGunMoveFrame->NowFrame), vPos, mRQ, 0.01f);
+					else
+						OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Walk", m_BigGunMoveFrame->NowFrame), vPos, mRQ, 0.01f);
+					break;
+				case None:
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
-
 
 	IMAGE->ReBegin(true, false);
 	IMAGE->PrintText("좌표 : " + to_string(vPos.x) + " " + to_string(vPos.y) + " " + to_string(vPos.z), Vec3(0, 150, 0), 20, D3DCOLOR_XRGB(255, 255, 255), false);
@@ -487,9 +531,11 @@ void cPlayer::ShootBullet()
 	switch (WeaponState)
 	{
 	case Pistol:
+		INPUT->DuplicatePlay("Pistol", 100);
 		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 13, 0) + PistolDir * 13, ShootDir, PLAYERBULLET, 3.f, 0.8f, 5.f));
 		break;
 	case BigGun:
+		INPUT->DuplicatePlay("Pistol", 100);
 		m_Bullet.push_back(new cBullet(vPos + Vec3(0, 14, 0) + BigGunDir, ShootDir,PLAYERBULLET , 3.f, 0.8f, 5.f));
 		break;
 	case None:

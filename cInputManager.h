@@ -48,6 +48,9 @@ public:
 	void AddSound(const string& key, const wstring& path);
 	void SoundPlay(const string& key, bool loop = false);
 	void SoundStop(const string& key);
-	void DuplicatePlay(const string& key);
+	void DuplicatePlay(const string& key, LONG Voulme = 0); // บาทý 0 ~ 100;
 };
+
 #define INPUT cInputManager::GetInstance()
+#define DSBCAPS_CTRLDEFAULT  (DSBCAPS_CTRLFREQUENCY |DSBCAPS_CTRLPAN | DSBCAPS_CTRLVOLUME)
+#define VOLUME_TO_DB(volume)   ((DWORD)(-30*(100-volume))) 

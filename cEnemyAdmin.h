@@ -14,6 +14,8 @@ private:
 	cPlayer * m_Player;
 
 	int Count = 0;
+
+	float time;
 public:
 	cEnemyAdmin(cPlayer * player, vector<cBullet *>& Bullet, vector<cCoin*>& Coin);
 	~cEnemyAdmin();

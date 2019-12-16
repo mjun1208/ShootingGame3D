@@ -21,7 +21,8 @@ cEnemyAdmin::~cEnemyAdmin()
 
 void cEnemyAdmin::Init()
 {
-	for (int i = 0; i < 2; i++) {
+	time = 0;
+	for (int i = 0; i < 1; i++) {
 		m_Enemy.push_back(new cMonster(Vec3(-409 + rand() % 4, 0, 73 + rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(-407 + rand() % 4, 0, 278 + rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(-406 + rand() % 4, 0, 0 + rand() % 4), (EnemyKind)(rand() % 5)));
@@ -34,7 +35,7 @@ void cEnemyAdmin::Init()
 		m_Enemy.push_back(new cMonster(Vec3(-105 + rand() % 4, 0, 507 + rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(214 + rand() % 4, 0, 317 + rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(320 + rand() % 4, 0, 194 + rand() % 4), (EnemyKind)(rand() % 5)));
-
+	
 		m_Enemy.push_back(new cMonster(Vec3(-409 + rand() % 4, 0, 73 - rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(-407 + rand() % 4, 0, 278 - rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(-406 + rand() % 4, 0, 0 - rand() % 4), (EnemyKind)(rand() % 5)));
@@ -47,7 +48,7 @@ void cEnemyAdmin::Init()
 		m_Enemy.push_back(new cMonster(Vec3(-105 + rand() % 4, 0, 507 - rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(214 + rand() % 4, 0, 317 - rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(320 + rand() % 4, 0, 194 - rand() % 4), (EnemyKind)(rand() % 5)));
-
+	
 		m_Enemy.push_back(new cMonster(Vec3(-409 - rand() % 4, 0, 73 + rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(-407 - rand() % 4, 0, 278 + rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(-406 - rand() % 4, 0, 0 + rand() % 4), (EnemyKind)(rand() % 5)));
@@ -60,7 +61,7 @@ void cEnemyAdmin::Init()
 		m_Enemy.push_back(new cMonster(Vec3(-105 - rand() % 4, 0, 507 + rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(214 - rand() % 4, 0, 317 + rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(320 - rand() % 4, 0, 194 + rand() % 4), (EnemyKind)(rand() % 5)));
-
+	
 		m_Enemy.push_back(new cMonster(Vec3(-409 - rand() % 4, 0, 73 - rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(-407 - rand() % 4, 0, 278 - rand() % 4), (EnemyKind)(rand() % 5)));
 		m_Enemy.push_back(new cMonster(Vec3(-406 - rand() % 4, 0, 0 - rand() % 4), (EnemyKind)(rand() % 5)));
@@ -127,7 +128,13 @@ void cEnemyAdmin::Update()
 		case 3:
 		m_Boss.push_back(new cBoss(Vec3(50, 0, -340), Vampire));
 			break;
+		case 4:
+			break;
 		default:
+			time += DeltaTime;
+			if (time > 2.f) {
+				SCENE->ChangeScene("Clear");
+			}
 			break;
 		}
 		Count++;

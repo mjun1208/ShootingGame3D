@@ -13,6 +13,8 @@ cMainGame mg;
 cEffectAdmin g_Effect;
 cBoundingSphereAdmin g_Bounding;
 int CoinCount = 0;
+float Damage = 0;
+int HealCount = 0;
 
 //bool IsDebug = false;
 
@@ -49,7 +51,7 @@ bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* p
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
 {
-	//_CrtSetBreakAlloc(534);
+	//_CrtSetBreakAlloc(3089237);
 	mg.Init();
     return S_OK;
 }

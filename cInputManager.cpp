@@ -106,13 +106,14 @@ void cInputManager::Release()
 void cInputManager::AddSound(const string & key, const wstring & path)
 {
 	CSound* pS;
-	pSoundManager->Create(&pS, (LPWSTR)path.c_str());
+	pSoundManager->Create(&pS, (LPWSTR)path.c_str(), DSBCAPS_CTRLDEFAULT | DSBCAPS_STATIC |DSBCAPS_LOCSOFTWARE);
 
 	m_VecSound[key] = pS;
 }
 
 void cInputManager::SoundPlay(const string & key, bool loop)
 {
+	m_VecSound[key]->Reset();
 	m_VecSound[key]->Play(0, loop);
 }
 
@@ -121,12 +122,13 @@ void cInputManager::SoundStop(const string & key)
 	m_VecSound[key]->Stop();
 }
 
-void cInputManager::DuplicatePlay(const string & key)
+void cInputManager::DuplicatePlay(const string & key, LONG Voulme)
 {
 	LPDIRECTSOUNDBUFFER pBuf;
 
 	pSoundManager->GetDirectSound()->DuplicateSoundBuffer(m_VecSound[key]->GetBuffer(0), &pBuf);
 
 	pBuf->SetCurrentPosition(0);
+	IDirectSoundBuffer_SetVolume(pBuf, VOLUME_TO_DB(Voulme));
 	pBuf->Play(0, 0, 0);
 }

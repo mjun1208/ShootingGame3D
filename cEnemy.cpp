@@ -4,6 +4,20 @@
 #include "cBoundingSphere.h"	
 #include "cPlayer.h"
 
+void cEnemy::SpeakSound()
+{
+	Vec3 Distance = m_vTarget - m_vPos;
+	float dis = D3DXVec3Length(&Distance);
+	dis = 100 - (dis / 2.5) + 20;
+	if (rand() % 2 == 0)
+		INPUT->DuplicatePlay("Zombie1", LONG(dis));
+	else
+		INPUT->DuplicatePlay("Zombie2", LONG(dis));
+
+	CurSpeakTime = 0;
+	RandomSpeakTime = rand() % 30 + 6;
+}
+
 cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 	: m_vPos(pos), m_EnemyState(Kind)
 {
@@ -103,6 +117,9 @@ cEnemy::cEnemy(Vec3 pos, EnemyKind Kind)
 
 	m_AttackBound = new cAttackBound(7.f);
 	m_AttackBound->SetPos(m_vPos);
+
+	CurSpeakTime = 0;
+	RandomSpeakTime = rand() % 30 + 6;
 	//Init();
 }
 

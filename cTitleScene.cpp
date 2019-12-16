@@ -1,11 +1,6 @@
 #include "DXUT.h"
 #include "cTitleScene.h"
 
-#include "cBulletAdmin.h"
-#include "cEnemyAdmin.h"
-#include "cCoinAdmin.h"
-#include "cPlayer.h"
-#include "cNode.h"
 
 cTitleScene::cTitleScene()
 {
@@ -18,75 +13,23 @@ cTitleScene::~cTitleScene()
 
 void cTitleScene::Init()
 {
-	m_Bullet = new cBulletAdmin();
-	m_Player = new cPlayer(m_Bullet->GetBullet());
-	m_Coin = new cCoinAdmin();
-	m_Enemy = new cEnemyAdmin(m_Player , m_Bullet->GetBullet(), m_Coin->GetCoin());
-
-
-	for (int i = 0; i < 3; i++) {
-		MapSet->LoadInfo(i);
-		for (auto iter : MapSet->OutInfo()) {
-			m_Node.push_back(new cNode(iter->GetPos(), iter->GetSize()));
-		}
-		MapSet->Release();
-	}
+	INPUT->SoundPlay("Title", true);
 }
 
 void cTitleScene::Update()
 {
-	m_Bullet->Update();
-	m_Enemy->Update();
-	m_Player->Update();
-	m_Coin->Update();
-	if (INPUT->KeyDown('M'))
-		SCENE->ChangeScene("MapEditer");
-
-	for (auto iter : m_Node) {
-		iter->Update();
-	}
-
-	if (INPUT->KeyDown('R')) {
-		SCENE->ChangeScene("Title");
-	}
+	if (INPUT->MouseLDown())
+		SCENE->ChangeScene("Ingame");
 }
 
 void cTitleScene::Render()
 {
-	for (auto iter : m_Node) {
-		iter->Render();
-	}
-
-	m_Player->Render();
-	m_Enemy->Render();
-	m_Bullet->Render();
-	m_Coin->Render();
-
-	D3DXMATRIX matX, matY, matZ , matR;
-
-	D3DXMatrixRotationX(&matX, D3DXToRadian(0));
-	D3DXMatrixRotationY(&matY, D3DXToRadian(0));
-	D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
-	
-	matR = matX * matY * matZ;
-	OBJ->Render(OBJ->FindOBJ("SkyBox"), Vec3(0, 0, 0), matR, 100.f);
-	OBJ->Render(OBJ->FindOBJ("Floor"), Vec3(0, 0.1f, 0), matR, 1.f);
-	OBJ->Render(OBJ->FindOBJ("Map"), Vec3(0, 64, 0), matR, 0.2f);
-
-	IMAGE->ReBegin(true, false);
-	IMAGE->PrintText("ÄÚÀÎ : " + to_string(CoinCount), Vec3(0, 200, 0), 20, D3DCOLOR_XRGB(255, 255, 255), false);
-	IMAGE->ReBegin(false, false);
+	IMAGE->ReBegin(true,false);
+	IMAGE->Render(IMAGE->FindImage("Title"), Vec3(WINSIZEX / 2, WINSIZEY / 2, 0), 0, true);
+	IMAGE->ReBegin(false,false);
 }
 
 void cTitleScene::Release()
 {
-	for (auto iter : m_Node) {
-		SAFE_DELETE(iter);
-	}
-	m_Node.clear();
-
-	SAFE_DELETE(m_Player);
-	SAFE_DELETE(m_Bullet);
-	SAFE_DELETE(m_Enemy);
-	SAFE_DELETE(m_Coin);
+	INPUT->SoundStop("Title");
 }

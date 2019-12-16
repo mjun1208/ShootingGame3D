@@ -7,9 +7,18 @@ void cCoin::CheckColl()
 	if (!b_Del && !m_Bounding->GetDel() && m_Bounding) {
 		for (auto iter : m_Bounding->GetCollinfo()) {
 			if (iter->Tag == PLAYER) {
-				b_Del = true;
+				if (IsCoin) {
+					CoinCount++;
+					INPUT->DuplicatePlay("Coin", 100);
+					g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("CoinEffect"), m_vPos + Vec3(0, 5, 0), 20, 0.5f));
+				}
+				else {
+					HealCount += 10;
+					INPUT->DuplicatePlay("Heal", 100);
+					g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("HealEffect"), m_vPos + Vec3(0, 5, 0), 20, 0.5f));
+				}
 				m_Bounding->SetActive(false);
-				CoinCount++;
+				b_Del = true;
 			}
 		}
 	}
@@ -18,6 +27,12 @@ void cCoin::CheckColl()
 cCoin::cCoin(Vec3 vPos)
 	: m_vPos(vPos)
 {
+	if (rand() % 5 == 0) {
+		IsCoin = false;
+	}
+	else
+		IsCoin = true;
+
 	Init();
 }
 
@@ -29,7 +44,10 @@ cCoin::~cCoin()
 void cCoin::Init()
 {
 	m_Bounding = new cBoundingSphere;
-	m_Bounding->ComputeBoundingSphere(COIN, 5.f);
+	if (IsCoin)
+	    m_Bounding->ComputeBoundingSphere(COIN, 5.f);
+	else
+		m_Bounding->ComputeBoundingSphere(HEAL, 5.f);
 	g_Bounding.GetBounding().push_back(m_Bounding);
 	Rot = 0;
 	b_Del = false;
@@ -55,8 +73,11 @@ void cCoin::Render()
 
 	D3DXMATRIX matR;
 	matR = matX * matY * matZ;
-
-	OBJ->Render(OBJ->FindOBJ("Coin"),m_vPos + Vec3(0, 10, 0), matR ,0.1f);
+	
+	if (IsCoin)
+	    OBJ->Render(OBJ->FindOBJ("Coin"),m_vPos + Vec3(0, 10, 0), matR ,0.1f);
+	else
+		OBJ->Render(OBJ->FindOBJ("Heal"), m_vPos + Vec3(0, 10, 0), matR, 0.1f);
 }
 
 void cCoin::Release()

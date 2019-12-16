@@ -40,7 +40,14 @@ void cMonster::Init()
 
 void cMonster::Update(vector<cBullet *>& Bullet)
 {
+
+	if (CurSpeakTime > RandomSpeakTime)
+		SpeakSound();
+	else
+		CurSpeakTime += DeltaTime;
+
 	vDir = m_vTarget - m_vPos;
+
 	if (i_Hp <= 0) {
 		i_Hp = 0;
 		State = Dead;
@@ -271,7 +278,7 @@ void cMonster::CheckColl()
 		for (auto iter : m_BoundingSphere->GetCollinfo()) {
 			if (iter->Tag == PLAYERBULLET) {
 				g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), iter->Pos, 1.f, 0.05f));
-				i_Hp -= 30;
+				i_Hp -= 30 + Damage;
 			}
 			else if (iter->Tag == ENEMY || iter->Tag == MAP) {
 				b_CantMove = true;

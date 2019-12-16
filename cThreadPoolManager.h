@@ -1,16 +1,17 @@
 #pragma once
 #include "singleton.h"
-class cThreadPoolManager : public singleton<cThreadPoolManager>
+class cThreadPoolManager
 {
 public:
 	cThreadPoolManager();
-	virtual ~cThreadPoolManager();
+    ~cThreadPoolManager();
 
 	template <class F, class... Args>
 	std::future<typename std::result_of<F(Args...)>::type> EnqueueJob(
 		F&& f, Args&&... args);
 
 	void Init();
+	bool stop_all;
 private:
 	// 총 Worker 쓰레드의 개수.
 	size_t num_threads_;
@@ -23,12 +24,28 @@ private:
 	std::mutex m_job_q_;
 
 	// 모든 쓰레드 종료
-	bool stop_all;
 
 	// Worker 쓰레드
 	void WorkerThread();
 };
 
-#define Thread cThreadPoolManager::GetInstance()
+template <class F, class... Args>
+std::future<typename std::result_of<F(Args...)>::type> cThreadPoolManager::EnqueueJob(
+	F&& f, Args&&... args) {
+	if (stop_all) {
+		throw std::runtime_error("ThreadPool 사용 중지됨");
+	}
 
+	using return_type = typename std::result_of<F(Args...)>::type;
+	auto job = std::make_shared<std::packaged_task<return_type()>>(
+		std::bind(std::forward<F>(f), std::forward<Args>(args)...));
+	std::future<return_type> job_result_future = job->get_future();
+
+	std::lock_guard<std::mutex> lock(m_job_q_);
+	jobs_.push([job]() { (*job)(); });
+
+	cv_job_q_.notify_one();
+
+	return job_result_future;
+}
 

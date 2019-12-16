@@ -63,6 +63,10 @@ private:
 	cBoundingSphere * m_BoundingSphere;
 
 	void CheckColl();
+
+	bool IsDead;
+	bool IsSceneChange;
+	float DeadDelay;
 public:
 	cPlayer(vector<cBullet *>& Bullet);
 	~cPlayer();
@@ -74,6 +78,6 @@ public:
 
 	Vec3 GetPos() { return vPos; }
 
-	void Hit() { if (!b_IsHit) { b_IsHit = true;  i_Hp -= 5; if (i_Hp <= 0) i_Hp = 0; g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), m_BoundingSphere->GetPos(), 1.f, 0.05f)); } };
+	void Hit() { if (!b_IsHit) { b_IsHit = true; INPUT->DuplicatePlay("Hit", 100);  i_Hp -= 5; if (i_Hp <= 0) i_Hp = 0; g_Effect.GetEffect().push_back(new cEffect(IMAGE->FindImage("BloodEffect"), m_BoundingSphere->GetPos(), 1.f, 0.05f)); } };
 };
 

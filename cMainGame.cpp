@@ -3,7 +3,10 @@
 
 #include "cLoadScene.h"
 #include "cTitleScene.h"
+#include "cIngameScene.h"
+#include "cEndScene.h"
 #include "cMapEditerScene.h"
+
 
 cMainGame::cMainGame()
 {
@@ -22,6 +25,11 @@ void cMainGame::Init()
 
 	SCENE->AddScene("Load", new cLoadScene);
 	SCENE->AddScene("Title", new cTitleScene);
+	SCENE->AddScene("Ingame", new cIngameScene);
+
+	SCENE->AddScene("Clear", new cEndScene(true));
+	SCENE->AddScene("GameOver", new cEndScene(false));
+
 	SCENE->AddScene("MapEditer", new cMapEditerScene);
 
 	SCENE->ChangeScene("Load");
@@ -66,7 +74,6 @@ void cMainGame::Release()
 	cOBJManager::ResetInstance();
 	cFxManager::ResetInstance();
 	cMapManager::ResetInstance();
-	cThreadPoolManager::ResetInstance();
 	g_Bounding.Release();
 }
 
