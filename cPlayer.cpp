@@ -85,6 +85,8 @@ void cPlayer::Update()
 	if (HealCount > 0) {
 		i_Hp += HealCount;
 		HealCount = 0;
+		if (i_Hp >= 100)
+			i_Hp = 100;
 	}
 
 	if (INPUT->KeyDown(VK_F1)) {
@@ -130,15 +132,14 @@ void cPlayer::Update()
 
 		fSpeed = 0;
 
-		if (!INPUT->KeyPress(VK_MENU)) {
+		if (INPUT->KeyPress('Q')) {
 			if (!IsSnipe)
 				Angle = CAMERA->GetAngle();
 			else {
 				Angle = CAMERA->GetAngle();
 			}
-			IsFixedCamera = false;
+			IsFixedCamera = true;
 		}
-
 		else {
 			if (!IsSnipe)
 				Angle = CAMERA->GetAngle();
@@ -157,6 +158,8 @@ void cPlayer::Update()
 		else
 			IsSnipe = false;
 
+		if (IsMove && INPUT->MouseLPress())
+			IsFixedCamera = true;
 
 		if (IsSnipe)
 			SnipeMove();
@@ -166,7 +169,7 @@ void cPlayer::Update()
 		if (IsAttack) {
 			IsAiming = true;
 			//Angle = ShootAngle;
-			fSpeed = 0.f;
+			//fSpeed = 0.f;
 			switch (WeaponState)
 			{
 			case Pistol:
@@ -199,6 +202,7 @@ void cPlayer::Update()
 			m_PistolMoveFrame->Frame();
 			m_BigGunMoveFrame->Frame();
 		}
+	
 
 		if (IsSnipe) {
 			D3DXMATRIX matX, matY, matZ, matR;
@@ -254,8 +258,6 @@ void cPlayer::Render()
 	}
 	RECT HpRECT{ 0, 0, ((float)m_HPGauge->info.Width / i_MaxHp) * i_Hp, m_HPGauge->info.Height };
 	IMAGE->CropRender(m_HPGauge, Vec3(m_HPEdge->info.Width / 2 + 50, m_HPEdge->info.Height / 2 + 25, 0), HpRECT);
-	if (INPUT->KeyPress('H') && i_Hp > 0)
-		i_Hp--;
 	IMAGE->ReBegin(false, false);
 
 
@@ -291,8 +293,43 @@ void cPlayer::Render()
 		OBJ->Render(OBJ->FindMultidOBJ("Player_Dead", m_DeadFrame->NowFrame), vPos, mRQ, 0.01f);
 	}
 	else {
-
-		if (IsAiming) {
+		if (IsMove) {
+			switch (WeaponState)
+			{
+			case Pistol:
+				if (IsBackMove)
+					OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Walk", m_PistolMoveFrame->EndFrame - m_PistolMoveFrame->NowFrame), vPos, mRQ, 0.01f);
+				else
+					OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Walk", m_PistolMoveFrame->NowFrame), vPos, mRQ, 0.01f);
+				break;
+			case BigGun:
+				if (IsBackMove)
+					OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Walk", m_BigGunMoveFrame->EndFrame - m_BigGunMoveFrame->NowFrame), vPos, mRQ, 0.01f);
+				else
+					OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Walk", m_BigGunMoveFrame->NowFrame), vPos, mRQ, 0.01f);
+				break;
+			case None:
+				break;
+			default:
+				break;
+			}
+		}
+		else if (!IsMove && !IsAiming){
+			switch (WeaponState)
+			{
+			case Pistol:
+				OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
+				break;
+			case BigGun:
+				OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
+				break;
+			case None:
+				break;
+			default:
+				break;
+			}
+		}
+		else if (IsAiming && !IsMove) {
 			switch (WeaponState)
 			{
 			case Pistol:
@@ -307,48 +344,14 @@ void cPlayer::Render()
 				break;
 			}
 		}
-		else {
-			if (!IsMove) {
-				switch (WeaponState)
-				{
-				case Pistol:
-					OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
-					break;
-				case BigGun:
-					OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Idle", m_IdleFrame->NowFrame), vPos, mRQ, 0.01f);
-					break;
-				case None:
-					break;
-				default:
-					break;
-				}
-			}
-			else {
-				switch (WeaponState)
-				{
-				case Pistol:
-					if (IsBackMove)
-						OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Walk", m_PistolMoveFrame->EndFrame - m_PistolMoveFrame->NowFrame), vPos, mRQ, 0.01f);
-					else
-						OBJ->Render(OBJ->FindMultidOBJ("Player_Pistol_Walk", m_PistolMoveFrame->NowFrame), vPos, mRQ, 0.01f);
-					break;
-				case BigGun:
-					if (IsBackMove)
-						OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Walk", m_BigGunMoveFrame->EndFrame - m_BigGunMoveFrame->NowFrame), vPos, mRQ, 0.01f);
-					else
-						OBJ->Render(OBJ->FindMultidOBJ("Player_BigGun_Walk", m_BigGunMoveFrame->NowFrame), vPos, mRQ, 0.01f);
-					break;
-				case None:
-					break;
-				default:
-					break;
-				}
-			}
-		}
 	}
 
 	IMAGE->ReBegin(true, false);
 	IMAGE->PrintText("ÁÂÇ¥ : " + to_string(vPos.x) + " " + to_string(vPos.y) + " " + to_string(vPos.z), Vec3(0, 150, 0), 20, D3DCOLOR_XRGB(255, 255, 255), false);
+
+	if (INPUT->MouseRPress()) {
+		IMAGE->Render(IMAGE->FindImage("Aim"), Vec3(WINSIZEX / 2, WINSIZEY / 2, 0), 0, true);
+	}
 	IMAGE->ReBegin(false, false);
 }
 
@@ -364,25 +367,25 @@ void cPlayer::Release()
 
 void cPlayer::Move()
 {
-	if (!IsAttack) {
+	//if (!IsAttack) {
 		if (INPUT->KeyPress('A') || INPUT->KeyPress('D')) {
 			if (INPUT->KeyPress('A')) {
 				if (INPUT->KeyPress('W')) {
 					if (IsFixedCamera)
-						Angle -= 3;
+						Angle -= 30;
 					else
 						Angle -= 45;
 				}
 
 				else if (INPUT->KeyPress('S')) {
 					if (IsFixedCamera)
-						Angle += 3;
+						Angle += 30;
 					else
 						Angle += 45;
 				}
 				else {
 					if (IsFixedCamera)
-						Angle -= 2;
+						Angle -= 20;
 					else
 						Angle -= 90;
 				}
@@ -391,20 +394,20 @@ void cPlayer::Move()
 			if (INPUT->KeyPress('D')) {
 				if (INPUT->KeyPress('W')) {
 					if (IsFixedCamera)
-						Angle += 3;
+						Angle += 30;
 					else
 						Angle += 45;
 				}
 				else if (INPUT->KeyPress('S')) {
 					if (IsFixedCamera)
-						Angle -= 3;
+						Angle -= 30;
 					else
 						Angle -= 45;
 					IsBackMove = true;
 				}
 				else {
 					if (IsFixedCamera)
-						Angle += 2;
+						Angle += 20;
 					else
 						Angle += 90;
 				}
@@ -424,10 +427,10 @@ void cPlayer::Move()
 			IsBackMove = false;
 			fSpeed = 1.f;
 		}
-		if (INPUT->MouseLPress()) {
+		if (INPUT->MouseLPress() && !IsAttack) {
 			ShootBullet();
 		}
-	}
+	//}
 
 	vPos += vDir * fSpeed;
 }
@@ -506,24 +509,44 @@ void cPlayer::ShootBullet()
 	else {
 		D3DXMATRIX matX, matY, matZ, matR;
 
-		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
-		D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() - 8));
-		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
-		matR = matX * matY * matZ;
-		D3DXVec3TransformNormal(&PistolDir, &vOriginDir, &matR);
+		if (!IsFixedCamera) {
+		    D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+		    D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() - 8));
+		    D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+		    matR = matX * matY * matZ;
+		    D3DXVec3TransformNormal(&PistolDir, &vOriginDir, &matR);
+		    
+		    D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+		    D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() - 2));
+		    D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+		    matR = matX * matY * matZ;
+		    D3DXVec3TransformNormal(&BigGunDir, &vOriginDir, &matR);
 
-		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
-		D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle() - 2));
-		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
-		matR = matX * matY * matZ;
-		D3DXVec3TransformNormal(&BigGunDir, &vOriginDir, &matR);
+			D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+			D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle()));
+			D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+			matR = matX * matY * matZ;
+			D3DXVec3TransformNormal(&ShootDir, &vOriginDir, &matR);
+		}
+		else {
+			D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+			D3DXMatrixRotationY(&matY, D3DXToRadian(Angle));
+			D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+			matR = matX * matY * matZ;
+			D3DXVec3TransformNormal(&PistolDir, &vOriginDir, &matR);
 
-		D3DXMatrixRotationX(&matX, D3DXToRadian(0));
-		D3DXMatrixRotationY(&matY, D3DXToRadian(CAMERA->GetAngle()));
-		D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
-		matR = matX * matY * matZ;
-		D3DXVec3TransformNormal(&ShootDir, &vOriginDir, &matR);
+			D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+			D3DXMatrixRotationY(&matY, D3DXToRadian(Angle));
+			D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+			matR = matX * matY * matZ;
+			D3DXVec3TransformNormal(&BigGunDir, &vOriginDir, &matR);
 
+			D3DXMatrixRotationX(&matX, D3DXToRadian(0));
+			D3DXMatrixRotationY(&matY, D3DXToRadian(Angle));
+			D3DXMatrixRotationZ(&matZ, D3DXToRadian(0));
+			matR = matX * matY * matZ;
+			D3DXVec3TransformNormal(&ShootDir, &vOriginDir, &matR);
+		}
 		BigGunDir *= 12;
 	}
 

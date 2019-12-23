@@ -158,7 +158,7 @@ INT WINAPI wWinMain( HINSTANCE, HINSTANCE, LPWSTR, int )
     DXUTSetHotkeyHandling( true, true, true );  // handle the default hotkeys
     DXUTSetCursorSettings( true, true ); // Show the cursor and clip it when in full screen
     DXUTCreateWindow( L"FrameWork" );
-    DXUTCreateDevice( true, WINSIZEX, WINSIZEY);
+    DXUTCreateDevice( false, WINSIZEX, WINSIZEY);
 
 	ShowCursor(0);
 

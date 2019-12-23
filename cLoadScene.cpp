@@ -66,6 +66,8 @@ void cLoadScene::Init()
 
 	Load("BloodEffect", "./resorce/Effect/Blood/(%d).png", 5);
 
+	Load("Aim", "./resorce/Aim.png");
+
 	Load("CoinEffect", "./resorce/Effect/Coin/(%d).png", 15);
 	Load("HealEffect", "./resorce/Effect/Heal/(%d).png", 15);
 

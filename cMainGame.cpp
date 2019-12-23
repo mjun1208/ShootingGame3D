@@ -33,6 +33,7 @@ void cMainGame::Init()
 	SCENE->AddScene("MapEditer", new cMapEditerScene);
 
 	SCENE->ChangeScene("Load");
+	IsBoundingRender = false;
 }
 
 void cMainGame::Update()
