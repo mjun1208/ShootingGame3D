@@ -1,11 +1,11 @@
-# Let's Go 레스토랑
+# Ghost Carnival 3D
 
 #### 영상 링크 :
 
 [![Video_Label](http://img.youtube.com/vi/A67tC_jxDtY/0.jpg)](https://youtu.be/A67tC_jxDtY)
 
 #### 실행 파일 : 
-[![image](https://github.com/user-attachments/assets/6f5f9345-22b3-4f2b-aa30-02ca0bbe55bc)](https://github.com/mjun1208/ShootingGame3D/releases/tag/Ghost_Carnival_3D)
+https://github.com/mjun1208/ShootingGame3D/releases/tag/Ghost_Carnival_3D
 
 ## 게임 설명 : 
 - DirectX9 으로 만든 3D TPS 게임입니다.
